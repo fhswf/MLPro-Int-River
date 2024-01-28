@@ -40,7 +40,7 @@ from mlpro.bf.various import Log
 from mlpro.bf.streams.tasks.windows import Window
 
 from mlpro.oa.streams import *
-from mlpro.wrappers.river.clusteranalyzers import *
+from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 

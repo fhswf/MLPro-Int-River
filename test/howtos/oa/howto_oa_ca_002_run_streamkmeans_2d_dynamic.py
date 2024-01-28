@@ -27,7 +27,7 @@ from mlpro.bf.streams.streams import *
 from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
 from mlpro.oa.streams import *
-from mlpro.wrappers.river.clusteranalyzers import *
+from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
