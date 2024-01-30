@@ -34,7 +34,7 @@ https://www.riverml.xyz/
 
 """
 
-from mlpro.wrappers.river.basics import WrapperRiver
+from mlpro_int_river.wrappers.basics import WrapperRiver
 from mlpro.bf.streams import *
 import river.datasets as river_ds
 import numpy

@@ -22,7 +22,7 @@ https://www.riverml.xyz/
 
 """
 
-from mlpro.wrappers.river.basics import *
+from mlpro_int_river.wrappers.basics import *
 from mlpro.oa.streams.basics import Instance, List
 from mlpro.oa.streams.tasks.anomalydetectors import *
 from river import anomaly

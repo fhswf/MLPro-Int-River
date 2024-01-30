@@ -46,7 +46,7 @@ https://www.riverml.xyz/
 
 
 from mlpro.bf.streams import Instance, List
-from mlpro.wrappers.river.basics import WrapperRiver
+from mlpro_int_river.wrappers.basics import WrapperRiver
 from mlpro.bf.math.normalizers import Normalizer
 from mlpro.oa.streams.tasks.clusteranalyzers import ClusterAnalyzer, Cluster, ClusterCentroid
 from mlpro.bf.mt import Task as MLTask
