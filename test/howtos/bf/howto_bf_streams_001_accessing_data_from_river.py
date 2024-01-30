@@ -1,7 +1,7 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
-## -- Package : mlpro.bf.examples
-## -- Module  : howto_bf_streams_053_accessing_data_from_river.py
+## -- Package : mlpro_int_river
+## -- Module  : howto_bf_streams_001_accessing_data_from_river.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
@@ -15,10 +15,11 @@
 ## -- 2022-11-21  1.1.3     DA       Correction on logging
 ## -- 2023-02-02  1.1.4     DA       Correction of time measurement
 ## -- 2023-04-16  1.1.5     DA       Get number of instances from stream
+## -- 2024-01-30  1.2.0     DA       Relocation to separate github repository
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.5 (2023-04-16)
+Ver. 1.2.0 (2024-01-30)
 
 This module demonstrates the use of River datasets as streams in MLPro. To this regard, MLPro
 provides wrapper classes to standardize stream access in own ML applications.

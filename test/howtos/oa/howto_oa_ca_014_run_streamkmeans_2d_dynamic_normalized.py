@@ -1,7 +1,7 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
 ## -- Package : mlpro_int_river
-## -- Module  : howto_oa_ca_004_run_kmeans_2d_dynamic_normalized.py
+## -- Module  : howto_oa_ca_014_run_streamkmeans_2d_dynamic_normalized.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description

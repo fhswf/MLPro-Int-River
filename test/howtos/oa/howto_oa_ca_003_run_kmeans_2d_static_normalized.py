@@ -1,6 +1,6 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
-## -- Package : mlpro.oa.examples
+## -- Package : mlpro_int_river
 ## -- Module  : howto_oa_ca_003_clustream_2d_static_normalized.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :

@@ -1,18 +1,18 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
-## -- Package : mlpro.oa.examples
-## -- Module  : howto_oa_ca_006_run_streamkmeans_3d_dynamic.py
+## -- Package : mlpro_int_river
+## -- Module  : howto_oa_ca_015_run_streamkmeans_3d_static.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
 ## -- 2023-12-22  0.0.0     SY       Creation
 ## -- 2023-12-22  1.0.0     SY       First version release
 ## -- 2023-12-28  1.1.0     DA       Exchange of benchmark stream and number of clouds
-## -- 2024-01-05  1.1.1     SY       Replace algorithm to StreamKMeans
+## -- 2023-12-29  1.2.0     DA       Adjustments on cloud sizes and weights
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-01-05)
+Ver. 1.2.0 (2023-12-29)
 
 This module demonstrates a task in a workflow, which is Wrapped KMeans Algorithm (River).
 In this module, we demonstrate the workflow in static 3D point clouds.
@@ -47,7 +47,6 @@ class Static3DScenario(OAScenario):
                                     p_seed = 1,
                                     p_radii = [100, 150, 200, 250, 300],
                                     p_weights = [2,3,4,5,6],
-                                    p_velocity = 1, 
                                     p_logging=Log.C_LOG_NOTHING )
         
 
@@ -65,11 +64,11 @@ class Static3DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverKMeans2MLPro( p_name='t1',
-                                              p_chunk_size=100,
                                               p_n_clusters=5,
-                                              p_halflife=0.5,
-                                              p_sigma=300,
-                                              p_seed=40,
+                                              p_halflife=0.1, 
+                                              p_sigma=3.0, 
+                                              p_mu=0.0,
+                                              p_seed=42,
                                               p_visualize=p_visualize,
                                               p_logging=p_logging )
         
@@ -84,10 +83,10 @@ class Static3DScenario(OAScenario):
 
 # 2 Prepare Demo/Unit test mode
 if __name__ == '__main__':
-    cycle_limit = 2000
+    cycle_limit = 1200
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 10
+    step_rate   = 5
 else:
     cycle_limit = 2
     logging     = Log.C_LOG_NOTHING
