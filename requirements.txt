@@ -6,5 +6,5 @@ pymunk>=6.4.0
 multiprocess>=0.70.14
 pyglet>=1.5.27
 lxml>=4.9.2
-mlpro>=2.0.0
+mlpro
 river>=0.15.0,!=0.20.0,!=0.20.1
