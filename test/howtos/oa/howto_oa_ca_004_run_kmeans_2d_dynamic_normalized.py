@@ -10,10 +10,11 @@
 ## -- 2023-11-19  1.0.1     DA       Turned on visualization/logging of clustering task
 ## -- 2023-08-20  1.0.2     SY       - Refactoring due to failed in Unittest
 ## --                                - Add window to the workflow
+## -- 2024-02-02  1.1.0     SY       Parameters Optimization
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.2 (2023-11-20)
+Ver. 1.1.0 (2024-02-02)
 
 This module demonstrates the combination of several tasks in a workflow, which includes:
 
@@ -35,7 +36,7 @@ Ocean Capsule, thus the result is reproducible.
 
 
 from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.streams.clouds3d_dynamic import StreamMLProDynamicClouds3D
+from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
 from mlpro.bf.streams.tasks.windows import Window
 
@@ -120,11 +121,11 @@ class Dynamic3DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t4',
+        task_clusterer = WrRiverKMeans2MLPro( p_name='t3',
                                              p_n_clusters=5,
                                              p_halflife=0.1, 
-                                             p_sigma=0.5, 
-                                             p_seed=42,
+                                             p_sigma=-0.75, 
+                                             p_seed=48,
                                              p_visualize=p_visualize,
                                              p_logging=p_logging )
        
