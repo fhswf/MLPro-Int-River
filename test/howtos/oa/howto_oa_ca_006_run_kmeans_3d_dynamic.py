@@ -33,7 +33,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
+# 1 Prepare a scenario for Dynamic 3D Point Clouds
 class Static3DScenario(OAScenario):
 
     C_NAME = 'Static3DScenario'
@@ -65,7 +65,6 @@ class Static3DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverKMeans2MLPro( p_name='t1',
-                                              p_chunk_size=100,
                                               p_n_clusters=5,
                                               p_halflife=0.5,
                                               p_sigma=300,

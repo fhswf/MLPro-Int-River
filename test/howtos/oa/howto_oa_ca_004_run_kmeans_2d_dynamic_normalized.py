@@ -63,14 +63,14 @@ else:
 
 
 
-# 1 Prepare a scenario for Dynamic 3D Point Clouds
+# 1 Prepare a scenario for Dynamic 2D Point Clouds
 class Dynamic3DScenario(OAScenario):
 
     C_NAME = 'Dynamic3DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1.1 Get stream from StreamMLProDynamicClouds3D
+        # 1.1 Get stream from StreamMLProClouds
         stream = StreamMLProClouds( p_num_dim = 2,
                                     p_num_instances = 2000,
                                     p_num_clouds = 5,

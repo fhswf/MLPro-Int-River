@@ -46,14 +46,14 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
+# 1 Prepare a scenario for Static 2D Point Clouds
 class Static3DScenario(OAScenario):
 
     C_NAME = 'Static3DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1.1 Get stream from StreamMLProStaticClouds3D
+        # 1.1 Get stream from StreamMLProClouds
         stream = StreamMLProClouds( p_num_dim = 2,
                                     p_num_instances = 2000,
                                     p_num_clouds = 5,

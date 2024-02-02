@@ -33,7 +33,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
+# 1 Prepare a scenario for Dynamic 2D Point Clouds
 class Static3DScenario(OAScenario):
 
     C_NAME = 'Static2DScenario'
