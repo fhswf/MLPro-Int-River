@@ -12,10 +12,11 @@
 ## -- 2023-12-10  1.0.3     DA       Increased number of macro clusters of CluStream to 8
 ## -- 2023-12-20  1.1.0     DA       Added event-oriented renormalization to CluStream task
 ## -- 2023-12-21  1.1.1     SY       Refactoring
+## -- 2024-02-02  1.2.0     SY       Parameters Optimization
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2023-12-21)
+Ver. 1.2.0 (2024-02-02)
 
 This module demonstrates the combination of several tasks in a workflow, which includes:
 
@@ -35,7 +36,7 @@ Ocean Capsule, thus the result is reproducible.
 
 
 from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.streams.clouds3d_static import StreamMLProStaticClouds3D
+from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
 
 from mlpro.oa.streams import *
@@ -114,10 +115,10 @@ class Static3DScenario(OAScenario):
         # Cluster Analyzer
         task_clusterer = WrRiverKMeans2MLPro( p_name='t3',
                                               p_n_clusters=5,
-                                              p_halflife=0.1, 
-                                              p_sigma=0.5, 
+                                              p_halflife=0.25, 
+                                              p_sigma=1.5, 
                                               p_mu=0.0,
-                                              p_seed=42,
+                                              p_seed=30,
                                               p_visualize=p_visualize,
                                               p_logging=p_logging )
         
