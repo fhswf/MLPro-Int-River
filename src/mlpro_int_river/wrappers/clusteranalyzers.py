@@ -21,10 +21,11 @@
 ## -- 2023-12-25  1.0.10    DA       Bugfix in WrClusterAnalyzerRiver2MLPro._adapt()
 ## -- 2023-12-29  1.0.11    DA/SY    Disabled renormalization of CluStream, DBStream, DenStream
 ## -- 2024-01-05  1.0.12    DA       All classed: refactoring of naming (C_NAME)
+## -- 2024-02-04  1.1.0     SY       Updating WrRiverDenStream2MLPro
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.12 (2024-01-05)
+Ver. 1.1.0 (2024-02-04)
 
 This module provides wrapper classes from River to MLPro, specifically for cluster analyzers. This
 module includes three clustering algorithms from River that are embedded to MLPro, such as:
@@ -646,7 +647,17 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         This method is to update the centroids of each introduced cluster.
         """
         
-        pass
+        for val in self._river_algo.p_micro_clusters.values():
+            related_cluster = self._clusters[id(val)]
+            
+            list_center = []
+            for _, (_, val_center) in enumerate(val.x.items()):
+                list_center.append(val_center) 
+                
+            try:
+                related_cluster.get_centroid().set_values(list_center)
+            except:
+                pass
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -688,6 +699,10 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                 if self.get_visualization():
                     related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)
 
+                list_center = []
+                for _, (_, val_center) in enumerate(val.x.items()):
+                    list_center.append(val_center)           
+                related_cluster.get_centroid().set_values(list_center)
                 self._add_cluster( p_cluster = related_cluster )
         
         list_keys_mlpro = list(self._clusters.keys())
@@ -701,11 +716,22 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 ## -------------------------------------------------------------------------------------------------
     def _renormalize(self, p_normalizer:Normalizer):
         """
-        Internal enormalization is hard to realize here without getting strong dependencies on
-        internal implementation details. 
+        Internal renormalization of all clusters. See method OATask.renormalize_on_event() for further
+        information.
+
+        Parameters
+        ----------
+        p_normalizer : Normalizer
+            Normalizer object to be applied on task-specific 
         """
         
-        raise NotImplementedError
+        super()._renormalize(p_normalizer)
+
+        for cluster in self._clusters.values():
+            for cluster_river in self._river_algo.p_micro_clusters.values():
+                if id(cluster_river) == cluster.get_id():
+                    for river_idx in cluster_river.x.keys():
+                        cluster_river.x[river_idx] = cluster._centroid.get_values()[river_idx-1]
 
 
 
