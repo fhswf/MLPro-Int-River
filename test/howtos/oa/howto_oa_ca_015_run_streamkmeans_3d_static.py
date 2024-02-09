@@ -63,14 +63,14 @@ class Static3DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t1',
-                                              p_n_clusters=5,
-                                              p_halflife=0.1, 
-                                              p_sigma=3.0, 
-                                              p_mu=0.0,
-                                              p_seed=42,
-                                              p_visualize=p_visualize,
-                                              p_logging=p_logging )
+        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t1',
+                                                   p_chunk_size=5,
+                                                   p_n_clusters=5,
+                                                   p_halflife=0.5, 
+                                                   p_sigma=300,
+                                                   p_seed=41,
+                                                   p_visualize=p_visualize,
+                                                   p_logging=p_logging )
         
         workflow.add_task(p_task = task_clusterer)
 

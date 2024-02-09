@@ -33,7 +33,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 # 1 Prepare a scenario for Static 2D Point Clouds
-class Static3DScenario(OAScenario):
+class Static2DScenario(OAScenario):
 
     C_NAME = 'Static2DScenario'
 
@@ -92,7 +92,7 @@ else:
 
 
 # 3 Instantiate the stream scenario
-myscenario = Static3DScenario(
+myscenario = Static2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

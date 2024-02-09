@@ -33,7 +33,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 # 1 Prepare a scenario for Static 2D Point Clouds
-class Static3DScenario(OAScenario):
+class Static2DScenario(OAScenario):
 
     C_NAME = 'Static2DScenario'
 
@@ -61,11 +61,11 @@ class Static3DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t1',
-                                                   p_chunk_size=100,
+                                                   p_chunk_size=5,
                                                    p_n_clusters=5,
-                                                   p_halflife=0.1, 
-                                                   p_sigma=3, 
-                                                   p_seed=42,
+                                                   p_halflife=0.5, 
+                                                   p_sigma=300,
+                                                   p_seed=41,
                                                    p_visualize=p_visualize,
                                                    p_logging=p_logging )
         
@@ -93,7 +93,7 @@ else:
 
 
 # 3 Instantiate the stream scenario
-myscenario = Static3DScenario(
+myscenario = Static2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

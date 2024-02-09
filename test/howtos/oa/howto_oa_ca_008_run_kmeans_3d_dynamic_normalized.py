@@ -27,7 +27,7 @@ This module demonstrates the combination of several tasks in a workflow, which i
 3) Wrapped CluStream Algorithm (River).
 
 Two data stream are incorporated in this module, such as static 3D point clouds and dynamic 3D point
-clouds. In this module, we demonstrate the workflow in static 3D point clouds.
+clouds. In this module, we demonstrate the workflow in dynamic 3D point clouds.
 
 This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
 Ocean Capsule, thus the result is reproducible.
@@ -63,9 +63,9 @@ else:
 
 
 # 1 Prepare a scenario for Dynamic 3D Point Clouds
-class Static3DScenario(OAScenario):
+class Dynamic3DScenario(OAScenario):
 
-    C_NAME = 'Static3DScenario'
+    C_NAME = 'Dynamic3DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
@@ -135,7 +135,7 @@ class Static3DScenario(OAScenario):
 
 
 # 2 Instantiate the stream scenario
-myscenario = Static3DScenario(
+myscenario = Dynamic3DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

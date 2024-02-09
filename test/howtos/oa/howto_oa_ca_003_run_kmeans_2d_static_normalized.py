@@ -26,8 +26,8 @@ This module demonstrates the combination of several tasks in a workflow, which i
 
 3) Wrapped CluStream Algorithm (River).
 
-Two data stream are incorporated in this module, such as static 3D point clouds and dynamic 3D point
-clouds. In this module, we demonstrate the workflow in static 3D point clouds.
+Two data stream are incorporated in this module, such as static 2D point clouds and dynamic 2D point
+clouds. In this module, we demonstrate the workflow in static 2D point clouds.
 
 This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
 Ocean Capsule, thus the result is reproducible.
@@ -47,9 +47,9 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 # 1 Prepare a scenario for Static 2D Point Clouds
-class Static3DScenario(OAScenario):
+class Static2DScenario(OAScenario):
 
-    C_NAME = 'Static3DScenario'
+    C_NAME = 'Static2DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
@@ -130,7 +130,7 @@ else:
 
 
 # 3 Instantiate the stream scenario
-myscenario = Static3DScenario(
+myscenario = Static2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

@@ -25,8 +25,8 @@ This module demonstrates the combination of several tasks in a workflow, which i
 
 4) Wrapped CluStream Algorithm (River).
 
-Two data stream are incorporated in this module, such as static 3D point clouds and dynamic 3D point
-clouds. In this module, we demonstrate the workflow in dynamic 3D point clouds.
+Two data stream are incorporated in this module, such as static 2D point clouds and dynamic 2D point
+clouds. In this module, we demonstrate the workflow in dynamic 2D point clouds.
 
 This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
 Ocean Capsule, thus the result is reproducible.
@@ -35,7 +35,6 @@ Ocean Capsule, thus the result is reproducible.
 
 
 from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.streams.clouds3d_dynamic import StreamMLProDynamicClouds3D
 from mlpro.bf.various import Log
 from mlpro.bf.streams.tasks.windows import Window
 
@@ -62,10 +61,10 @@ else:
 
 
 
-# 1 Prepare a scenario for Dynamic 3D Point Clouds
-class Dynamic3DScenario(OAScenario):
+# 1 Prepare a scenario for Dynamic 2D Point Clouds
+class Dynamic2DScenario(OAScenario):
 
-    C_NAME = 'Dynamic3DScenario'
+    C_NAME = 'Dynamic2DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
@@ -120,13 +119,14 @@ class Dynamic3DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t4',
-                                             p_n_clusters=5,
-                                             p_halflife=0.1, 
-                                             p_sigma=0.5, 
-                                             p_seed=42,
-                                             p_visualize=p_visualize,
-                                             p_logging=p_logging )
+        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t4',
+                                                   p_chunk_size=5,
+                                                   p_n_clusters=5,
+                                                   p_halflife=0.5, 
+                                                   p_sigma=300,
+                                                   p_seed=41,
+                                                   p_visualize=p_visualize,
+                                                   p_logging=p_logging )
        
         workflow.add_task(p_task = task_clusterer, p_pred_tasks=[task_norm_minmax])
 
@@ -138,7 +138,7 @@ class Dynamic3DScenario(OAScenario):
 
 
 # 2 Instantiate the stream scenario
-myscenario = Dynamic3DScenario(
+myscenario = Dynamic2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
