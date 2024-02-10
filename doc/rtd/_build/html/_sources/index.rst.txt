@@ -3,38 +3,50 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-MLPro-Int-River - Integration of package River into MLPro
-=========================================================
+MLPro-Int-River - Integration of River into MLPro
+=================================================
 
-Welcome to MLPro-Int-River
+Welcome to MLPro-Int-River, an extension to MLPro to integrate the River package.
+MLPro is a middleware framework for standardized machine learning in Python. It is 
+developed by the South Westphalia University of Applied Sciences, Germany, and provides 
+standards, templates, and processes for hybrid machine learning applications. River, in 
+turn, provides numerous state-of-the-art algorithms for several topics of online machine 
+learning.
 
+MLPro-Int-River provides wrapper classes that allow the use of selected River functionality 
+in your MLPro applications. The use of these wrappers is illustrated in numerous example programs.
 
+**See also**
+   - `MLPro - Machine Learning Professional <https://mlpro.readthedocs.io>`_ 
+   - `River - Online machine learning in Python <https://riverml.xyz>`_ 
 
-.. toctree::
-   :maxdepth: 3
-   :caption: Welcome to MLPro-Int-River
-   :glob:
-   :numbered:
-
-   content/01_welcome/sub/*
-
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Custom Part 1
-   :glob:
-   :numbered:
-
-   content/02_custom_part/custom_section1/main   
 
 
 .. toctree::
    :maxdepth: 3
-   :caption: Custom Part 2
+   :caption: Getting Started
    :glob:
    :numbered:
 
-   content/03_custom_part/custom_section2/main   
+   content/01_getting_started/sub/*
+
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Example Pool
+   :glob:
+   :numbered:
+
+   content/02_example_pool/custom_section1/main   
+
+
+.. toctree::
+   :maxdepth: 3
+   :caption: API
+   :glob:
+   :numbered:
+
+   content/03_api/custom_section2/main   
 
 
 .. toctree::

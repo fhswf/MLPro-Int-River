@@ -1,9 +1,9 @@
 .. _target_appendix1:
-A1 - Custom Appendix
-====================
+A1 - Project MLPro-Int-River
+============================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :glob:
 
    sub/*
