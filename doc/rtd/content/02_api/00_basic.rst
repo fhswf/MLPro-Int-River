@@ -11,5 +11,4 @@ Wrapper Root Class
     :undoc-members:
     :private-members:
     :show-inheritance:
-    :private-members:
-   
+  

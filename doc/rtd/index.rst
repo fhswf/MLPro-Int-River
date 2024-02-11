@@ -16,6 +16,10 @@ learning.
 MLPro-Int-River provides wrapper classes that enable the use of selected River functionalities 
 in your MLPro applications. The use of these wrappers is illustrated in numerous example programs.
 
+.. image:: MLPro-Int-River.gif
+   :width: 300
+
+
 **Preparation**
    Before running the examples, please install the latest versions of MLPro, River, and MLPro-Int-River as follows:
 
@@ -35,7 +39,7 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: MLPro-Int-River - Example Pool
    :glob:
 
@@ -43,7 +47,7 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: API
    :glob:
 
@@ -51,7 +55,7 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: About
    :glob:
 

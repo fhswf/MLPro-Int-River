@@ -1,6 +1,6 @@
-.. _howto_streams:
+.. _howtos_streams:
 Reuse of River Data Streams
-==========================
+===========================
 
 .. toctree::
    :maxdepth: 1

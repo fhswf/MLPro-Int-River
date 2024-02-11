@@ -1,6 +1,6 @@
 .. _api_streams:
 Wrappers for River Data Streams
-==============================
+===============================
 
 .. image:: images/MLPro-Int-River-Streams.drawio.png
    :scale: 50%
@@ -11,5 +11,4 @@ Wrappers for River Data Streams
     :undoc-members:
     :private-members:
     :show-inheritance:
-    :private-members:
    

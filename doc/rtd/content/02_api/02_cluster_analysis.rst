@@ -11,5 +11,4 @@ Wrappers for River Cluster Analyzers
     :undoc-members:
     :private-members:
     :show-inheritance:
-    :private-members:
    

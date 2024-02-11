@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLPro-Int-River - Integration of River into MLPro &mdash; MLPro Documentations 0.5.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=1dd76d02"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reuse of River Data Streams" href="content/01_example_pool/01_streams.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            MLPro Documentations
+              <img src="_static/logo_mlpro.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">MLPro-Int-River - Example Pool</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/01_example_pool/01_streams.html">Reuse of River Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/01_example_pool/02_cluster_analysis.html">Reuse of River Cluster Analyzers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/00_basic.html">Wrapper Root Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/01_streams.html">Wrappers for River Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/02_cluster_analysis.html">Wrappers for River Cluster Analyzers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/03_anomaly_detection.html">Wrappers for River Anomaly Detectors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/03_about/01_versions.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/03_about/02_disclaimer.html">Disclaimer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">MLPro Documentations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MLPro-Int-River - Integration of River into MLPro</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/fhswf/MLPro-Int-River/blob/main/doc/docs/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mlpro-int-river-integration-of-river-into-mlpro">
+<h1>MLPro-Int-River - Integration of River into MLPro<a class="headerlink" href="#mlpro-int-river-integration-of-river-into-mlpro" title="Link to this heading"></a></h1>
+<p>Welcome to MLPro-Int-River, an extension to MLPro to integrate the River package.
+MLPro is a middleware framework for standardized machine learning in Python. It is
+developed by the South Westphalia University of Applied Sciences, Germany, and provides
+standards, templates, and processes for hybrid machine learning applications. River, in
+turn, provides numerous state-of-the-art algorithms for several topics of online machine
+learning.</p>
+<p>MLPro-Int-River provides wrapper classes that enable the use of selected River functionalities
+in your MLPro applications. The use of these wrappers is illustrated in numerous example programs.</p>
+<a class="reference internal image-reference" href="_images/MLPro-Int-River.gif"><img alt="_images/MLPro-Int-River.gif" src="_images/MLPro-Int-River.gif" style="width: 300px;" /></a>
+<dl>
+<dt><strong>Preparation</strong></dt><dd><p>Before running the examples, please install the latest versions of MLPro, River, and MLPro-Int-River as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mlpro<span class="w"> </span>--upgrade
+pip<span class="w"> </span>install<span class="w"> </span>river<span class="w"> </span>--upgrade
+pip<span class="w"> </span>install<span class="w"> </span>mlpro-int-river<span class="w"> </span>--upgrade
+</pre></div>
+</div>
+</dd>
+<dt><strong>See also</strong></dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://mlpro.readthedocs.io">MLPro - Machine Learning Professional</a></p></li>
+<li><p><a class="reference external" href="https://mlpro.readthedocs.io/en/latest/content/03_machine_learning/mlpro_oa/main.html">MLPro-OA - Sub-framework for online machine learning</a></p></li>
+<li><p><a class="reference external" href="https://riverml.xyz">River - Online machine learning in Python</a></p></li>
+<li><p><a class="reference external" href="https://mlpro.readthedocs.io/en/latest/content/04_extensions/main.html">Further MLPro extensions</a></p></li>
+<li><p><a class="reference external" href="https://github.com/fhswf/MLPro-Int-River">MLPro-Int-River on GitHub</a></p></li>
+</ul>
+</dd>
+</dl>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">MLPro-Int-River - Example Pool</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/01_example_pool/01_streams.html">Reuse of River Data Streams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/01_example_pool/01_howtos_streams/howto_bf_streams_001_accessing_data_from_river.html">Howto BF-STREAMS-001: Accessing Native Data From MLPro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/01_example_pool/02_cluster_analysis.html">Reuse of River Cluster Analyzers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/01_example_pool/02_howtos_cluster_analysis/howto_oa_ca_001_run_kmeans_2d_static.html">Howto OA-CA-001: Run KMEANS on 2D static point clouds</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/00_basic.html">Wrapper Root Class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/00_basic.html#mlpro_int_river.wrappers.basics.WrapperRiver"><code class="docutils literal notranslate"><span class="pre">WrapperRiver</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/01_streams.html">Wrappers for River Data Streams</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/01_streams.html#mlpro_int_river.wrappers.streams.WrStreamProviderRiver"><code class="docutils literal notranslate"><span class="pre">WrStreamProviderRiver</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/01_streams.html#mlpro_int_river.wrappers.streams.WrStreamRiver"><code class="docutils literal notranslate"><span class="pre">WrStreamRiver</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/02_cluster_analysis.html">Wrappers for River Cluster Analyzers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/02_cluster_analysis.html#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/02_cluster_analysis.html#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverDBStream2MLPro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/02_cluster_analysis.html#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverCluStream2MLPro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/02_cluster_analysis.html#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverDenStream2MLPro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/02_cluster_analysis.html#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverKMeans2MLPro</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/02_cluster_analysis.html#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverStreamKMeans2MLPro</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="content/02_api/03_anomaly_detection.html">Wrappers for River Anomaly Detectors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/03_anomaly_detection.html#mlpro_int_river.wrappers.anomalydetectors.HST"><code class="docutils literal notranslate"><span class="pre">HST</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/02_api/03_anomaly_detection.html#mlpro_int_river.wrappers.anomalydetectors.SVM"><code class="docutils literal notranslate"><span class="pre">SVM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/03_about/01_versions.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/03_about/02_disclaimer.html">Disclaimer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="content/03_about/02_disclaimer.html#disclaimers-for-mlpro-usage">Disclaimers for MLPro Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="content/03_about/02_disclaimer.html#consent">Consent</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="content/01_example_pool/01_streams.html" class="btn btn-neutral float-right" title="Reuse of River Data Streams" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024 South Westphalia University of Applied Sciences, Germany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
