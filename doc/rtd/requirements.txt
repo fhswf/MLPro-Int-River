@@ -1,6 +1,5 @@
 mlpro
-river==0.15.0
-mlpro-int-river
+river>=0.15.0,!=0.20.0,!=0.20.1
 
 sphinxcontrib-napoleon
 sphinx-copybutton
