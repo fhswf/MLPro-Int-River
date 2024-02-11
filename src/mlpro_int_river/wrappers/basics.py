@@ -1,6 +1,6 @@
 ## -------------------------------------------------------------------------------------------------
-## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
-## -- Package : mlpro.wrappers
+## -- Project : MLPro - The integrative middleware framework for standardized machine learning
+## -- Package : mlpro_int_river.wrappers
 ## -- Module  : basics.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :

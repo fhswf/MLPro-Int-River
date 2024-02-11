@@ -13,45 +13,46 @@ standards, templates, and processes for hybrid machine learning applications. Ri
 turn, provides numerous state-of-the-art algorithms for several topics of online machine 
 learning.
 
-MLPro-Int-River provides wrapper classes that allow the use of selected River functionality 
+MLPro-Int-River provides wrapper classes that enable the use of selected River functionalities 
 in your MLPro applications. The use of these wrappers is illustrated in numerous example programs.
+
+**Preparation**
+   Before running the examples, please install the latest versions of MLPro, River, and MLPro-Int-River as follows:
+
+   .. code-block:: bash
+
+      pip install mlpro --upgrade
+      pip install river --upgrade
+      pip install mlpro-int-river --upgrade
+
 
 **See also**
    - `MLPro - Machine Learning Professional <https://mlpro.readthedocs.io>`_ 
+   - `MLPro-OA - Sub-framework for online machine learning <https://mlpro.readthedocs.io/en/latest/content/03_machine_learning/mlpro_oa/main.html>`_
    - `River - Online machine learning in Python <https://riverml.xyz>`_ 
-
-
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Getting Started
-   :glob:
-   :numbered:
-
-   content/01_getting_started/sub/*
+   - `Further MLPro extensions <https://mlpro.readthedocs.io/en/latest/content/04_extensions/main.html>`_
+   - `MLPro-Int-River on GitHub <https://github.com/fhswf/MLPro-Int-River>`_
 
 
 .. toctree::
    :maxdepth: 3
-   :caption: Example Pool
+   :caption: MLPro-Int-River - Example Pool
    :glob:
-   :numbered:
 
-   content/02_example_pool/custom_section1/main   
+   content/01_example_pool/*
 
 
 .. toctree::
    :maxdepth: 3
    :caption: API
    :glob:
-   :numbered:
 
-   content/03_api/custom_section2/main   
+   content/02_api/*
 
 
 .. toctree::
    :maxdepth: 3
-   :caption: Appendices
+   :caption: About
    :glob:
 
-   content/04_appendices/appendix1/main
+   content/03_about/*

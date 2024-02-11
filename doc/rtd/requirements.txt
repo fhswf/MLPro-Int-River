@@ -1,3 +1,7 @@
+mlpro
+river==0.15.0
+mlpro-int-river
+
 sphinxcontrib-napoleon
 sphinx-copybutton
 sphinx_multitoc_numbering

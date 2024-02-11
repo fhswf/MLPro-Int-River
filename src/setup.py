@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name='mlpro_int_river',
-version='1.0.0',
+version='0.5.0',
 description='MLPro: Integration River',
 author='MLPro Team',
 author_mail='mlpro@listen.fh-swf.de',
@@ -16,8 +16,8 @@ extras_require={
         "numpy",
         "matplotlib",
         "multiprocess",
-        "mlpro>=1.2.0",
-        "river==0.14.0"
+        "mlpro>=1.3.1",
+        "river==0.15.0"
     ],
 },
 
