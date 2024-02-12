@@ -35,7 +35,6 @@ Ocean Capsule, thus the result is reproducible.
 
 
 from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.streams.clouds3d_static import StreamMLProStaticClouds3D
 from mlpro.bf.various import Log
 
 from mlpro.oa.streams import *
