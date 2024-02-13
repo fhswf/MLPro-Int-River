@@ -15,7 +15,7 @@
 Ver. 1.1.1 (2024-01-05)
 
 This module demonstrates a task in a workflow, which is Wrapped KMeans Algorithm (River).
-In this module, we demonstrate the workflow in static 2D point clouds.
+In this module, we demonstrate the workflow in dynamic 2D point clouds.
 
 This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
 Ocean Capsule, thus the result is reproducible.
@@ -33,10 +33,10 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
-class Static3DScenario(OAScenario):
+# 1 Prepare a scenario for Dynamic 2D Point Clouds
+class Dynamic2DScenario(OAScenario):
 
-    C_NAME = 'Static2DScenario'
+    C_NAME = 'Dynamic2DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
@@ -95,7 +95,7 @@ else:
 
 
 # 3 Instantiate the stream scenario
-myscenario = Static3DScenario(
+myscenario = Dynamic2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

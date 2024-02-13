@@ -26,7 +26,7 @@ This module demonstrates the combination of several tasks in a workflow, which i
 3) Wrapped CluStream Algorithm (River).
 
 Two data stream are incorporated in this module, such as static 3D point clouds and dynamic 3D point
-clouds. In this module, we demonstrate the workflow in static 3D point clouds.
+clouds. In this module, we demonstrate the workflow in dynamic 3D point clouds.
 
 This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
 Ocean Capsule, thus the result is reproducible.
@@ -36,7 +36,6 @@ Ocean Capsule, thus the result is reproducible.
 
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
-
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import *
 
@@ -60,14 +59,14 @@ else:
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
-class Static3DScenario(OAScenario):
+# 1 Prepare a scenario for Dynamic 3D Point Clouds
+class Dynamic3DScenario(OAScenario):
 
-    C_NAME = 'Static3DScenario'
+    C_NAME = 'Dynamic3DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1.1 Get stream from StreamMLProStaticClouds3D
+        # 1.1 Get stream from MLPro Streams
         stream = StreamMLProClouds( p_num_dim = 3,
                                     p_num_instances = 2000,
                                     p_num_clouds = 5,
@@ -111,14 +110,14 @@ class Static3DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t3',
-                                              p_n_clusters=5,
-                                              p_halflife=0.1, 
-                                              p_sigma=0.5, 
-                                              p_mu=0.0,
-                                              p_seed=42,
-                                              p_visualize=p_visualize,
-                                              p_logging=p_logging )
+        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t3',
+                                                   p_chunk_size=5,
+                                                   p_n_clusters=5,
+                                                   p_halflife=0.5, 
+                                                   p_sigma=300,
+                                                   p_seed=41,
+                                                   p_visualize=p_visualize,
+                                                   p_logging=p_logging )
         
         task_norm_minmax.register_event_handler( p_event_id=NormalizerMinMax.C_EVENT_ADAPTED,
                                                  p_event_handler=task_clusterer.renormalize_on_event )
@@ -133,7 +132,7 @@ class Static3DScenario(OAScenario):
 
 
 # 2 Instantiate the stream scenario
-myscenario = Static3DScenario(
+myscenario = Dynamic3DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

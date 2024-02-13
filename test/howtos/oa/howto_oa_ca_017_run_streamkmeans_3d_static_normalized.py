@@ -37,7 +37,6 @@ Ocean Capsule, thus the result is reproducible.
 
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
-
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import *
 
@@ -111,14 +110,14 @@ class Static3DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t3',
-                                              p_n_clusters=5,
-                                              p_halflife=0.25, 
-                                              p_sigma=1.5, 
-                                              p_mu=0.0,
-                                              p_seed=30,
-                                              p_visualize=p_visualize,
-                                              p_logging=p_logging )
+        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t3',
+                                                   p_chunk_size=5,
+                                                   p_n_clusters=5,
+                                                   p_halflife=0.5, 
+                                                   p_sigma=300,
+                                                   p_seed=41,
+                                                   p_visualize=p_visualize,
+                                                   p_logging=p_logging )
         
         task_norm_minmax.register_event_handler( p_event_id=NormalizerMinMax.C_EVENT_ADAPTED,
                                                  p_event_handler=task_clusterer.renormalize_on_event )

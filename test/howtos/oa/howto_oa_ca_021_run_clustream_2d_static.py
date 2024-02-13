@@ -1,32 +1,19 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
 ## -- Package : mlpro_int_river
-## -- Module  : howto_oa_ca_013_run_streamkmeans_2d_static_normalized.py
+## -- Module  : howto_oa_ca_021_run_clustream_2d_static.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
-## -- 2023-08-23  0.0.0     SY       Creation
-## -- 2023-08-23  1.0.0     SY       First version release
-## -- 2023-11-19  1.0.1     DA       Turned on visualization/logging of clustering task
-## -- 2023-08-20  1.0.2     SY       Refactoring due to failed in Unittest
-## -- 2023-12-10  1.0.3     DA       Increased number of macro clusters of CluStream to 8
-## -- 2023-12-20  1.1.0     DA       Added event-oriented renormalization to CluStream task
-## -- 2023-12-21  1.1.1     SY       Refactoring
+## -- 2024-02-09  0.0.0     SY       Creation
+## -- 2024-02-09  1.0.0     SY       First version release
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2023-12-21)
+Ver. 1.0.0 (2024-02-09)
 
-This module demonstrates the combination of several tasks in a workflow, which includes:
-
-1) Boundary Detector,
-
-2) Min/Max-Normalizer, and
-
-3) Wrapped CluStream Algorithm (River).
-
-Two data stream are incorporated in this module, such as static 2D point clouds and dynamic 2D point
-clouds. In this module, we demonstrate the workflow in static 2D point clouds.
+This module demonstrates a task in a workflow, which is Wrapped CluStream Algorithm (River).
+In this module, we demonstrate the workflow in static 2D point clouds.
 
 This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
 Ocean Capsule, thus the result is reproducible.
@@ -35,8 +22,8 @@ Ocean Capsule, thus the result is reproducible.
 
 
 from mlpro.bf.streams.streams import *
+from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
-
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import *
 
@@ -44,14 +31,14 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
+# 1 Prepare a scenario for Static 2D Point Clouds
 class Static2DScenario(OAScenario):
 
     C_NAME = 'Static2DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1.1 Get stream from StreamMLProStaticClouds3D
+        # 1.1 Get MLPro benchmark stream
         stream = StreamMLProClouds( p_num_dim = 2,
                                     p_num_instances = 2000,
                                     p_num_clouds = 5,
@@ -59,53 +46,34 @@ class Static2DScenario(OAScenario):
                                     p_radii=[100],
                                     p_logging=Log.C_LOG_NOTHING )
 
-        # 1.2 Set up a stream workflow based on a custom stream task
+        # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_2D',
-                              p_range_max=OAWorkflow.C_RANGE_NONE,
-                              p_ada=p_ada,
-                              p_visualize=p_visualize,
-                              p_logging=p_logging)
+        workflow = OAWorkflow( p_name='wf_2D',
+                               p_range_max=OAWorkflow.C_RANGE_NONE,
+                               p_ada=p_ada,
+                               p_visualize=p_visualize,
+                               p_logging=p_logging )
 
 
         # 1.2.2 Creation of tasks and add them to the workflow
 
-        # Boundary detector 
-        task_bd = BoundaryDetector(p_name='t1', 
-                                   p_ada=True, 
-                                   p_visualize=p_visualize,   
-                                   p_logging=p_logging)
-        
-        workflow.add_task(p_task = task_bd)
-
-        # MinMax-Normalizer
-        task_norm_minmax = NormalizerMinMax(p_name='t2', 
-                                            p_ada=True,
-                                            p_visualize=p_visualize, 
-                                            p_logging=p_logging )
-
-        task_bd.register_event_handler(
-            p_event_id=BoundaryDetector.C_EVENT_ADAPTED,
-            p_event_handler=task_norm_minmax.adapt_on_event
-            )
-        
-        workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
-
         # Cluster Analyzer
-        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t3',
-                                                   p_chunk_size=5,
-                                                   p_n_clusters=5,
-                                                   p_halflife=0.5, 
-                                                   p_sigma=300,
-                                                   p_seed=41,
-                                                   p_visualize=p_visualize,
-                                                   p_logging=p_logging )
+        task_clusterer = WrRiverCluStream2MLPro( p_name='t1',
+                                                p_n_macro_clusters = 5,
+                                                p_max_micro_clusters = 20,
+                                                p_micro_cluster_r_factor = 2,
+                                                p_time_window = 100,
+                                                p_time_gap = 10,
+                                                p_seed = 41,
+                                                p_halflife = 1.0,
+                                                p_mu = 1,
+                                                p_sigma = 1,
+                                                p_p = 2,
+                                                p_visualize=p_visualize,
+                                                p_logging=p_logging )
         
-        task_norm_minmax.register_event_handler( p_event_id=NormalizerMinMax.C_EVENT_ADAPTED,
-                                                 p_event_handler=task_clusterer.renormalize_on_event )
-        
-        workflow.add_task(p_task = task_clusterer, p_pred_tasks=[task_norm_minmax])
+        workflow.add_task(p_task = task_clusterer)
 
         # 1.3 Return stream and workflow
         return stream, workflow
@@ -115,10 +83,10 @@ class Static2DScenario(OAScenario):
 
 # 2 Prepare Demo/Unit test mode
 if __name__ == '__main__':
-    cycle_limit = 2000
+    cycle_limit = 1000
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 1
+    step_rate   = 2
 else:
     cycle_limit = 2
     logging     = Log.C_LOG_NOTHING
@@ -154,7 +122,7 @@ tp_delta            = tp_after - tp_before
 duraction_sec       = ( tp_delta.seconds * 1000000 + tp_delta.microseconds + 1 ) / 1000000
 myscenario.log(Log.C_LOG_TYPE_S, 'Duration [sec]:', round(duraction_sec,2), ', Cycles/sec:', round(cycle_limit/duraction_sec,2))
 
-clusters            = myscenario.get_workflow()._tasks[2].get_clusters()
+clusters            = myscenario.get_workflow()._tasks[0].get_clusters()
 number_of_clusters  = len(clusters)
 
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
