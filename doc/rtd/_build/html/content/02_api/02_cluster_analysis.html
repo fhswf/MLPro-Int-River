@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wrappers for River Cluster Analyzers &mdash; MLPro Documentations 0.5.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3876c83e" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=1dd76d02"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Wrappers for River Anomaly Detectors" href="03_anomaly_detection.html" />
+    <link rel="prev" title="Wrappers for River Data Streams" href="01_streams.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MLPro Documentations
+              <img src="../../_static/logo_mlpro.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">MLPro-Int-River - Example Pool</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../01_example_pool/01_streams.html">Reuse of River Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_example_pool/02_cluster_analysis.html">Reuse of River Cluster Analyzers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_basic.html">Wrapper Root Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_streams.html">Wrappers for River Data Streams</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Wrappers for River Cluster Analyzers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_TYPE"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro.C_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_WRAPPED_PACKAGE"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro.C_WRAPPED_PACKAGE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_MINIMUM_VERSION"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro.C_MINIMUM_VERSION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro._adapt"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro._adapt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro._update_clusters"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro._update_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_clusters"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro.get_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_algorithm"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro.get_algorithm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_cluster_memberships"><code class="docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro.get_cluster_memberships()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverDBStream2MLPro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro.C_TYPE"><code class="docutils literal notranslate"><span class="pre">WrRiverDBStream2MLPro.C_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro._update_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverDBStream2MLPro._update_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro.get_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverDBStream2MLPro.get_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro._renormalize"><code class="docutils literal notranslate"><span class="pre">WrRiverDBStream2MLPro._renormalize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverCluStream2MLPro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro.C_TYPE"><code class="docutils literal notranslate"><span class="pre">WrRiverCluStream2MLPro.C_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro._update_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverCluStream2MLPro._update_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro.get_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverCluStream2MLPro.get_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro._renormalize"><code class="docutils literal notranslate"><span class="pre">WrRiverCluStream2MLPro._renormalize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverDenStream2MLPro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro.C_TYPE"><code class="docutils literal notranslate"><span class="pre">WrRiverDenStream2MLPro.C_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro._update_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverDenStream2MLPro._update_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro.get_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverDenStream2MLPro.get_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro._renormalize"><code class="docutils literal notranslate"><span class="pre">WrRiverDenStream2MLPro._renormalize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverKMeans2MLPro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro.C_TYPE"><code class="docutils literal notranslate"><span class="pre">WrRiverKMeans2MLPro.C_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro._update_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverKMeans2MLPro._update_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro.get_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverKMeans2MLPro.get_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro._renormalize"><code class="docutils literal notranslate"><span class="pre">WrRiverKMeans2MLPro._renormalize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro"><code class="docutils literal notranslate"><span class="pre">WrRiverStreamKMeans2MLPro</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro.C_NAME"><code class="docutils literal notranslate"><span class="pre">WrRiverStreamKMeans2MLPro.C_NAME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro._update_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverStreamKMeans2MLPro._update_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro.get_clusters"><code class="docutils literal notranslate"><span class="pre">WrRiverStreamKMeans2MLPro.get_clusters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro._renormalize"><code class="docutils literal notranslate"><span class="pre">WrRiverStreamKMeans2MLPro._renormalize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_anomaly_detection.html">Wrappers for River Anomaly Detectors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../03_about/01_versions.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_about/02_disclaimer.html">Disclaimer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MLPro Documentations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Wrappers for River Cluster Analyzers</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/fhswf/MLPro-Int-River/blob/main/doc/docs/content/02_api/02_cluster_analysis.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wrappers-for-river-cluster-analyzers">
+<span id="api-ca"></span><h1>Wrappers for River Cluster Analyzers<a class="headerlink" href="#wrappers-for-river-cluster-analyzers" title="Link to this heading"></a></h1>
+<a class="reference internal image-reference" href="../../_images/MLPro-Int-River-Cluster_Analyzers.drawio.png"><img alt="../../_images/MLPro-Int-River-Cluster_Analyzers.drawio.png" src="../../_images/MLPro-Int-River-Cluster_Analyzers.drawio.png" style="width: 1282.0px; height: 1807.0px;" /></a>
+<p id="module-mlpro_int_river.wrappers.clusteranalyzers">Ver. 1.0.12 (2024-01-05)</p>
+<p>This module provides wrapper classes from River to MLPro, specifically for cluster analyzers. This
+module includes three clustering algorithms from River that are embedded to MLPro, such as:</p>
+<ol class="arabic simple">
+<li><p>DBSTREAM (<a class="reference external" href="https://riverml.xyz/latest/api/cluster/DBSTREAM/">https://riverml.xyz/latest/api/cluster/DBSTREAM/</a>)</p></li>
+<li><p>CluStream (<a class="reference external" href="https://riverml.xyz/latest/api/cluster/CluStream/">https://riverml.xyz/latest/api/cluster/CluStream/</a>)</p></li>
+<li><p>DenStream (<a class="reference external" href="https://riverml.xyz/latest/api/cluster/DenStream/">https://riverml.xyz/latest/api/cluster/DenStream/</a>)</p></li>
+<li><p>KMeans (<a class="reference external" href="https://riverml.xyz/latest/api/cluster/KMeans/">https://riverml.xyz/latest/api/cluster/KMeans/</a>)</p></li>
+<li><p>STREAMKMeans (<a class="reference external" href="https://riverml.xyz/latest/api/cluster/STREAMKMeans/">https://riverml.xyz/latest/api/cluster/STREAMKMeans/</a>)</p></li>
+</ol>
+<p>Learn more:
+<a class="reference external" href="https://www.riverml.xyz/">https://www.riverml.xyz/</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlpro_int_river.wrappers.clusteranalyzers.</span></span><span class="sig-name descname"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_cls_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_river_algo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Clusterer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_range_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ada</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_visualize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">p_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="00_basic.html#mlpro_int_river.wrappers.basics.WrapperRiver" title="mlpro_int_river.wrappers.basics.WrapperRiver"><code class="xref py py-class docutils literal notranslate"><span class="pre">WrapperRiver</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ClusterAnalyzer</span></code></p>
+<p>This is the base wrapper class for each River-based cluster analyzer to MLPro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_cls_cluster</strong> – Cluster class (Class Cluster or a child class).</p></li>
+<li><p><strong>p_river_algo</strong> (<em>river.base.Clusterer</em>) – Instantiated river-based clusterer.</p></li>
+<li><p><strong>p_name</strong> (<em>str</em>) – Name of the clusterer. Default: None.</p></li>
+<li><p><strong>p_range_max</strong> – MLPro machine learning task, either process or thread. Default: MLTask.C_RANGE_THREAD.</p></li>
+<li><p><strong>p_ada</strong> (<em>bool</em>) – Turn on adaptivity. Default: True.</p></li>
+<li><p><strong>p_visualize</strong> (<em>bool</em>) – Turn on visualization. Default: False.</p></li>
+<li><p><strong>p_logging</strong> – Set up type of logging. Default: Log.C_LOG_ALL.</p></li>
+<li><p><strong>p_kwargs</strong> (<em>dict</em>) – Further optional named parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_TYPE">
+<span class="sig-name descname"><span class="pre">C_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'River</span> <span class="pre">Cluster</span> <span class="pre">Analyzer'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_WRAPPED_PACKAGE">
+<span class="sig-name descname"><span class="pre">C_WRAPPED_PACKAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'river'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_WRAPPED_PACKAGE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_MINIMUM_VERSION">
+<span class="sig-name descname"><span class="pre">C_MINIMUM_VERSION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'0.15.0'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.C_MINIMUM_VERSION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro._adapt">
+<span class="sig-name descname"><span class="pre">_adapt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_inst_new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Instance</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro._adapt" title="Link to this definition"></a></dt>
+<dd><p>This method is to adapt the current clusters according to the incoming instances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p_inst_new</strong> (<em>List</em><em>[</em><em>Instance</em><em>]</em>) – incoming instances.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>adapted</strong> – True, if something has been adapted. False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro._update_clusters">
+<span class="sig-name descname"><span class="pre">_update_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro._update_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method is to update the centroids of each introduced cluster.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_clusters">
+<span class="sig-name descname"><span class="pre">get_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method returns the current list of clusters. To be defined according to each clusterer
+mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>list_of_clusters</strong> – Current list of clusters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Cluster]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_algorithm">
+<span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Clusterer</span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_algorithm" title="Link to this definition"></a></dt>
+<dd><p>This method returns the river algorithm of the clusterer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The river algorithm of the clusterer.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>base.Clusterer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_cluster_memberships">
+<span class="sig-name descname"><span class="pre">get_cluster_memberships</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_inst</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro.get_cluster_memberships" title="Link to this definition"></a></dt>
+<dd><p>Public custom method to determine the membership of the given instance to each cluster as
+a value in percent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_inst</strong> (<em>Instance</em>) – Instance to be evaluated.</p></li>
+<li><p><strong>p_scope</strong> (<em>int</em>) – Scope of the result list. See class attributes C_MS_SCOPE_* for possible values. Default
+value is C_MS_SCOPE_MAX.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>membership</strong> – List of membership tuples for each cluster. A tuple consists of a cluster id, a
+relative membership value in percent and a reference to the cluster.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, float, Cluster]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlpro_int_river.wrappers.clusteranalyzers.</span></span><span class="sig-name descname"><span class="pre">WrRiverDBStream2MLPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_range_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ada</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_visualize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_clustering_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_fading_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_cleanup_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_intersection_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_minimum_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">p_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro" title="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="xref py py-class docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a></p>
+<p>This is the wrapper class for DBSTREAM clusterer.</p>
+<p>According to <a class="reference external" href="https://riverml.xyz/latest/api/cluster/DBSTREAM/">https://riverml.xyz/latest/api/cluster/DBSTREAM/</a> :
+DBSTREAM is a clustering algorithm for evolving data streams.
+It is the first micro-cluster-based online clustering component that explicitely captures the
+density between micro-clusters via a shared density graph. The density information in the graph
+is then exploited for reclustering based on actual density between adjacent micro clusters.</p>
+<dl class="simple">
+<dt>The algorithm is divided into two parts:</dt><dd><ol class="arabic simple">
+<li><p>Online micro-cluster maintenance (learning)</p></li>
+<li><p>Offline generation of macro clusters (clustering)</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_name</strong> (<em>str</em>) – Name of the clusterer. Default: None.</p></li>
+<li><p><strong>p_range_max</strong> – MLPro machine learning task, either process or thread. Default: MLTask.C_RANGE_THREAD.</p></li>
+<li><p><strong>p_ada</strong> (<em>bool</em>) – Turn on adaptivity. Default: True.</p></li>
+<li><p><strong>p_visualize</strong> (<em>bool</em>) – Turn on visualization. Default: False.</p></li>
+<li><p><strong>p_logging</strong> – Set up type of logging. Default: Log.C_LOG_ALL.</p></li>
+<li><p><strong>p_clustering_threshold</strong> (<em>float</em>) – DBStream represents each micro cluster by a leader (a data point defining the micro cluster’s
+center) and the density in an area of a user-specified radius (clustering_threshold) around
+the center. Default: 1.0.</p></li>
+<li><p><strong>p_fading_factor</strong> (<em>float</em>) – Parameter that controls the importance of historical data to current cluster.
+Note that fading_factor has to be different from 0. Default: 0.01.</p></li>
+<li><p><strong>p_cleanup_interval</strong> (<em>float</em>) – The time interval between two consecutive time points when the cleanup process is conducted.
+Default: 2.</p></li>
+<li><p><strong>p_intersection_factor</strong> (<em>float</em>) – The intersection factor related to the area of the overlap of the micro clusters relative
+to the area cover by micro clusters. This parameter is used to determine whether a micro
+cluster or a shared density is weak. Default: 0.3.</p></li>
+<li><p><strong>p_minimum_weight</strong> (<em>float</em>) – The minimum weight for a cluster to be not “noisy”. Default: 1.0.</p></li>
+<li><p><strong>p_kwargs</strong> (<em>dict</em>) – Further optional named parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro.C_TYPE">
+<span class="sig-name descname"><span class="pre">C_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'River</span> <span class="pre">Cluster</span> <span class="pre">Analyzer</span> <span class="pre">DBSTREAM'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro.C_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro._update_clusters">
+<span class="sig-name descname"><span class="pre">_update_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro._update_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method is to update the centroids of each introduced cluster.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro.get_clusters">
+<span class="sig-name descname"><span class="pre">get_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro.get_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method returns the current list of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_of_clusters</strong> – Current list of clusters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[Cluster]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro._renormalize">
+<span class="sig-name descname"><span class="pre">_renormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_normalizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Normalizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDBStream2MLPro._renormalize" title="Link to this definition"></a></dt>
+<dd><p>Internal enormalization is hard to realize here without getting strong dependencies on
+internal implementation details.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlpro_int_river.wrappers.clusteranalyzers.</span></span><span class="sig-name descname"><span class="pre">WrRiverCluStream2MLPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_range_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ada</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_visualize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_n_macro_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_max_micro_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_micro_cluster_r_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_time_window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_time_gap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_halflife</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">p_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro" title="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="xref py py-class docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a></p>
+<p>This is the wrapper class for CluStream clusterer.</p>
+<p>According to <a class="reference external" href="https://riverml.xyz/latest/api/cluster/CluStream/">https://riverml.xyz/latest/api/cluster/CluStream/</a> :
+The CluStream algorithm maintains statistical information about the data using micro-clusters.
+These micro-clusters are temporal extensions of cluster feature vectors. The micro-clusters are
+stored at snapshots in time following a pyramidal pattern. This pattern allows to recall summary
+statistics from different time horizons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_name</strong> (<em>str</em>) – Name of the clusterer. Default: None.</p></li>
+<li><p><strong>p_range_max</strong> – MLPro machine learning task, either process or thread. Default: MLTask.C_RANGE_THREAD.</p></li>
+<li><p><strong>p_ada</strong> (<em>bool</em>) – Turn on adaptivity. Default: True.</p></li>
+<li><p><strong>p_visualize</strong> (<em>bool</em>) – Turn on visualization. Default: False.</p></li>
+<li><p><strong>p_logging</strong> – Set up type of logging. Default: Log.C_LOG_ALL.</p></li>
+<li><p><strong>p_n_macro_clusters</strong> (<em>int</em>) – The number of clusters (k) for the k-means algorithm. Default: 5.</p></li>
+<li><p><strong>p_max_micro_clusters</strong> (<em>int</em>) – The maximum number of micro-clusters to use. Default: 100.</p></li>
+<li><p><strong>p_micro_cluster_r_factor</strong> (<em>int</em>) – Multiplier for the micro-cluster radius. When deciding to add a new data point to a
+micro-cluster, the maximum boundary is defined as a factor of the micro_cluster_r_factor
+of the RMS deviation of the data points in the micro-cluster from the centroid. Default: 2.</p></li>
+<li><p><strong>p_time_window</strong> (<em>int</em>) – If the current time is T and the time window is h, we only consider the data that arrived
+within the period (T-h,T). Default: 1000.</p></li>
+<li><p><strong>p_time_gap</strong> (<em>int</em>) – An incremental k-means is applied on the current set of micro-clusters after each time_gap
+to form the final macro-cluster solution. Default: 100.</p></li>
+<li><p><strong>p_seed</strong> (<em>int</em>) – Random seed used for generating initial centroid positions. Default: None.</p></li>
+<li><p><strong>p_halflife</strong> (<em>float</em>) – Amount by which to move the cluster centers, a reasonable value if between 0 and 1.
+Default: 0.5.</p></li>
+<li><p><strong>p_mu</strong> (<em>float</em>) – Mean of the normal distribution used to instantiate cluster positions. Default: 1.</p></li>
+<li><p><strong>p_sigma</strong> (<em>float</em>) – Standard deviation of the normal distribution used to instantiate cluster positions.
+Default: 1.</p></li>
+<li><p><strong>p_p</strong> (<em>int</em>) – Power parameter for the Minkowski metric. When p=1, this corresponds to the Manhattan
+distance, while p=2 corresponds to the Euclidean distance. Default: 2.</p></li>
+<li><p><strong>p_kwargs</strong> (<em>dict</em>) – Further optional named parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro.C_TYPE">
+<span class="sig-name descname"><span class="pre">C_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'River</span> <span class="pre">Cluster</span> <span class="pre">Analyzer</span> <span class="pre">CluStream'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro.C_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro._update_clusters">
+<span class="sig-name descname"><span class="pre">_update_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro._update_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method is to update the centroids of each introduced cluster.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro.get_clusters">
+<span class="sig-name descname"><span class="pre">get_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro.get_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method returns the current list of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_of_clusters</strong> – Current list of clusters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[Cluster]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro._renormalize">
+<span class="sig-name descname"><span class="pre">_renormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_normalizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Normalizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverCluStream2MLPro._renormalize" title="Link to this definition"></a></dt>
+<dd><p>Internal enormalization is hard to realize here without getting strong dependencies on
+internal implementation details.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlpro_int_river.wrappers.clusteranalyzers.</span></span><span class="sig-name descname"><span class="pre">WrRiverDenStream2MLPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_range_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ada</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_visualize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_decaying_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_n_samples_init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_stream_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">p_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro" title="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="xref py py-class docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a></p>
+<p>This is the wrapper class for DenStream clusterer.</p>
+<p>According to <a class="reference external" href="https://riverml.xyz/latest/api/cluster/DenStream/">https://riverml.xyz/latest/api/cluster/DenStream/</a> :
+DenStream is a clustering algorithm for evolving data streams. DenStream can discover clusters
+with arbitrary shape and is robust against noise (outliers).</p>
+<p>“Dense” micro-clusters (named core-micro-clusters) summarise the clusters of arbitrary shape.
+A pruning strategy based on the concepts of potential and outlier micro-clusters guarantees the
+precision of the weights of the micro-clusters with limited memory.</p>
+<dl class="simple">
+<dt>The algorithm is divided into two parts:</dt><dd><ol class="arabic simple">
+<li><p>Online micro-cluster maintenance (learning)</p></li>
+<li><p>Offline generation of macro clusters (clustering)</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_name</strong> (<em>str</em>) – Name of the clusterer. Default: None.</p></li>
+<li><p><strong>p_range_max</strong> – MLPro machine learning task, either process or thread. Default: MLTask.C_RANGE_THREAD.</p></li>
+<li><p><strong>p_ada</strong> (<em>bool</em>) – Turn on adaptivity. Default: True.</p></li>
+<li><p><strong>p_visualize</strong> (<em>bool</em>) – Turn on visualization. Default: False.</p></li>
+<li><p><strong>p_logging</strong> – Set up type of logging. Default: Log.C_LOG_ALL.</p></li>
+<li><p><strong>p_decaying_factor</strong> (<em>float</em>) – Parameter that controls the importance of historical data to current cluster. Note that
+decaying_factor has to be different from 0. Default: 0.25.</p></li>
+<li><p><strong>p_beta</strong> (<em>float</em>) – Parameter to determine the threshold of outlier relative to core micro-clusters. The value
+of beta must be within the range (0,1). Default: 0.75.</p></li>
+<li><p><strong>p_mu</strong> (<em>float</em>) – Parameter to determine the threshold of outliers relative to core micro-cluster.
+As beta * mu must be greater than 1, mu must be within the range (1/beta, inf). Default: 2.</p></li>
+<li><p><strong>p_epsilon</strong> (<em>float</em>) – Defines the epsilon neighborhood. Default: 0.02.</p></li>
+<li><p><strong>p_n_samples_init</strong> (<em>int</em>) – Number of points to to initiqalize the online process. Default: 1000.</p></li>
+<li><p><strong>p_stream_speed</strong> (<em>int</em>) – Number of points arrived in unit time. Default: 100.</p></li>
+<li><p><strong>p_kwargs</strong> (<em>dict</em>) – Further optional named parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro.C_TYPE">
+<span class="sig-name descname"><span class="pre">C_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'River</span> <span class="pre">Cluster</span> <span class="pre">Analyzer</span> <span class="pre">DenStream'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro.C_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro._update_clusters">
+<span class="sig-name descname"><span class="pre">_update_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro._update_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method is to update the centroids of each introduced cluster.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro.get_clusters">
+<span class="sig-name descname"><span class="pre">get_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro.get_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method returns the current list of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_of_clusters</strong> – Current list of clusters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[ClusterCentroid]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro._renormalize">
+<span class="sig-name descname"><span class="pre">_renormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_normalizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Normalizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverDenStream2MLPro._renormalize" title="Link to this definition"></a></dt>
+<dd><p>Internal enormalization is hard to realize here without getting strong dependencies on
+internal implementation details.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlpro_int_river.wrappers.clusteranalyzers.</span></span><span class="sig-name descname"><span class="pre">WrRiverKMeans2MLPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_range_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ada</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_visualize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_n_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_halflife</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">p_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro" title="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="xref py py-class docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a></p>
+<p>This is the wrapper class for KMeans clusterer.</p>
+<p>According to <a class="reference external" href="https://riverml.xyz/latest/api/cluster/KMeans/">https://riverml.xyz/latest/api/cluster/KMeans/</a> :
+Incremental k-means. The most common way to implement batch k-means is to use Lloyd’s algorithm,
+which consists in assigning all the data points to a set of cluster centers and then moving the
+centers accordingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_name</strong> (<em>str</em>) – Name of the clusterer. Default: None.</p></li>
+<li><p><strong>p_range_max</strong> – MLPro machine learning task, either process or thread. Default: MLTask.C_RANGE_THREAD.</p></li>
+<li><p><strong>p_ada</strong> (<em>bool</em>) – Turn on adaptivity. Default: True.</p></li>
+<li><p><strong>p_visualize</strong> (<em>bool</em>) – Turn on visualization. Default: False.</p></li>
+<li><p><strong>p_logging</strong> – Set up type of logging. Default: Log.C_LOG_ALL.</p></li>
+<li><p><strong>p_n_clusters</strong> (<em>int</em>) – Maximum number of clusters to assign. Default: 5.</p></li>
+<li><p><strong>p_seed</strong> (<em>int</em>) – Random seed used for generating initial centroid positions. Default: None.</p></li>
+<li><p><strong>p_halflife</strong> (<em>float</em>) – Amount by which to move the cluster centers, a reasonable value if between 0 and 1.
+Default: 0.5.</p></li>
+<li><p><strong>p_mu</strong> (<em>float</em>) – Mean of the normal distribution used to instantiate cluster positions. Default: 1.</p></li>
+<li><p><strong>p_sigma</strong> (<em>float</em>) – Standard deviation of the normal distribution used to instantiate cluster positions.
+Default: 1.</p></li>
+<li><p><strong>p_p</strong> (<em>int</em>) – Power parameter for the Minkowski metric. When p=1, this corresponds to the Manhattan
+distance, while p=2 corresponds to the Euclidean distance. Default: 2.</p></li>
+<li><p><strong>p_kwargs</strong> (<em>dict</em>) – Further optional named parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro.C_TYPE">
+<span class="sig-name descname"><span class="pre">C_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'River</span> <span class="pre">Cluster</span> <span class="pre">Analyzer</span> <span class="pre">KMeans'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro.C_TYPE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro._update_clusters">
+<span class="sig-name descname"><span class="pre">_update_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro._update_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method is to update the centroids of each introduced cluster.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro.get_clusters">
+<span class="sig-name descname"><span class="pre">get_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro.get_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method returns the current list of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_of_clusters</strong> – Current list of clusters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[Cluster]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro._renormalize">
+<span class="sig-name descname"><span class="pre">_renormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_normalizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Normalizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverKMeans2MLPro._renormalize" title="Link to this definition"></a></dt>
+<dd><p>Internal renormalization of all clusters. See method OATask.renormalize_on_event() for further
+information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p_normalizer</strong> (<em>Normalizer</em>) – Normalizer object to be applied on task-specific</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlpro_int_river.wrappers.clusteranalyzers.</span></span><span class="sig-name descname"><span class="pre">WrRiverStreamKMeans2MLPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_range_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ada</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_visualize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_n_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_halflife</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_mu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">p_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro" title="mlpro_int_river.wrappers.clusteranalyzers.WrClusterAnalyzerRiver2MLPro"><code class="xref py py-class docutils literal notranslate"><span class="pre">WrClusterAnalyzerRiver2MLPro</span></code></a></p>
+<p>This is the wrapper class for STREAMKMeans clusterer.</p>
+<p>According to <a class="reference external" href="https://riverml.xyz/latest/api/cluster/STREAMKMeans/">https://riverml.xyz/latest/api/cluster/STREAMKMeans/</a> :
+STREAMKMeans is an alternative version of the original algorithm STREAMLSEARCH proposed by
+O’Callaghan et al., by replacing the k-medians using LSEARCH by the k-means algorithm.</p>
+<p>However, instead of using the traditional k-means, which requires a total reclustering each time
+the temporary chunk of data points is full, the implementation of this algorithm uses an
+increamental k-means.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_name</strong> (<em>str</em>) – Name of the clusterer. Default: None.</p></li>
+<li><p><strong>p_range_max</strong> – MLPro machine learning task, either process or thread. Default: MLTask.C_RANGE_THREAD.</p></li>
+<li><p><strong>p_ada</strong> (<em>bool</em>) – Turn on adaptivity. Default: True.</p></li>
+<li><p><strong>p_visualize</strong> (<em>bool</em>) – Turn on visualization. Default: False.</p></li>
+<li><p><strong>p_logging</strong> – Set up type of logging. Default: Log.C_LOG_ALL.</p></li>
+<li><p><strong>p_chunk_size</strong> (<em>int</em>) – Maximum size allowed for the temporary data chunk. Default: 10.</p></li>
+<li><p><strong>p_n_clusters</strong> (<em>int</em>) – Number of clusters generated by the algorithm. Default: 5.</p></li>
+<li><p><strong>p_seed</strong> (<em>int</em>) – Random seed used for generating initial centroid positions. Default: None.</p></li>
+<li><p><strong>p_halflife</strong> (<em>float</em>) – Amount by which to move the cluster centers, a reasonable value if between 0 and 1.
+Default: 0.5.</p></li>
+<li><p><strong>p_mu</strong> (<em>float</em>) – Mean of the normal distribution used to instantiate cluster positions. Default: 1.</p></li>
+<li><p><strong>p_sigma</strong> (<em>float</em>) – Standard deviation of the normal distribution used to instantiate cluster positions.
+Default: 1.</p></li>
+<li><p><strong>p_p</strong> (<em>int</em>) – Power parameter for the Minkowski metric. When p=1, this corresponds to the Manhattan
+distance, while p=2 corresponds to the Euclidean distance. Default: 2.</p></li>
+<li><p><strong>p_kwargs</strong> (<em>dict</em>) – Further optional named parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro.C_NAME">
+<span class="sig-name descname"><span class="pre">C_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'River</span> <span class="pre">Cluster</span> <span class="pre">Analyzer</span> <span class="pre">STREAMKMeans'</span></em><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro.C_NAME" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro._update_clusters">
+<span class="sig-name descname"><span class="pre">_update_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro._update_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method is to update the centroids of each introduced cluster.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro.get_clusters">
+<span class="sig-name descname"><span class="pre">get_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Cluster</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro.get_clusters" title="Link to this definition"></a></dt>
+<dd><p>This method returns the current list of clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_of_clusters</strong> – Current list of clusters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[Cluster]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro._renormalize">
+<span class="sig-name descname"><span class="pre">_renormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_normalizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Normalizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlpro_int_river.wrappers.clusteranalyzers.WrRiverStreamKMeans2MLPro._renormalize" title="Link to this definition"></a></dt>
+<dd><p>Internal renormalization of all clusters. See method OATask.renormalize_on_event() for further
+information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p_normalizer</strong> (<em>Normalizer</em>) – Normalizer object to be applied on task-specific</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01_streams.html" class="btn btn-neutral float-left" title="Wrappers for River Data Streams" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03_anomaly_detection.html" class="btn btn-neutral float-right" title="Wrappers for River Anomaly Detectors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024 South Westphalia University of Applied Sciences, Germany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

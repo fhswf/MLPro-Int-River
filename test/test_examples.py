@@ -104,9 +104,10 @@ class HowtoTester(Log):
 
 
 
+sys.path.append('src')
+
 tester = HowtoTester()
 howtos = tester.get_howtos( sys.path[0] + os.sep + 'howtos' )
-
 
 if __name__ != '__main__':
     @pytest.mark.parametrize("p_path,p_file", howtos)

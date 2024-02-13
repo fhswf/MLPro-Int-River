@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Howto BF-STREAMS-001: Accessing Native Data From MLPro &mdash; MLPro Documentations 0.5.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3876c83e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=1dd76d02"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Reuse of River Cluster Analyzers" href="../02_cluster_analysis.html" />
+    <link rel="prev" title="Reuse of River Data Streams" href="../01_streams.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            MLPro Documentations
+              <img src="../../../_static/logo_mlpro.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">MLPro-Int-River - Example Pool</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../01_streams.html">Reuse of River Data Streams</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Howto BF-STREAMS-001: Accessing Native Data From MLPro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02_cluster_analysis.html">Reuse of River Cluster Analyzers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../02_api/00_basic.html">Wrapper Root Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_api/01_streams.html">Wrappers for River Data Streams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_api/02_cluster_analysis.html">Wrappers for River Cluster Analyzers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_api/03_anomaly_detection.html">Wrappers for River Anomaly Detectors</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../03_about/01_versions.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_about/02_disclaimer.html">Disclaimer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">MLPro Documentations</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../01_streams.html">Reuse of River Data Streams</a></li>
+      <li class="breadcrumb-item active">Howto BF-STREAMS-001: Accessing Native Data From MLPro</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/fhswf/MLPro-Int-River/blob/main/doc/docs/content/01_example_pool/01_howtos_streams/howto_bf_streams_001_accessing_data_from_river.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="howto-bf-streams-001-accessing-native-data-from-mlpro">
+<span id="howto-bf-streams-001"></span><h1>Howto BF-STREAMS-001: Accessing Native Data From MLPro<a class="headerlink" href="#howto-bf-streams-001-accessing-native-data-from-mlpro" title="Link to this heading"></a></h1>
+<p><strong>Executable code</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## -------------------------------------------------------------------------------------------------</span>
+<span class="c1">## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks</span>
+<span class="c1">## -- Package : mlpro_int_river</span>
+<span class="c1">## -- Module  : howto_bf_streams_001_accessing_data_from_river.py</span>
+<span class="c1">## -------------------------------------------------------------------------------------------------</span>
+<span class="c1">## -- History :</span>
+<span class="c1">## -- yyyy-mm-dd  Ver.      Auth.    Description</span>
+<span class="c1">## -- 2022-06-14  0.0.0     LSB      Creation</span>
+<span class="c1">## -- 2022-06-14  1.0.0     LSB      Release of first version</span>
+<span class="c1">## -- 2022-06-25  1.0.1     LSB      Refactoring for new label and instance class</span>
+<span class="c1">## -- 2022-10-12  1.0.2     DA       Renaming</span>
+<span class="c1">## -- 2022-11-07  1.1.0     DA       Refactoring after changes on class Stream</span>
+<span class="c1">## -- 2022-11-08  1.1.1     DA       Minor improvements</span>
+<span class="c1">## -- 2022-11-19  1.1.2     DA       Get string by name</span>
+<span class="c1">## -- 2022-11-21  1.1.3     DA       Correction on logging</span>
+<span class="c1">## -- 2023-02-02  1.1.4     DA       Correction of time measurement</span>
+<span class="c1">## -- 2023-04-16  1.1.5     DA       Get number of instances from stream</span>
+<span class="c1">## -- 2024-01-30  1.2.0     DA       Relocation to separate github repository</span>
+<span class="c1">## -------------------------------------------------------------------------------------------------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Ver. 1.2.0 (2024-01-30)</span>
+
+<span class="sd">This module demonstrates the use of River datasets as streams in MLPro. To this regard, MLPro</span>
+<span class="sd">provides wrapper classes to standardize stream access in own ML applications.</span>
+
+<span class="sd">You will learn:</span>
+
+<span class="sd">1) How to access datasets of the River project.</span>
+
+<span class="sd">2) How to iterate the instances of an River stream.</span>
+
+<span class="sd">3) How to access feature and label data of a data stream.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">mlpro_int_river.wrappers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">mlpro.bf.various</span> <span class="kn">import</span> <span class="n">Log</span>
+
+
+
+
+<span class="c1"># 0 Prepare Demo/Unit test mode</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">num_inst</span>    <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">logging</span>     <span class="o">=</span> <span class="n">Log</span><span class="o">.</span><span class="n">C_LOG_ALL</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="vm">__file__</span><span class="p">)</span>
+    <span class="n">num_inst</span>    <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">logging</span>     <span class="o">=</span> <span class="n">Log</span><span class="o">.</span><span class="n">C_LOG_NOTHING</span>
+
+
+<span class="c1"># 1 Create a Wrapper for River stream provider</span>
+<span class="n">river</span>  <span class="o">=</span> <span class="n">WrStreamProviderRiver</span><span class="p">(</span><span class="n">p_logging</span><span class="o">=</span><span class="n">logging</span><span class="p">)</span>
+
+
+<span class="c1"># 2 Get a list of streams available at the stream provider</span>
+<span class="n">stream_list</span> <span class="o">=</span> <span class="n">river</span><span class="o">.</span><span class="n">get_stream_list</span><span class="p">(</span><span class="n">p_logging</span> <span class="o">=</span> <span class="n">logging</span><span class="p">)</span>
+
+
+<span class="c1"># 3 Get stream &quot;Bikes&quot; from the stream provider</span>
+<span class="n">mystream</span> <span class="o">=</span> <span class="n">river</span><span class="o">.</span><span class="n">get_stream</span><span class="p">(</span><span class="n">p_name</span><span class="o">=</span><span class="s1">&#39;Bikes&#39;</span><span class="p">,</span> <span class="n">p_logging</span><span class="o">=</span><span class="n">logging</span><span class="p">)</span>
+
+
+<span class="c1"># 4 Get the feature space of the stream</span>
+<span class="n">feature_space</span> <span class="o">=</span> <span class="n">mystream</span><span class="o">.</span><span class="n">get_feature_space</span><span class="p">()</span>
+<span class="n">river</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">C_LOG_TYPE_I</span><span class="p">,</span><span class="s2">&quot;Number of features in the stream:&quot;</span><span class="p">,</span><span class="n">feature_space</span><span class="o">.</span><span class="n">get_num_dim</span><span class="p">())</span>
+
+
+<span class="c1"># 5 Set up an iterator for the stream</span>
+<span class="n">myiterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">mystream</span><span class="p">)</span>
+
+
+<span class="c1"># 6 Fetching some stream instances</span>
+<span class="n">myiterator</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">C_LOG_TYPE_W</span><span class="p">,</span><span class="s1">&#39;Fetching first&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">num_inst</span><span class="p">),</span> <span class="s1">&#39;stream instances...&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_inst</span><span class="p">):</span>
+    <span class="n">curr_instance</span>   <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">myiterator</span><span class="p">)</span>
+    <span class="n">curr_data</span>       <span class="o">=</span> <span class="n">curr_instance</span><span class="o">.</span><span class="n">get_feature_data</span><span class="p">()</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
+    <span class="n">curr_label</span>      <span class="o">=</span> <span class="n">curr_instance</span><span class="o">.</span><span class="n">get_label_data</span><span class="p">()</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
+    <span class="n">myiterator</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">C_LOG_TYPE_I</span><span class="p">,</span> <span class="s1">&#39;Instance&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: </span><span class="se">\n</span><span class="s1">   Data:&#39;</span><span class="p">,</span> <span class="n">curr_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">14</span><span class="p">],</span> <span class="s1">&#39;...</span><span class="se">\n</span><span class="s1">   Label:&#39;</span><span class="p">,</span> <span class="n">curr_label</span><span class="p">)</span>
+
+
+<span class="c1"># 7 Resetting the iterator</span>
+<span class="n">myiterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">mystream</span><span class="p">)</span>
+
+
+<span class="c1"># 8 Fetching all 182,470 instances</span>
+<span class="n">myiterator</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">C_LOG_TYPE_W</span><span class="p">,</span><span class="s1">&#39;Fetching all&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">get_num_instances</span><span class="p">()),</span> <span class="s1">&#39;instances...&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">curr_instance</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">myiterator</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">num_inst</span><span class="p">:</span> 
+        <span class="n">myiterator</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Log</span><span class="o">.</span><span class="n">C_LOG_TYPE_W</span><span class="p">,</span> <span class="s1">&#39;Rest of the&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">get_num_instances</span><span class="p">()),</span> <span class="s1">&#39;instances dark...&#39;</span><span class="p">)</span>
+        <span class="n">myiterator</span><span class="o">.</span><span class="n">switch_logging</span><span class="p">(</span><span class="n">p_logging</span><span class="o">=</span><span class="n">Log</span><span class="o">.</span><span class="n">C_LOG_NOTHING</span><span class="p">)</span>
+        <span class="n">tp_start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+    <span class="n">curr_data</span>       <span class="o">=</span> <span class="n">curr_instance</span><span class="o">.</span><span class="n">get_feature_data</span><span class="p">()</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
+    <span class="n">curr_label</span>      <span class="o">=</span> <span class="n">curr_instance</span><span class="o">.</span><span class="n">get_label_data</span><span class="p">()</span><span class="o">.</span><span class="n">get_values</span><span class="p">()</span>
+    <span class="n">myiterator</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mystream</span><span class="o">.</span><span class="n">C_LOG_TYPE_I</span><span class="p">,</span> <span class="s1">&#39;Instance&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: </span><span class="se">\n</span><span class="s1">   Data:&#39;</span><span class="p">,</span> <span class="n">curr_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">14</span><span class="p">],</span> <span class="s1">&#39;...</span><span class="se">\n</span><span class="s1">   Label:&#39;</span><span class="p">,</span> <span class="n">curr_label</span><span class="p">)</span>
+
+<span class="c1"># 8.1 Some statistics...</span>
+<span class="n">tp_end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="n">tp_end</span> <span class="o">-</span> <span class="n">tp_start</span>
+<span class="n">duration_sec</span> <span class="o">=</span> <span class="p">(</span> <span class="n">duration</span><span class="o">.</span><span class="n">seconds</span> <span class="o">*</span> <span class="mi">1000000</span> <span class="o">+</span> <span class="n">duration</span><span class="o">.</span><span class="n">microseconds</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="p">(</span> <span class="n">myiterator</span><span class="o">.</span><span class="n">get_num_instances</span><span class="p">()</span> <span class="o">-</span> <span class="n">num_inst</span> <span class="p">)</span> <span class="o">/</span> <span class="n">duration_sec</span>
+
+<span class="n">myiterator</span><span class="o">.</span><span class="n">switch_logging</span><span class="p">(</span><span class="n">p_logging</span><span class="o">=</span><span class="n">logging</span><span class="p">)</span>
+<span class="n">myiterator</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Log</span><span class="o">.</span><span class="n">C_LOG_TYPE_W</span><span class="p">,</span> <span class="s1">&#39;Done in&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">duration_sec</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&#39; seconds (throughput =&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">rate</span><span class="p">),</span> <span class="s1">&#39;instances/sec)&#39;</span><span class="p">)</span>    
+</pre></div>
+</div>
+<p><strong>Results</strong></p>
+<a class="reference internal image-reference" href="../../../_images/howto_bf_streams_001_accessing_data_from_river.png"><img alt="../../../_images/howto_bf_streams_001_accessing_data_from_river.png" src="../../../_images/howto_bf_streams_001_accessing_data_from_river.png" style="width: 600px;" /></a>
+<dl class="simple">
+<dt><strong>Cross Reference</strong></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="../../02_api/01_streams.html#api-streams"><span class="std std-ref">API Reference: Streams</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../01_streams.html" class="btn btn-neutral float-left" title="Reuse of River Data Streams" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../02_cluster_analysis.html" class="btn btn-neutral float-right" title="Reuse of River Cluster Analyzers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024 South Westphalia University of Applied Sciences, Germany.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
