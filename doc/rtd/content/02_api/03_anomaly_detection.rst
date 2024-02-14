@@ -2,7 +2,7 @@
 Wrappers for River Anomaly Detectors
 ====================================
 
-.. image:: images/MLPro-Wrappers-River-Anomaly_Detectors.drawio.png
+.. image:: images/MLPro-Int-River-Anomaly_Detectors.drawio.png
    :scale: 50%
 
 
