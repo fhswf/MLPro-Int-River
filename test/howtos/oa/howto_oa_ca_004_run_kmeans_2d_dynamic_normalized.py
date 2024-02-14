@@ -29,6 +29,10 @@ In particular you will learn:
 
 3. How to reuse native MLPro benchmark streams
 
+4. How to reuse native MLPro sliding window
+
+5. How to reuse native MLPro online adaptive min-max normalization for data preprocessing
+
 """
 
 
@@ -48,7 +52,7 @@ if __name__ == '__main__':
     cycle_limit = 2000
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 1
+    step_rate   = 2
 else:
     cycle_limit = 2
     logging     = Log.C_LOG_NOTHING

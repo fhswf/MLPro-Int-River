@@ -49,7 +49,7 @@ if __name__ == '__main__':
     cycle_limit = 1200
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 1
+    step_rate   = 2
 else:
     cycle_limit = 2
     logging     = Log.C_LOG_NOTHING

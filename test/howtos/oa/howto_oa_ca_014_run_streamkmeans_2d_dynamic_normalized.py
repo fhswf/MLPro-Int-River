@@ -28,6 +28,10 @@ In particular you will learn:
 
 3. How to reuse native MLPro benchmark streams
 
+4. How to reuse native MLPro sliding window
+
+5. How to reuse native MLPro online adaptive min-max normalization for data preprocessing
+
 """
 
 
