@@ -1,10 +1,10 @@
-.. _Howto_OA_CA_001:
-Howto OA-CA-001: Run KMeans on static 2D point clouds
+.. _Howto_OA_CA_005:
+Howto OA-CA-005: Run KMeans on static 3D point clouds
 =====================================================
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_001_run_kmeans_2d_static.py
+.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_005_run_kmeans_3d_static.py
 	:language: python
 
 
@@ -12,7 +12,7 @@ Howto OA-CA-001: Run KMeans on static 2D point clouds
 **Results**
 
 .. image::
-    images/howto_oa_ca_001_run_kmeans_2d_static.gif
+    images/howto_oa_ca_005_run_kmeans_3d_static.gif
     :width: 1000px
 
 
