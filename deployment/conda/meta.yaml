@@ -1,5 +1,5 @@
 {% set name = "mlpro-int-river" %}
-{% set version = "1.0.0" %}
+{% set version = "0.1.0" %}
 
 package:
   name: "{{ name|lower }}"
@@ -29,7 +29,7 @@ test:
     - mypackage
 
 about:
-  home: https://github.com/...
+  home: https://github.com/fhswf/MLPro-Int-River
   license: ...
   license_family: ...
   summary: ...
