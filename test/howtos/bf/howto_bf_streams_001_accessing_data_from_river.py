@@ -1,5 +1,5 @@
 ## -------------------------------------------------------------------------------------------------
-## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
+## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river
 ## -- Module  : howto_bf_streams_001_accessing_data_from_river.py
 ## -------------------------------------------------------------------------------------------------

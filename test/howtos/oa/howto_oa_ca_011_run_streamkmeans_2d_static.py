@@ -1,5 +1,5 @@
 ## -------------------------------------------------------------------------------------------------
-## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
+## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river
 ## -- Module  : howto_oa_ca_011_run_streamkmeans_2d_static.py
 ## -------------------------------------------------------------------------------------------------
@@ -13,11 +13,18 @@
 """
 Ver. 1.1.0 (2023-12-28)
 
-This module demonstrates a task in a workflow, which is Wrapped StreamKMeans Algorithm (River).
-In this module, we demonstrate the workflow in static 2D point clouds.
+This module demonstrates online cluster analysis of static 2D random point clouds using the wrapped
+River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
+MLPro-OA-Streams for online adaptive stream processing is used to implement a scenario consisting of  
+a custom workflow and a native benchmark stream.
 
-This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
-Ocean Capsule, thus the result is reproducible.
+In particular you will learn:
+
+1. How to set up, run and visualize an online adaptive custom stream processing scenario 
+
+2. How to reuse wrapped River algorithms in own custom stream processing workflows
+
+3. How to reuse native MLPro benchmark streams
 
 """
 

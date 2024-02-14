@@ -1,5 +1,5 @@
 ## -------------------------------------------------------------------------------------------------
-## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
+## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river
 ## -- Module  : howto_oa_ca_004_run_kmeans_2d_dynamic_normalized.py
 ## -------------------------------------------------------------------------------------------------
@@ -16,21 +16,18 @@
 """
 Ver. 1.1.0 (2024-02-02)
 
-This module demonstrates the combination of several tasks in a workflow, which includes:
+This module demonstrates online cluster analysis of normalized dynamic 2D random point clouds using the wrapped
+River implementation of stream algorithm KMeans. To this regard, the systematics of sub-framework 
+MLPro-OA-Streams for online adaptive stream processing is used to implement a scenario consisting of  
+a custom workflow and a native benchmark stream.
 
-1) Window,
+In particular you will learn:
 
-2) Boundary Detector,
+1. How to set up, run and visualize an online adaptive custom stream processing scenario 
 
-3) Min/Max-Normalizer, and
+2. How to reuse wrapped River algorithms in own custom stream processing workflows
 
-4) Wrapped CluStream Algorithm (River).
-
-Two data stream are incorporated in this module, such as static 2D point clouds and dynamic 2D point
-clouds. In this module, we demonstrate the workflow in dynamic 2D point clouds.
-
-This module is prepared for the MLPro-OA scientific paper and going to be stored as Code
-Ocean Capsule, thus the result is reproducible.
+3. How to reuse native MLPro benchmark streams
 
 """
 
