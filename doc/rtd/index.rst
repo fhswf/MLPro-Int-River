@@ -25,7 +25,7 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
    .. code-block:: bash
 
-      pip install mlpro --upgrade
+      pip install mlpro[full] --upgrade
       pip install river --upgrade
       pip install mlpro-int-river --upgrade
 
