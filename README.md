@@ -16,5 +16,7 @@ MLPro-Int-River provides wrapper classes that enable the use of selected River f
 
 ## Learn more
 [MLPro - Machine Learning Professional](https://mlpro.readthedocs.io)
+
 [MLPro-Int-River - Integration of River into MLPro](https://mlpro-int-river.readthedocs.io)
+
 [River - Online machine learning in Python](https://riverml.xyz)
