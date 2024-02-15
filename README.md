@@ -1,8 +1,10 @@
 [![CI](https://github.com/fhswf/MLPro-Int-River/actions/workflows/ci.yml/badge.svg)](https://github.com/fhswf/MLPro-Int-River/actions/workflows/ci.yml)
 [![Documentation Status](https://readthedocs.org/projects/mlpro-int-river/badge/?version=latest)](https://mlpro-int-river.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/mlpro-int-river.svg)](https://badge.fury.io/py/mlpro-int-river)
+<!---
 [![Anaconda-Version Badge](https://anaconda.org/mlpro-int-river/mlpro-int-river/badges/version.svg)](https://anaconda.org/mlpro-int-river/mlpro)
 [![Anaconda-Downloads Badge](https://img.shields.io/conda/dn/mlpro-int-river/mlpro-int-river?color=green&label=Anaconda.org%20Total%20downloads&style=flat-square)](https://anaconda.org/mlpro-int-river/mlpro-int-river)
+--->
 [![PyPI Total Downloads](https://static.pepy.tech/personalized-badge/mlpro-int-river?period=total&units=international_system&left_color=blue&right_color=orange&left_text=PyPI%20Total%20Downloads)](https://pepy.tech/project/mlpro-int-river)
 [![PyPI Last Month Downloads](https://static.pepy.tech/personalized-badge/mlpro-int-river?period=month&units=international_system&left_color=blue&right_color=orange&left_text=PyPI%20Last%20Month%20Downloads)](https://pepy.tech/project/mlpro-int-river)
 
@@ -14,9 +16,7 @@ Welcome to MLPro-Int-River, an extension to MLPro to integrate the River package
 
 MLPro-Int-River provides wrapper classes that enable the use of selected River functionalities in your MLPro applications. The use of these wrappers is illustrated in numerous example programs.
 
-## Learn more
-[MLPro - Machine Learning Professional](https://mlpro.readthedocs.io)
-
-[MLPro-Int-River - Integration of River into MLPro](https://mlpro-int-river.readthedocs.io)
-
-[River - Online machine learning in Python](https://riverml.xyz)
+### Learn more
+[MLPro - Machine Learning Professional](https://mlpro.readthedocs.io)   
+[MLPro-Int-River - Integration of River into MLPro](https://mlpro-int-river.readthedocs.io)   
+[River - Online machine learning in Python](https://riverml.xyz)   
