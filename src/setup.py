@@ -1,8 +1,8 @@
 from setuptools import setup
 
 
-setup(name='mlpro_int_river',
-version='0.1.2',
+setup(name='mlpro-int-river',
+version='0.1.3',
 description='MLPro: Integration River',
 author='MLPro Team',
 author_mail='mlpro@listen.fh-swf.de',
@@ -12,12 +12,8 @@ packages=['mlpro_int_river'],
 # Package dependencies for full installation
 extras_require={
     "full": [
-        "dill",
-        "numpy",
-        "matplotlib",
-        "multiprocess",
-        "mlpro>=1.3.1",
-        "river==0.15.0"
+        "mlpro[full]>=1.3.1",
+        "river>=0.21.0"
     ],
 },
 

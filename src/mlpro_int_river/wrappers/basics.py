@@ -26,17 +26,13 @@
 ## --                                    - native River streams
 ## --                                    - selected cluster algorithms
 ## --                                    - selected algorithms for anomaly detection 
+## -- 2024-02-15  2.1.0     DA       Updated minimum version of river to 0.21.0
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 2.0.0 (2023-05-12)
+Ver. 2.1.0 (2024-02-15)
 
-This module provides wrapper classes to embed River functionalities into MLPro. Currently, the 
-following topics are supported by the wrapper:
-
-- Native data streams
-
-- Selected cluster algorithms
+This module contains the abstract root class for all river wraper classes.
 
 Learn more:
 https://www.riverml.xyz/
@@ -58,7 +54,7 @@ class WrapperRiver (Wrapper):
 
     C_TYPE              = 'Wrapper River'
     C_WRAPPED_PACKAGE   = 'river'
-    C_MINIMUM_VERSION   = '0.15.0'
+    C_MINIMUM_VERSION   = '0.21.0'
 
     C_SCIREF_TYPE       = ScientificObject.C_SCIREF_TYPE_ONLINE
     C_SCIREF_AUTHOR     = 'River'
