@@ -1,6 +1,6 @@
 .. _Howto_BF_STREAMS_001:
-Howto BF-STREAMS-001: Accessing Native Data From MLPro
-======================================================
+Howto BF-STREAMS-001: Accessing Data Streams From River
+=======================================================
 
 **Executable code**
 
