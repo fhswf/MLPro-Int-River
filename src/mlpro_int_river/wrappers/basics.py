@@ -32,7 +32,7 @@
 """
 Ver. 2.1.0 (2024-02-15)
 
-This module contains the abstract root class for all river wraper classes.
+This module contains the abstract root class for all river wrapper classes.
 
 Learn more:
 https://www.riverml.xyz/
