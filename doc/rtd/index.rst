@@ -37,6 +37,14 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
 
 .. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Home
+
+   self
+
+
+.. toctree::
    :maxdepth: 2
    :caption: Example Pool
    :glob:
@@ -54,7 +62,7 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
 .. toctree::
    :maxdepth: 2
-   :caption: About MLPro-Int-River
+   :caption: About
    :glob:
 
    content/03_about/*
