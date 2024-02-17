@@ -22,10 +22,11 @@
 ## --                                - New wrappers for River cluster analyzers
 ## --                                - Refatoring of classes WrStream*
 ## --                                - Class WrStreamProviderRiver: detects now all River data sets 
+## -- 2024-02-17  2.0.1     DA       Class WrStreamProviderRiver: correction C_TYPE
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 2.0.0 (2023-04-16)
+Ver. 2.0.1 (2024-02-17)
 
 This module provides wrapper classes to embed River stream functionalities into MLPro. 
 
@@ -57,12 +58,14 @@ class WrStreamProviderRiver (WrapperRiver, StreamProvider):
         Log level of stream objects (see constants of class Log). Default: Log.C_LOG_ALL.
     """
 
-    C_NAME              = 'Native Streams'
+    C_NAME              = 'River'
 
 ## -------------------------------------------------------------------------------------------------
     def __init__(self, p_logging = Log.C_LOG_ALL):
 
         self._river_streams = {}
+
+        self.C_TYPE = StreamProvider.C_TYPE
 
         WrapperRiver.__init__(self, p_logging=p_logging)
         StreamProvider.__init__(self, p_logging = p_logging)
