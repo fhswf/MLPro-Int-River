@@ -10,10 +10,11 @@
 ## -- 2023-11-19  1.0.1     DA       Turned on visualization/logging of clustering task
 ## -- 2023-08-20  1.0.2     SY       - Refactoring due to failed in Unittest
 ## --                                - Add window to the workflow
+## -- 2024-02-23  1.0.3     SY       Parameters Optimization
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.2 (2023-11-20)
+Ver. 1.0.3 (2024-02-23)
 
 This module demonstrates online cluster analysis of normalized dynamic 2D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -69,7 +70,7 @@ class Dynamic2DScenario(OAScenario):
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1.1 Get stream from StreamMLProDynamicClouds3D
+        # 1.1 Get stream from StreamMLProClouds
         stream = StreamMLProClouds( p_num_dim = 2,
                                     p_num_instances = 2000,
                                     p_num_clouds = 5,
@@ -121,11 +122,11 @@ class Dynamic2DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t4',
-                                                   p_chunk_size=5,
+                                                   p_chunk_size=100,
                                                    p_n_clusters=5,
-                                                   p_halflife=0.5, 
-                                                   p_sigma=300,
-                                                   p_seed=41,
+                                                   p_halflife=1.00, 
+                                                   p_sigma=0.5,
+                                                   p_seed=48,
                                                    p_visualize=p_visualize,
                                                    p_logging=p_logging )
        
