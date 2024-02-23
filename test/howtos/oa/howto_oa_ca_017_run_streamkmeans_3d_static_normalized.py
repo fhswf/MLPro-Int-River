@@ -13,10 +13,11 @@
 ## -- 2023-12-20  1.1.0     DA       Added event-oriented renormalization to CluStream task
 ## -- 2023-12-21  1.1.1     SY       Refactoring
 ## -- 2024-01-05  1.1.2     SY       Updating KMeans parameters
+## -- 2024-02-23  1.1.3     SY       Parameters Optimization
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.2 (2024-01-05)
+Ver. 1.1.3 (2024-02-23)
 
 This module demonstrates online cluster analysis of normalized static 3D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -112,11 +113,11 @@ class Static3DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t3',
-                                                   p_chunk_size=5,
+                                                   p_chunk_size=100,
                                                    p_n_clusters=5,
-                                                   p_halflife=0.5, 
-                                                   p_sigma=300,
-                                                   p_seed=41,
+                                                   p_halflife=1.0, 
+                                                   p_sigma=0.5,
+                                                   p_seed=42,
                                                    p_visualize=p_visualize,
                                                    p_logging=p_logging )
         

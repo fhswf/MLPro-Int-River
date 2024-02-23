@@ -9,10 +9,11 @@
 ## -- 2023-12-22  1.0.0     SY       First version release
 ## -- 2023-12-28  1.1.0     DA       Exchange of benchmark stream and number of clouds
 ## -- 2023-12-29  1.2.0     DA       Adjustments on cloud sizes and weights
+## -- 2024-02-23  1.2.1     SY       Parameters Optimization
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.2.0 (2023-12-29)
+Ver. 1.2.1 (2024-02-23)
 
 This module demonstrates online cluster analysis of static 3D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -71,11 +72,11 @@ class Static3DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t1',
-                                                   p_chunk_size=5,
+                                                   p_chunk_size=50,
                                                    p_n_clusters=5,
-                                                   p_halflife=0.5, 
-                                                   p_sigma=300,
-                                                   p_seed=41,
+                                                   p_halflife=1.0, 
+                                                   p_sigma=0.5,
+                                                   p_seed=44,
                                                    p_visualize=p_visualize,
                                                    p_logging=p_logging )
         

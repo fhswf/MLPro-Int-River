@@ -122,11 +122,11 @@ class Dynamic2DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t4',
-                                                   p_chunk_size=100,
+                                                   p_chunk_size=500,
                                                    p_n_clusters=5,
                                                    p_halflife=1.00, 
                                                    p_sigma=0.5,
-                                                   p_seed=48,
+                                                   p_seed=54,
                                                    p_visualize=p_visualize,
                                                    p_logging=p_logging )
        
