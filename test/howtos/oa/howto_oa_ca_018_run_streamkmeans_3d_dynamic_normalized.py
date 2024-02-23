@@ -115,7 +115,7 @@ class Dynamic3DScenario(OAScenario):
                                                    p_n_clusters=5,
                                                    p_halflife=1.0, 
                                                    p_sigma=0.2,
-                                                   p_seed=12,
+                                                   p_seed=15,
                                                    p_visualize=p_visualize,
                                                    p_logging=p_logging )
         

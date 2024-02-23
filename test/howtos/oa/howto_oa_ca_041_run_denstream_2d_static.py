@@ -1,18 +1,18 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river
-## -- Module  : howto_oa_ca_022_run_clustream_2d_dynamic.py
+## -- Module  : howto_oa_ca_041_run_denstream_2d_static.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
-## -- 2024-02-09  0.0.0     SY       Creation
-## -- 2024-02-09  1.0.0     SY       First version release
+## -- 2024-02-23  0.0.0     SY       Creation
+## -- 2024-02-23  1.0.0     SY       First version release
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.0 (2024-02-09)
+Ver. 1.0.0 (2024-02-23)
 
-This module demonstrates online cluster analysis of dynamic 2D random point clouds using the wrapped
+This module demonstrates online cluster analysis of static 2D random point clouds using the wrapped
 River implementation of stream algorithm CluStream. To this regard, the systematics of sub-framework 
 MLPro-OA-Streams for online adaptive stream processing is used to implement a scenario consisting of  
 a custom workflow and a native benchmark stream.
@@ -38,10 +38,10 @@ from mlpro_int_river.wrappers.clusteranalyzers import *
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
-class Dynamic2DScenario(OAScenario):
+# 1 Prepare a scenario for Static 2D Point Clouds
+class Static2DScenario(OAScenario):
 
-    C_NAME = 'Dynamic2DScenario'
+    C_NAME = 'Static2DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
@@ -51,33 +51,28 @@ class Dynamic2DScenario(OAScenario):
                                     p_num_clouds = 5,
                                     p_seed = 1,
                                     p_radii=[100],
-                                    p_velocity=1,
                                     p_logging=Log.C_LOG_NOTHING )
 
         # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_2D',
-                              p_range_max=OAWorkflow.C_RANGE_NONE,
-                              p_ada=p_ada,
-                              p_visualize=p_visualize,
-                              p_logging=p_logging)
+        workflow = OAWorkflow( p_name='wf_2D',
+                               p_range_max=OAWorkflow.C_RANGE_NONE,
+                               p_ada=p_ada,
+                               p_visualize=p_visualize,
+                               p_logging=p_logging )
 
 
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverCluStream2MLPro( p_name='t1',
-                                                p_n_macro_clusters = 5,
-                                                p_max_micro_clusters = 35,
-                                                p_micro_cluster_r_factor = 1,
-                                                p_time_window = 200,
-                                                p_time_gap = 100,
-                                                p_seed = 55,
-                                                p_halflife = 0.5,
-                                                p_mu = 1,
-                                                p_sigma = 500,
-                                                p_p = 1,
+        task_clusterer = WrRiverDenStream2MLPro( p_name='t1',
+                                                p_decaying_factor=0.25,
+                                                p_beta=0.75,
+                                                p_mu=10,
+                                                p_epsilon=0.02,
+                                                p_n_samples_init=200,
+                                                p_stream_speed=100,
                                                 p_visualize=p_visualize,
                                                 p_logging=p_logging )
         
@@ -94,7 +89,7 @@ if __name__ == '__main__':
     cycle_limit = 1000
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 1
+    step_rate   = 2
 else:
     cycle_limit = 2
     logging     = Log.C_LOG_NOTHING
@@ -105,7 +100,7 @@ else:
 
 
 # 3 Instantiate the stream scenario
-myscenario = Dynamic2DScenario(
+myscenario = Static2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
