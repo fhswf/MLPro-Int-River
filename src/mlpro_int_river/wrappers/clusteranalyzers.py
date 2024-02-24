@@ -24,10 +24,11 @@
 ## -- 2024-02-04  1.1.0     SY       Updating WrRiverDenStream2MLPro, WrRiverStreamKMeans2MLPro due
 ## --                                to visualization errors
 ## -- 2024-02-24  1.1.1     DA       Class WrClusterAnalyzerRiver2MLPro: package constants removed
+## -- 2024-02-24  1.1.2     SY       Update cluster IDs for DBStream and Denstream
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-02-24)
+Ver. 1.1.2 (2024-02-24)
 
 This module provides wrapper classes from River to MLPro, specifically for cluster analyzers. This
 module includes three clustering algorithms from River that are embedded to MLPro, such as:
@@ -329,7 +330,9 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                                cleanup_interval=p_cleanup_interval,
                                intersection_factor=p_intersection_factor,
                                minimum_weight=p_minimum_weight)
-
+        
+        self.map_ids = {}
+        self.id_counter = 1
         super().__init__(p_cls_cluster=ClusterCentroid(),
                          p_river_algo=alg,
                          p_name=p_name,
@@ -347,7 +350,7 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         """
         
         for _, (key, val) in enumerate(self._river_algo.micro_clusters.items()):
-            related_cluster = self._clusters[id(val)]
+            related_cluster = self._clusters[self.map_ids[id(val)]]
             related_cluster.get_centroid().set_values(list(self._river_algo.centers[key].values()))
 
 
@@ -365,12 +368,17 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
         list_keys_river = []
         for _, (key, val) in enumerate(self._river_algo.micro_clusters.items()):
-            list_keys_river.append(id(val))
+            if not (id(val) in self.map_ids.keys()):
+                self.map_ids[id(val)] = self.id_counter
+                self.id_counter += 1
+            key_id = self.map_ids[id(val)]
+            list_keys_river.append(key_id)
+
             try:
-                related_cluster = self._clusters[id(val)]
+                related_cluster = self._clusters[key_id]
             except:
                 related_cluster = ClusterCentroid(
-                    p_id = id(val),
+                    p_id = key_id,
                     p_visualize=self.get_visualization(),
                     p_cluster=self._river_algo.clusters[key],
                     p_micro_cluster=val
@@ -628,6 +636,8 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                                 n_samples_init=p_n_samples_init,
                                 stream_speed=p_stream_speed)
         
+        self.map_ids = {}
+        self.id_counter = 1
         self.n_dummy_prediction = 0
 
         super().__init__(p_cls_cluster=ClusterCentroid(),
@@ -647,7 +657,7 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         """
         
         for val in self._river_algo.p_micro_clusters.values():
-            related_cluster = self._clusters[id(val)]
+            related_cluster = self._clusters[self.map_ids[id(val)]]
             
             list_center = []
             for _, (_, val_center) in enumerate(val.x.items()):
@@ -679,16 +689,21 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
         list_keys_river = []
         for _, (key, val) in enumerate(self._river_algo.p_micro_clusters.items()):
-            list_keys_river.append(id(val))
+            if not (id(val) in self.map_ids.keys()):
+                self.map_ids[id(val)] = self.id_counter
+                self.id_counter += 1
+            key_id = self.map_ids[id(val)]
+            list_keys_river.append(key_id)
+
             try:
-                related_cluster = self._clusters[id(val)]
+                related_cluster = self._clusters[key_id]
             except:
                 try:
                     o_micro_cluster = self._river_algo.o_micro_clusters[key]
                 except:
                     o_micro_cluster = None
                 related_cluster = ClusterCentroid(
-                    p_id = id(val),
+                    p_id = key_id,
                     p_visualize=self.get_visualization(),
                     p_cluster=self._river_algo.clusters[key],
                     p_micro_cluster=val,
