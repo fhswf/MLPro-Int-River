@@ -1,5 +1,5 @@
 .. _Howto_OA_CA_021:
-Howto OA-CA-001: Run CluStream on static 2D point clouds
+Howto OA-CA-021: Run CluStream on static 2D point clouds
 ========================================================
 
 **Executable code**
