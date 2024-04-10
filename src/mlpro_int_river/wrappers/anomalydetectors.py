@@ -4,12 +4,14 @@
 ## -- Module  : anomalydetectors.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
-## -- 2023-06-23  1.0.0     SP       Creation
-## -- 2023-06-23  1.0.0     SP       First version release
+## -- yyyy-mm-dd  Ver.      Auth.    Description
+## -- 2023-06-23  1.0.0     SK       Creation
+## -- 2023-06-23  1.0.0     SK       First version release
+## -- 2024-04-10  1.0.1     DA       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.0 (2023-05-12)
+Ver. 1.0.1 (2024-04-10)
 
 This module provides wrapper functionalities to incorporate anomaly detector algorithms of the 
 River ecosystem. This module includes two algorithms from River that are embedded to MLPro, such as:
@@ -22,15 +24,21 @@ https://www.riverml.xyz/
 
 """
 
-from mlpro_int_river.wrappers.basics import *
-from mlpro.oa.streams.basics import Instance, List
-from mlpro.oa.streams.tasks.anomalydetectors import *
+from mlpro.bf.various import Log
+from mlpro.bf.streams import StreamTask
+from mlpro_int_river.wrappers import WrapperRiver
+from mlpro.oa.streams.tasks.anomalydetectors import AnomalyDetector, Anomaly
 from river import anomaly
 
-class HST(AnomalyDetector):
 
-    C_NAME          = 'HST Anomaly Detector'
+
+
+## -------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------
+class HST (WrapperRiver, AnomalyDetector):
+
     C_TYPE          = 'Anomaly Detector'
+    C_NAME          = 'River-HST'
 
 ## -------------------------------------------------------------------------------------------------
     def __init__(self,
@@ -79,10 +87,12 @@ class HST(AnomalyDetector):
             # Determine if the data point is an anomaly based on its outlier score
             if self.anomaly_scores < 0:
                 self.counter += 1
-                event_obj = AnomalyEvent(p_raising_object=self, p_kwargs=self.data_points[-1]) 
+                event_obj = Anomaly(p_raising_object=self, p_kwargs=self.data_points[-1]) 
                 handler = self.event_handler
                 self.register_event_handler(event_obj.C_NAME, handler)
                 self._raise_event(event_obj.C_NAME, event_obj)
+
+
 
 
 
@@ -138,12 +148,7 @@ class SVM(AnomalyDetector):
             # Determine if the data point is an anomaly based on its outlier score
             if self.anomaly_scores < 0:
                 self.counter += 1
-                event_obj = AnomalyEvent(p_raising_object=self, p_kwargs=self.data_points[-1]) 
+                event_obj = Anomaly(p_raising_object=self, p_kwargs=self.data_points[-1]) 
                 handler = self.event_handler
                 self.register_event_handler(event_obj.C_NAME, handler)
                 self._raise_event(event_obj.C_NAME, event_obj)
-
-
-
-## -------------------------------------------------------------------------------------------------
-## -------------------------------------------------------------------------------------------------
