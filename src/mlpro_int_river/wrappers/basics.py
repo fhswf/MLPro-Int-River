@@ -27,10 +27,11 @@
 ## --                                    - selected cluster algorithms
 ## --                                    - selected algorithms for anomaly detection 
 ## -- 2024-02-15  2.1.0     DA       Updated minimum version of river to 0.21.0
+## -- 2024-04-10  2.1.1     DA       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 2.1.0 (2024-02-15)
+Ver. 2.1.1 (2024-04-10)
 
 This module contains the abstract root class for all river wrapper classes.
 
@@ -40,7 +41,7 @@ https://www.riverml.xyz/
 """
 
 from mlpro.bf.various import ScientificObject
-from mlpro.wrappers.models import Wrapper
+from mlpro.wrappers import Wrapper
 
 
 

@@ -23,10 +23,11 @@
 ## -- 2024-01-05  1.0.12    DA       All classed: refactoring of naming (C_NAME)
 ## -- 2024-02-04  1.1.0     SY       Updating WrRiverDenStream2MLPro, WrRiverStreamKMeans2MLPro due
 ## --                                to visualization errors
+## -- 2024-02-24  1.1.1     DA       Class WrClusterAnalyzerRiver2MLPro: package constants removed
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.0 (2024-02-04)
+Ver. 1.1.1 (2024-02-24)
 
 This module provides wrapper classes from River to MLPro, specifically for cluster analyzers. This
 module includes three clustering algorithms from River that are embedded to MLPro, such as:
@@ -48,7 +49,7 @@ https://www.riverml.xyz/
 
 
 from mlpro.bf.streams import Instance, List
-from mlpro_int_river.wrappers.basics import WrapperRiver
+from mlpro_int_river.wrappers import WrapperRiver
 from mlpro.bf.math.normalizers import Normalizer
 from mlpro.oa.streams.tasks.clusteranalyzers import ClusterAnalyzer, Cluster, ClusterCentroid
 from mlpro.bf.mt import Task as MLTask
@@ -90,9 +91,6 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
     """
 
     C_TYPE              = 'River Cluster Analyzer'
-    
-    C_WRAPPED_PACKAGE   = 'river'
-    C_MINIMUM_VERSION   = '0.15.0'
 
 
 ## -------------------------------------------------------------------------------------------------
