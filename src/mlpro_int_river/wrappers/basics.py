@@ -41,7 +41,7 @@ https://www.riverml.xyz/
 """
 
 from mlpro.bf.various import ScientificObject
-from mlpro.wrappers.basics import Wrapper
+from mlpro.wrappers import Wrapper
 
 
 
