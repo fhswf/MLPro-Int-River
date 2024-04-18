@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name='mlpro-int-river',
-version='0.1.4',
+version='0.1.5',
 description='MLPro: Integration River',
 author='MLPro Team',
 author_mail='mlpro@listen.fh-swf.de',
