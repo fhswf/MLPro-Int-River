@@ -36,7 +36,7 @@ You will learn:
 
 
 from datetime import datetime
-from mlpro_int_river.wrappers import *
+from mlpro_int_river import *
 from mlpro.bf.various import Log
 
 
