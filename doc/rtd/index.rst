@@ -21,11 +21,12 @@ in your MLPro applications. The use of these wrappers is illustrated in numerous
 
 
 **Preparation**
-   Before running the examples, please install the latest versions of MLPro, River, and MLPro-Int-River as follows:
 
-   .. code-block:: bash
+Before running the examples, please install the latest versions of MLPro, River, and MLPro-Int-River as follows:
 
-      pip install mlpro-int-river[full] --upgrade
+.. code-block:: bash
+
+   pip install mlpro-int-river[full] --upgrade
 
 
 **See also**
