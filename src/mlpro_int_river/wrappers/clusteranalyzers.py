@@ -24,10 +24,11 @@
 ## -- 2024-02-04  1.1.0     SY       Updating WrRiverDenStream2MLPro, WrRiverStreamKMeans2MLPro due
 ## --                                to visualization errors
 ## -- 2024-02-24  1.1.1     DA       Class WrClusterAnalyzerRiver2MLPro: package constants removed
+## -- 2024-04-29  1.1.2     SY       Updating WrRiverDenStream2MLPro due to River 0.21.1
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-02-24)
+Ver. 1.1.2 (2024-02-29)
 
 This module provides wrapper classes from River to MLPro, specifically for cluster analyzers. This
 module includes three clustering algorithms from River that are embedded to MLPro, such as:
@@ -646,17 +647,18 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         This method is to update the centroids of each introduced cluster.
         """
         
-        for val in self._river_algo.p_micro_clusters.values():
-            related_cluster = self._clusters[id(val)]
-            
-            list_center = []
-            for _, (_, val_center) in enumerate(val.x.items()):
-                list_center.append(val_center) 
+        if self._river_algo.n_clusters != 0: 
+            for val in self._river_algo.p_micro_clusters.values():
+                related_cluster = self._clusters[id(val)]
                 
-            try:
-                related_cluster.get_centroid().set_values(list_center)
-            except:
-                pass
+                list_center = []
+                for _, (_, val_center) in enumerate(val.x.items()):
+                    list_center.append(val_center) 
+                    
+                try:
+                    related_cluster.get_centroid().set_values(list_center)
+                except:
+                    pass
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -678,31 +680,32 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
             self.n_dummy_prediction += 1
 
         list_keys_river = []
-        for _, (key, val) in enumerate(self._river_algo.p_micro_clusters.items()):
-            list_keys_river.append(id(val))
-            try:
-                related_cluster = self._clusters[id(val)]
-            except:
+        if self._river_algo.n_clusters != 0:       
+            for _, (key, val) in enumerate(self._river_algo.p_micro_clusters.items()):
+                list_keys_river.append(id(val))
                 try:
-                    o_micro_cluster = self._river_algo.o_micro_clusters[key]
+                    related_cluster = self._clusters[id(val)]
                 except:
-                    o_micro_cluster = None
-                related_cluster = ClusterCentroid(
-                    p_id = id(val),
-                    p_visualize=self.get_visualization(),
-                    p_cluster=self._river_algo.clusters[key],
-                    p_micro_cluster=val,
-                    p_o_micro_cluster=o_micro_cluster
-                    )
-                
-                if self.get_visualization():
-                    related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)
-
-                list_center = []
-                for _, (_, val_center) in enumerate(val.x.items()):
-                    list_center.append(val_center)           
-                related_cluster.get_centroid().set_values(list_center)
-                self._add_cluster( p_cluster = related_cluster )
+                    try:
+                        o_micro_cluster = self._river_algo.o_micro_clusters[key]
+                    except:
+                        o_micro_cluster = None
+                    related_cluster = ClusterCentroid(
+                        p_id = id(val),
+                        p_visualize=self.get_visualization(),
+                        p_cluster=self._river_algo.clusters[key],
+                        p_micro_cluster=val,
+                        p_o_micro_cluster=o_micro_cluster
+                        )
+                    
+                    if self.get_visualization():
+                        related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)
+    
+                    list_center = []
+                    for _, (_, val_center) in enumerate(val.x.items()):
+                        list_center.append(val_center)           
+                    related_cluster.get_centroid().set_values(list_center)
+                    self._add_cluster( p_cluster = related_cluster )
         
         list_keys_mlpro = list(self._clusters.keys())
         for x in list_keys_mlpro:
