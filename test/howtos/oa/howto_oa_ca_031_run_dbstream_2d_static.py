@@ -7,10 +7,11 @@
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
 ## -- 2024-02-23  0.0.0     SY       Creation
 ## -- 2024-02-23  1.0.0     SY       First version release
+## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.0 (2024-02-23)
+Ver. 1.1.0 (2024-04-30)
 
 This module demonstrates online cluster analysis of static 2D random point clouds using the wrapped
 River implementation of stream algorithm CluStream. To this regard, the systematics of sub-framework 
@@ -133,7 +134,7 @@ myscenario.log(Log.C_LOG_TYPE_I, '----------------------------------------------
 myscenario.log(Log.C_LOG_TYPE_I, 'Here is the recap of the cluster analyzer')
 myscenario.log(Log.C_LOG_TYPE_I, 'Number of clusters: ', number_of_clusters)
 for x in range(number_of_clusters):
-    myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[list_keys[x]].get_centroid().get_values()))
+    myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[list_keys[x]].get_centroid().get_position()))
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 

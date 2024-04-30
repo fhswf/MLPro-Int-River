@@ -10,10 +10,11 @@
 ## -- 2023-08-23  1.0.1     SY       Refactoring
 ## -- 2023-12-17  1.0.2     SY       Refactoring unit test mode
 ## -- 2023-12-22  1.0.3     SY       Refactoring
+## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.0.3 (2023-12-22)
+Ver. 1.1.0 (2024-04-30)
 
 This module demonstrates the principles of stream processing with MLPro. To this regard, a stream of
 a stream provider is combined with a stream workflow to a stream scenario. The workflow consists of 
@@ -188,7 +189,7 @@ else:
 river_centers       = myscenario.get_workflow()._tasks[0].get_algorithm().centers
 
 for x in range(wr_n_clusters):
-    if list(river_centers[x].values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[x].get_centroid().get_values()):
+    if list(river_centers[x].values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[x].get_centroid().get_position()):
         print("The center of cluster %s from river and mlpro matches!"%(x+1))
     else:
         print("The center of cluster %s from river and mlpro does not match!"%(x+1))

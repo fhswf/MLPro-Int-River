@@ -9,10 +9,11 @@
 ## -- 2023-12-22  1.0.0     SY       First version release
 ## -- 2023-12-28  1.1.0     DA       Exchange of benchmark stream and number of clouds
 ## -- 2024-01-05  1.1.1     SY       Replace algorithm to StreamKMeans
+## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-01-05)
+Ver. 1.2.0 (2024-04-30)
 
 This module demonstrates online cluster analysis of dynamic 2D random point clouds using the wrapped
 River implementation of stream algorithm KMeans. To this regard, the systematics of sub-framework 
@@ -135,7 +136,7 @@ myscenario.log(Log.C_LOG_TYPE_I, '----------------------------------------------
 myscenario.log(Log.C_LOG_TYPE_I, 'Here is the recap of the cluster analyzer')
 myscenario.log(Log.C_LOG_TYPE_I, 'Number of clusters: ', number_of_clusters)
 for x in range(number_of_clusters):
-    myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[x].get_centroid().get_values()))
+    myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[x].get_centroid().get_position()))
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 
