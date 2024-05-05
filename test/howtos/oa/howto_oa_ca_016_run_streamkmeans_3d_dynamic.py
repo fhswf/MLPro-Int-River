@@ -140,7 +140,7 @@ myscenario.log(Log.C_LOG_TYPE_I, '----------------------------------------------
 myscenario.log(Log.C_LOG_TYPE_I, 'Here is the recap of the cluster analyzer')
 myscenario.log(Log.C_LOG_TYPE_I, 'Number of clusters: ', number_of_clusters)
 for x in range(number_of_clusters):
-    myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[x].get_centroid().get_position()))
+    myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[x].centroid.value))
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 

@@ -192,7 +192,7 @@ else:
 river_centers       = myscenario.get_workflow()._tasks[0].get_algorithm().p_micro_clusters.values()
 
 for val in river_centers:
-    if list(val.x.values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].get_centroid().get_position()):
+    if list(val.x.values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].centroid.value):
         print("The center of cluster %s from river and mlpro matches!"%(id(val)))
     else:
         print("The center of cluster %s from river and mlpro does not match!"%(id(val)
