@@ -1,6 +1,6 @@
 ## -------------------------------------------------------------------------------------------------
-## -- Project : MLPro - A Synoptic Framework for Standardized Machine Learning Tasks
-## -- Package : mlpro.wrappers.river
+## -- Project : MLPro - The integrative middleware framework for standardized machine learning
+## -- Package : mlpro_int_river.wrappers
 ## -- Module  : clusteranalyzers.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
@@ -25,10 +25,12 @@
 ## --                                to visualization errors
 ## -- 2024-02-24  1.1.1     DA       Class WrClusterAnalyzerRiver2MLPro: package constants removed
 ## -- 2024-04-29  1.1.2     SY       Updating WrRiverDenStream2MLPro due to River 0.21.1
+## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
+## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.2 (2024-02-29)
+Ver. 1.3.0 (2024-05-05)
 
 This module provides wrapper classes from River to MLPro, specifically for cluster analyzers. This
 module includes three clustering algorithms from River that are embedded to MLPro, such as:
@@ -52,7 +54,9 @@ https://www.riverml.xyz/
 from mlpro.bf.streams import Instance, List
 from mlpro_int_river.wrappers import WrapperRiver
 from mlpro.bf.math.normalizers import Normalizer
-from mlpro.oa.streams.tasks.clusteranalyzers import ClusterAnalyzer, Cluster, ClusterCentroid
+from mlpro.oa.streams.tasks.clusteranalyzers import ClusterAnalyzer
+from mlpro.oa.streams.tasks.clusteranalyzers.clusters import Cluster, ClusterCentroid
+from mlpro.oa.streams.tasks.clusteranalyzers.clusters.properties import *
 from mlpro.bf.mt import Task as MLTask
 from mlpro.bf.various import Log
 from mlpro.bf.streams import *
@@ -91,29 +95,34 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
         
     """
 
-    C_TYPE              = 'River Cluster Analyzer'
+    C_TYPE                  = 'River Cluster Analyzer'
+
+    C_CLUSTER_PROPERTIES    = [ cprop_centroid ]
 
 
 ## -------------------------------------------------------------------------------------------------
-    def __init__(self,
-                 p_cls_cluster,
-                 p_river_algo:base.Clusterer,
-                 p_name:str = None,
-                 p_range_max = MLTask.C_RANGE_THREAD,
-                 p_ada:bool = True,
-                 p_visualize:bool = True,
-                 p_logging = Log.C_LOG_ALL,
-                 **p_kwargs):
+    def __init__( self,
+                  p_cls_cluster : type,
+                  p_river_algo:base.Clusterer,
+                  p_name:str = None,
+                  p_range_max = MLTask.C_RANGE_THREAD,
+                  p_ada:bool = True,
+                  p_visualize:bool = True,
+                  p_logging = Log.C_LOG_ALL,
+                  **p_kwargs):
         
         self._river_algo = p_river_algo
 
-        ClusterAnalyzer.__init__(self,
-                                 p_cls_cluster=p_cls_cluster,
-                                 p_name=p_name,
-                                 p_range_max=p_range_max,
-                                 p_ada=p_ada,
-                                 p_visualize=p_visualize,
-                                 **p_kwargs)
+        ClusterAnalyzer.__init__( self,
+                                  p_cls_cluster = p_cls_cluster,
+                                  p_cluster_limit = 0,
+                                  p_name = p_name,
+                                  p_range_max = p_range_max,
+                                  p_ada = p_ada,
+                                  p_duplicate_data = False,
+                                  p_visualize = p_visualize,
+                                  p_logging = p_logging,
+                                  **p_kwargs )
 
         WrapperRiver.__init__(self, p_logging=p_logging)
 
@@ -331,7 +340,7 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                                intersection_factor=p_intersection_factor,
                                minimum_weight=p_minimum_weight)
 
-        super().__init__(p_cls_cluster=ClusterCentroid(),
+        super().__init__(p_cls_cluster=ClusterCentroid,
                          p_river_algo=alg,
                          p_name=p_name,
                          p_range_max=p_range_max,
@@ -349,7 +358,7 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         
         for _, (key, val) in enumerate(self._river_algo.micro_clusters.items()):
             related_cluster = self._clusters[id(val)]
-            related_cluster.get_centroid().set_values(list(self._river_algo.centers[key].values()))
+            related_cluster.centroid.value = list(self._river_algo.centers[key].values())
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -372,6 +381,7 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
             except:
                 related_cluster = ClusterCentroid(
                     p_id = id(val),
+                    p_properties=self.C_CLUSTER_PROPERTIES,
                     p_visualize=self.get_visualization(),
                     p_cluster=self._river_algo.clusters[key],
                     p_micro_cluster=val
@@ -380,7 +390,7 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                 if self.get_visualization():
                     related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)             
 
-                related_cluster.get_centroid().set_values(list(self._river_algo.centers[key].values()))
+                related_cluster.centroid.value = list(self._river_algo.centers[key].values())
                 self._add_cluster( p_cluster = related_cluster )
         
         list_keys_mlpro = list(self._clusters.keys())
@@ -394,7 +404,7 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 ## -------------------------------------------------------------------------------------------------
     def _renormalize(self, p_normalizer:Normalizer):
         """
-        Internal enormalization is hard to realize here without getting strong dependencies on
+        Internal renormalization is hard to realize here without getting strong dependencies on
         internal implementation details. 
         """
         
@@ -493,7 +503,7 @@ class WrRiverCluStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                                 sigma=p_sigma,
                                 p=p_p)
 
-        super().__init__(p_cls_cluster=ClusterCentroid(),
+        super().__init__(p_cls_cluster=ClusterCentroid,
                          p_river_algo=alg,
                          p_name=p_name,
                          p_range_max=p_range_max,
@@ -511,7 +521,7 @@ class WrRiverCluStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         
         for x in self._river_algo.centers.keys():
             related_cluster = self._clusters[x]
-            related_cluster.get_centroid().set_values(list(self._river_algo.centers[x].values()))
+            related_cluster.centroid.value = list(self._river_algo.centers[x].values())
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -530,12 +540,12 @@ class WrRiverCluStream2MLPro (WrClusterAnalyzerRiver2MLPro):
             try:
                 related_cluster = self._clusters[x]
             except:
-                related_cluster = ClusterCentroid(p_id=x, p_visualize=self.get_visualization())   
+                related_cluster = self._cls_cluster(p_id=x, p_visualize=self.get_visualization())   
 
                 if self.get_visualization():
                     related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)             
 
-                related_cluster.get_centroid().set_values(list(self._river_algo.centers[x].values()))
+                related_cluster.centroid.value = list(self._river_algo.centers[x].values())
                 self._add_cluster( p_cluster = related_cluster )
 
         return self._clusters
@@ -631,7 +641,7 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
         
         self.n_dummy_prediction = 0
 
-        super().__init__(p_cls_cluster=ClusterCentroid(),
+        super().__init__(p_cls_cluster=ClusterCentroid,
                          p_river_algo=alg,
                          p_name=p_name,
                          p_range_max=p_range_max,
@@ -656,7 +666,7 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                     list_center.append(val_center) 
                     
                 try:
-                    related_cluster.get_centroid().set_values(list_center)
+                    related_cluster.centroid.value = list_center
                 except:
                     pass
 
@@ -690,8 +700,9 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                         o_micro_cluster = self._river_algo.o_micro_clusters[key]
                     except:
                         o_micro_cluster = None
-                    related_cluster = ClusterCentroid(
+                    related_cluster = self._cls_cluster(
                         p_id = id(val),
+                        p_properties=self.C_CLUSTER_PROPERTIES,
                         p_visualize=self.get_visualization(),
                         p_cluster=self._river_algo.clusters[key],
                         p_micro_cluster=val,
@@ -704,7 +715,7 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                     list_center = []
                     for _, (_, val_center) in enumerate(val.x.items()):
                         list_center.append(val_center)           
-                    related_cluster.get_centroid().set_values(list_center)
+                    related_cluster.centroid.value = list_center
                     self._add_cluster( p_cluster = related_cluster )
         
         list_keys_mlpro = list(self._clusters.keys())
@@ -733,7 +744,7 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
             for cluster_river in self._river_algo.p_micro_clusters.values():
                 if id(cluster_river) == cluster.get_id():
                     for river_idx in cluster_river.x.keys():
-                        cluster_river.x[river_idx] = cluster._centroid.get_values()[river_idx-1]
+                        cluster_river.x[river_idx] = cluster.centroid.value[river_idx-1]
 
 
 
@@ -807,7 +818,7 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                              p=p_p,
                              seed=p_seed)
 
-        super().__init__(p_cls_cluster=ClusterCentroid(),
+        super().__init__(p_cls_cluster=ClusterCentroid,
                          p_river_algo=alg,
                          p_name=p_name,
                          p_range_max=p_range_max,
@@ -827,7 +838,7 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
             list_center = []
             for y in range(len(self._river_algo.centers[x])):
                 list_center.append(self._river_algo.centers[x][y+1])
-            related_cluster.get_centroid().set_values(list_center)
+            related_cluster.centroid.value = list_center
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -846,7 +857,7 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
             try:
                 related_cluster = self._clusters[x]
             except:
-                related_cluster = ClusterCentroid(p_id=x, p_visualize=self.get_visualization())  
+                related_cluster = self._cls_cluster(p_id=x, p_properties=self.C_CLUSTER_PROPERTIES, p_visualize=self.get_visualization())  
 
                 if self.get_visualization(): 
                     related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)  
@@ -854,7 +865,7 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                 list_center = []
                 for y in range(len(self._river_algo.centers[x])):
                     list_center.append(self._river_algo.centers[x][y+1])           
-                related_cluster.get_centroid().set_values(list_center)
+                related_cluster.centroid.value = list_center
                 self._add_cluster( p_cluster = related_cluster )
 
         return self._clusters
@@ -877,7 +888,7 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
         for cluster in self._clusters.values():
             related_cluster = self._river_algo.centers[cluster.get_id()]
             for mlpro_idx, river_idx in enumerate(related_cluster):
-                related_cluster[river_idx] = cluster._centroid.get_values()[mlpro_idx]
+                related_cluster[river_idx] = cluster.centroid.value[mlpro_idx]
 
 
 
@@ -958,7 +969,7 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                                    p=p_p,
                                    seed=p_seed)
 
-        super().__init__(p_cls_cluster=ClusterCentroid(),
+        super().__init__(p_cls_cluster=ClusterCentroid,
                          p_river_algo=alg,
                          p_name=p_name,
                          p_range_max=p_range_max,
@@ -980,7 +991,7 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                 for y in range(len(self._river_algo.centers[x])):
                     list_center.append(self._river_algo.centers[x][y+1])
                 try:
-                    related_cluster.get_centroid().set_values(list_center)
+                    related_cluster.centroid.value = list_center
                 except:
                     pass
             except:
@@ -1004,7 +1015,7 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                 related_cluster = self._clusters[x]
             except:
                 if len(self._river_algo.centers[x]) != 0:
-                    related_cluster = ClusterCentroid(p_id=x, p_visualize=self.get_visualization()) 
+                    related_cluster = self._cls_cluster(p_id=x, p_properties=self.C_CLUSTER_PROPERTIES, p_visualize=self.get_visualization()) 
                     
                     if self.get_visualization():  
                         related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)  
@@ -1014,7 +1025,7 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                         list_center.append(self._river_algo.centers[x][y+1])
                         
                     try:          
-                        related_cluster.get_centroid().set_values(list_center)
+                        related_cluster.centroid.value = list_center
                     except:
                         pass
                     
@@ -1041,9 +1052,6 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
             try:
                 related_cluster = self._river_algo.centers[cluster.get_id()]
                 for mlpro_idx, river_idx in enumerate(related_cluster):
-                    related_cluster[river_idx] = cluster._centroid.get_values()[mlpro_idx]
+                    related_cluster[river_idx] = cluster.centroid.value[mlpro_idx]
             except:
                 pass
-
-
-    
