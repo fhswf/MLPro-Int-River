@@ -38,25 +38,7 @@ In particular you will learn:
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
-
-
-
-# 0 Prepare Demo/Unit test mode
-if __name__ == '__main__':
-    cycle_limit = 1200
-    logging     = Log.C_LOG_ALL
-    visualize   = True
-    step_rate   = 1
-else:
-    cycle_limit = 2
-    logging     = Log.C_LOG_NOTHING
-    visualize   = False
-    step_rate   = 1
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
 
@@ -80,7 +62,7 @@ class Dynamic3DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_3D',
+        workflow = OAWorkflow(p_name='Cluster Analysis using StreamKMeans@River',
                               p_range_max=OAWorkflow.C_RANGE_NONE,
                               p_ada=p_ada,
                               p_visualize=p_visualize,
@@ -90,7 +72,7 @@ class Dynamic3DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='t1', 
+        task_bd = BoundaryDetector(p_name='#1: Boundary Detector', 
                                    p_ada=True, 
                                    p_visualize=p_visualize,   
                                    p_logging=p_logging)
@@ -98,7 +80,7 @@ class Dynamic3DScenario(OAScenario):
         workflow.add_task(p_task = task_bd)
 
         # MinMax-Normalizer
-        task_norm_minmax = NormalizerMinMax(p_name='t2', 
+        task_norm_minmax = NormalizerMinMax(p_name='#2: Normalizer MinMax', 
                                             p_ada=True,
                                             p_visualize=p_visualize, 
                                             p_logging=p_logging )
@@ -111,7 +93,7 @@ class Dynamic3DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t3',
+        task_clusterer = WrRiverStreamKMeans2MLPro(p_name='#3: StreamKMeans@River',
                                                    p_chunk_size=400,
                                                    p_n_clusters=5,
                                                    p_halflife=1.0, 
@@ -130,20 +112,30 @@ class Dynamic3DScenario(OAScenario):
 
 
 
+# 2 Prepare Demo/Unit test mode
+if __name__ == '__main__':
+    cycle_limit = 1200
+    logging     = Log.C_LOG_ALL
+    visualize   = True
+    step_rate   = 1
+else:
+    cycle_limit = 2
+    logging     = Log.C_LOG_NOTHING
+    visualize   = False
+    step_rate   = 1
 
 
-# 2 Instantiate the stream scenario
+
+# 3 Instantiate the stream scenario
 myscenario = Dynamic3DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
-    p_logging=logging
-    )
+    p_logging=logging)
 
 
 
-
-# 3 Reset and run own stream scenario
+# 4 Reset and run own stream scenario
 myscenario.reset()
 
 if __name__ == '__main__':

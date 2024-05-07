@@ -33,9 +33,7 @@ from mlpro.bf.streams.streams import *
 from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverCluStream2MLPro
 
 
 
@@ -57,7 +55,7 @@ class Static2DScenario(OAScenario):
         # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='wf_2D',
+        workflow = OAWorkflow( p_name='Cluster Analysis using CluStream@River',
                                p_range_max=OAWorkflow.C_RANGE_NONE,
                                p_ada=p_ada,
                                p_visualize=p_visualize,
@@ -67,7 +65,7 @@ class Static2DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverCluStream2MLPro( p_name='t1',
+        task_clusterer = WrRiverCluStream2MLPro(p_name='#1: CluStream@River',
                                                 p_n_macro_clusters = 5,
                                                 p_max_micro_clusters = 20,
                                                 p_micro_cluster_r_factor = 2,
@@ -88,7 +86,6 @@ class Static2DScenario(OAScenario):
 
 
 
-
 # 2 Prepare Demo/Unit test mode
 if __name__ == '__main__':
     cycle_limit = 1000
@@ -103,15 +100,12 @@ else:
 
 
 
-
 # 3 Instantiate the stream scenario
 myscenario = Static2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
-    p_logging=logging
-    )
-
+    p_logging=logging)
 
 
 

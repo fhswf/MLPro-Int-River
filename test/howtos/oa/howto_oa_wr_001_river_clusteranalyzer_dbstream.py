@@ -41,11 +41,8 @@ DBSTREAM
 from mlpro.bf.streams.streams import *
 from mlpro.bf.streams.models import *
 from mlpro.bf.streams.streams.provider_mlpro import StreamMLProBase
-
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverDBStream2MLPro
 
 
 
@@ -130,11 +127,6 @@ class AdScenario4DBStream (OAScenario):
         return stream, workflow
 
 
-
-
-
-## -------------------------------------------------------------------------------------------------
-## -------------------------------------------------------------------------------------------------
 
 # 1 Preparation of demo/unit test mode
 if __name__ == "__main__":

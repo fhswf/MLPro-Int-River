@@ -36,9 +36,7 @@ from mlpro.bf.streams.streams import *
 from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
 
@@ -62,7 +60,7 @@ class Static3DScenario(OAScenario):
         # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_3D',
+        workflow = OAWorkflow(p_name='Cluster Analysis using StreamKMeans@River',
                               p_range_max=OAWorkflow.C_RANGE_NONE,
                               p_ada=p_ada,
                               p_visualize=p_visualize,
@@ -72,7 +70,7 @@ class Static3DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t1',
+        task_clusterer = WrRiverStreamKMeans2MLPro(p_name='#1: StreamKMeans@River',
                                                    p_chunk_size=50,
                                                    p_n_clusters=5,
                                                    p_halflife=1.0, 
@@ -85,8 +83,6 @@ class Static3DScenario(OAScenario):
 
         # 1.3 Return stream and workflow
         return stream, workflow
-
-
 
 
 
@@ -104,15 +100,12 @@ else:
 
 
 
-
 # 3 Instantiate the stream scenario
 myscenario = Static3DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
-    p_logging=logging
-    )
-
+    p_logging=logging)
 
 
 

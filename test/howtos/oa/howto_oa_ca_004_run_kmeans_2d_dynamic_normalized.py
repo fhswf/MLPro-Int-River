@@ -40,27 +40,8 @@ In particular you will learn:
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
 from mlpro.bf.streams.tasks.windows import Window
-
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
-
-
-
-# 0 Prepare Demo/Unit test mode
-if __name__ == '__main__':
-    cycle_limit = 2000
-    logging     = Log.C_LOG_ALL
-    visualize   = True
-    step_rate   = 2
-else:
-    cycle_limit = 2
-    logging     = Log.C_LOG_NOTHING
-    visualize   = False
-    step_rate   = 1
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverKMeans2MLPro
 
 
 
@@ -83,7 +64,7 @@ class Dynamic2DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_2D',
+        workflow = OAWorkflow(p_name='Cluster Analysis using KMeans@River',
                               p_range_max=OAWorkflow.C_RANGE_NONE,
                               p_ada=p_ada,
                               p_visualize=p_visualize,
@@ -96,21 +77,21 @@ class Dynamic2DScenario(OAScenario):
         task_window = Window(p_buffer_size=100, 
                              p_delay=False,
                              p_enable_statistics=True,
-                             p_name='t1',
+                             p_name='#1: Sliding Window',
                              p_duplicate_data=True,
                              p_visualize=p_visualize,
                              p_logging=p_logging)
         workflow.add_task(p_task=task_window)
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='t2', 
+        task_bd = BoundaryDetector(p_name='#2: Boundary Detector', 
                                    p_ada=True, 
                                    p_visualize=p_visualize,   
                                    p_logging=p_logging)
         workflow.add_task(p_task=task_bd, p_pred_tasks=[task_window])
 
         # MinMax-Normalizer
-        task_norm_minmax = NormalizerMinMax(p_name='t3', 
+        task_norm_minmax = NormalizerMinMax(p_name='#3: Normalizer MinMax', 
                                             p_ada=True,
                                             p_visualize=p_visualize, 
                                             p_logging=p_logging )
@@ -122,7 +103,7 @@ class Dynamic2DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t4',
+        task_clusterer = WrRiverKMeans2MLPro( p_name='#4: KMeans@River',
                                              p_n_clusters=5,
                                              p_halflife=0.1, 
                                              p_sigma=-0.75, 
@@ -137,20 +118,30 @@ class Dynamic2DScenario(OAScenario):
 
 
 
+# 2 Prepare Demo/Unit test mode
+if __name__ == '__main__':
+    cycle_limit = 2000
+    logging     = Log.C_LOG_ALL
+    visualize   = True
+    step_rate   = 2
+else:
+    cycle_limit = 2
+    logging     = Log.C_LOG_NOTHING
+    visualize   = False
+    step_rate   = 1
 
 
-# 2 Instantiate the stream scenario
+
+# 3 Instantiate the stream scenario
 myscenario = Dynamic2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
-    p_logging=logging
-    )
+    p_logging=logging)
 
 
 
-
-# 3 Reset and run own stream scenario
+# 4 Reset and run own stream scenario
 myscenario.reset()
 
 if __name__ == '__main__':
