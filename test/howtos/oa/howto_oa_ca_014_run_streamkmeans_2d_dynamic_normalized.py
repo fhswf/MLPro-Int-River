@@ -83,7 +83,7 @@ class Dynamic2DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_2D',
+        workflow = OAWorkflow(p_name='Cluster Analysis using StreamKMeans@River',
                               p_range_max=OAWorkflow.C_RANGE_NONE,
                               p_ada=p_ada,
                               p_visualize=p_visualize,
@@ -96,21 +96,21 @@ class Dynamic2DScenario(OAScenario):
         task_window = Window(p_buffer_size=100, 
                              p_delay=False,
                              p_enable_statistics=True,
-                             p_name='t1',
+                             p_name='#1: Sliding Window',
                              p_duplicate_data=True,
                              p_visualize=p_visualize,
                              p_logging=p_logging)
         workflow.add_task(p_task=task_window)
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='t2', 
+        task_bd = BoundaryDetector(p_name='#2: Boundary Detector', 
                                    p_ada=True, 
                                    p_visualize=p_visualize,   
                                    p_logging=p_logging)
         workflow.add_task(p_task=task_bd, p_pred_tasks=[task_window])
 
         # MinMax-Normalizer
-        task_norm_minmax = NormalizerMinMax(p_name='t3', 
+        task_norm_minmax = NormalizerMinMax(p_name='#3: Normalizer MinMax', 
                                             p_ada=True,
                                             p_visualize=p_visualize, 
                                             p_logging=p_logging )
@@ -122,7 +122,7 @@ class Dynamic2DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='t4',
+        task_clusterer = WrRiverStreamKMeans2MLPro(p_name='#4: StreamKMeans@River',
                                                    p_chunk_size=500,
                                                    p_n_clusters=5,
                                                    p_halflife=1.00, 

@@ -57,7 +57,7 @@ class Static2DScenario(OAScenario):
         # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='wf_2D',
+        workflow = OAWorkflow( p_name='Cluster Analysis using DBStream@River',
                                p_range_max=OAWorkflow.C_RANGE_NONE,
                                p_ada=p_ada,
                                p_visualize=p_visualize,
@@ -67,7 +67,7 @@ class Static2DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverDBStream2MLPro( p_name='t1',
+        task_clusterer = WrRiverDBStream2MLPro( p_name='#1: DBStream@River',
                                                p_clustering_threshold = 50,
                                                p_fading_factor = 50,
                                                p_cleanup_interval = 50,

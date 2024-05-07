@@ -59,7 +59,7 @@ class Static2DScenario(OAScenario):
         # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='wf_2D',
+        workflow = OAWorkflow( p_name='Cluster Analysis using KMeans@River',
                                p_range_max=OAWorkflow.C_RANGE_NONE,
                                p_ada=p_ada,
                                p_visualize=p_visualize,
@@ -69,7 +69,7 @@ class Static2DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t1',
+        task_clusterer = WrRiverKMeans2MLPro( p_name='#1: KMeans@River',
                                               p_n_clusters=5,
                                               p_halflife=0.1, 
                                               p_sigma=3, 

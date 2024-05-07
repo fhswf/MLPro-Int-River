@@ -65,7 +65,7 @@ class Static2DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='wf_2D',
+        workflow = OAWorkflow(p_name='Cluster Analysis using KMeans@River',
                               p_range_max=OAWorkflow.C_RANGE_NONE,
                               p_ada=p_ada,
                               p_visualize=p_visualize,
@@ -75,7 +75,7 @@ class Static2DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='t1', 
+        task_bd = BoundaryDetector(p_name='#1: Boundary Detector', 
                                    p_ada=True, 
                                    p_visualize=p_visualize,   
                                    p_logging=p_logging)
@@ -83,7 +83,7 @@ class Static2DScenario(OAScenario):
         workflow.add_task(p_task = task_bd)
 
         # MinMax-Normalizer
-        task_norm_minmax = NormalizerMinMax(p_name='t2', 
+        task_norm_minmax = NormalizerMinMax(p_name='#2: Normalizer MinMax', 
                                             p_ada=True,
                                             p_visualize=p_visualize, 
                                             p_logging=p_logging )
@@ -96,7 +96,7 @@ class Static2DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverKMeans2MLPro( p_name='t3',
+        task_clusterer = WrRiverKMeans2MLPro( p_name='#3: KMeans@River',
                                              p_n_clusters=5,
                                              p_halflife=0.05, 
                                              p_sigma=-1.0, 
