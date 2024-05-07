@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name='mlpro-int-river',
-version='0.1.5',
+version='0.1.6',
 description='MLPro: Integration River',
 author='MLPro Team',
 author_mail='mlpro@listen.fh-swf.de',
@@ -12,7 +12,7 @@ packages=['mlpro_int_river'],
 # Package dependencies for full installation
 extras_require={
     "full": [
-        "mlpro[full]>=1.4.1",
+        "mlpro[full]>=1.4.2",
         "river>=0.21.0"
     ],
 },
