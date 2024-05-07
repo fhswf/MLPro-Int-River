@@ -193,11 +193,10 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                     related_cluster = self._cls_cluster(
                         p_id = id(val),
                         p_properties=self.C_CLUSTER_PROPERTIES,
-                        p_visualize=self.get_visualization(),
-                        p_cluster=self._river_algo.clusters[key],
-                        p_micro_cluster=val,
-                        p_o_micro_cluster=o_micro_cluster
-                        )
+                        p_visualize=self.get_visualization())
+                        # p_cluster=self._river_algo.clusters[key],
+                        # p_micro_cluster=val,
+                        # p_o_micro_cluster=o_micro_cluster)
                     
                     if self.get_visualization():
                         related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)
