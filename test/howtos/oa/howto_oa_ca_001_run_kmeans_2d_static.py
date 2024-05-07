@@ -35,9 +35,7 @@ from mlpro.bf.streams.streams import *
 from mlpro.bf.streams.streams.clouds import *
 from mlpro.bf.various import Log
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverKMeans2MLPro
 
 
 
@@ -84,7 +82,6 @@ class Static2DScenario(OAScenario):
 
 
 
-
 # 2 Prepare Demo/Unit test mode
 if __name__ == '__main__':
     cycle_limit = 1000
@@ -99,15 +96,12 @@ else:
 
 
 
-
 # 3 Instantiate the stream scenario
 myscenario = Static2DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
-    p_logging=logging
-    )
-
+    p_logging=logging)
 
 
 

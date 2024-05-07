@@ -41,25 +41,7 @@ In particular you will learn:
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import *
-
-
-
-
-
-# 0 Prepare Demo/Unit test mode
-if __name__ == '__main__':
-    cycle_limit = 1200
-    logging     = Log.C_LOG_ALL
-    visualize   = True
-    step_rate   = 1
-else:
-    cycle_limit = 2
-    logging     = Log.C_LOG_NOTHING
-    visualize   = False
-    step_rate   = 1
-
-
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
 
@@ -132,20 +114,30 @@ class Static3DScenario(OAScenario):
 
 
 
+# 2 Prepare Demo/Unit test mode
+if __name__ == '__main__':
+    cycle_limit = 1200
+    logging     = Log.C_LOG_ALL
+    visualize   = True
+    step_rate   = 1
+else:
+    cycle_limit = 2
+    logging     = Log.C_LOG_NOTHING
+    visualize   = False
+    step_rate   = 1
 
 
-# 2 Instantiate the stream scenario
+
+# 3 Instantiate the stream scenario
 myscenario = Static3DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,
-    p_logging=logging
-    )
+    p_logging=logging)
 
 
 
-
-# 3 Reset and run own stream scenario
+# 4 Reset and run own stream scenario
 myscenario.reset()
 
 if __name__ == '__main__':
