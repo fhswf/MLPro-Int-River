@@ -1,2 +1,2 @@
-mlpro[full]>=1.4.2
+mlpro[full]>1.4.4
 river>=0.21.0

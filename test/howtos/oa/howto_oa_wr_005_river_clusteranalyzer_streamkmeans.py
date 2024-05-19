@@ -36,7 +36,6 @@ STREAMKMeans
 """
 
 from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.models import *
 from mlpro.bf.streams.streams.provider_mlpro import StreamMLProBase
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
