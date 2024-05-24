@@ -28,10 +28,11 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separation of particular algorithms into separate modules
+## -- 2024-05-24  1.5.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.0 (2024-05-07)
+Ver. 1.5.0 (2024-05-24)
 
 This module provides wrapper root classes from River to MLPro, specifically for cluster analyzers. 
 
@@ -89,7 +90,6 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 
     C_CLUSTER_PROPERTIES    = [ cprop_centroid ]
 
-
 ## -------------------------------------------------------------------------------------------------
     def __init__( self,
                   p_cls_cluster : type,
@@ -118,30 +118,23 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def _adapt(self, p_inst_new:List[Instance]) -> bool:
+    def _adapt(self, p_inst_new : Instance) -> bool:
         """
         This method is to adapt the current clusters according to the incoming instances.
 
         Parameters
         ----------
-        p_inst_new : List[Instance]
-            incoming instances.
+        p_inst_new : Instance
+            New stream instances to be processed.
 
         Returns
         -------
-        adapted : bool
-            True, if something has been adapted. False otherwise.
-            
+        bool
+            True, if something has been adapted. False otherwise.        
         """
         
         # extract features data from instances
-        first_instance = True
-        for inst in p_inst_new:
-            if first_instance:
-                feature_data    = np.array(inst.get_feature_data().get_values())
-                first_instance  = False
-            else:
-                feature_data    = np.append(feature_data, inst.get_feature_data().get_values())
+        feature_data    = np.array(p_inst_new.get_feature_data().get_values())
 
         # transform np array to dict with enumeration
         input_data = dict(enumerate(feature_data.flatten(), 1))
@@ -222,13 +215,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
         """
         
         # extract features data from instances
-        first_instance = True
-        for inst in p_inst:
-            if first_instance:
-                feature_data    = inst.get_feature_data().get_values()
-                first_instance  = False
-            else:
-                feature_data    = np.append(feature_data, inst.get_feature_data().get_values())
+        feature_data    = p_inst.get_feature_data().get_values()
 
         # transform np array to dict with enumeration
         input_data = dict(enumerate(feature_data.flatten(), 1))
@@ -245,11 +232,11 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
             for x in range(len(list_clusters)):
                 cluster = list_clusters[cluster_idx]
                 if x == cluster_idx:
-                    memberships_rel.append((cluster.get_id(), 1, cluster))
+                    memberships_rel.append((cluster.id, 1, cluster))
                     self.log(self.C_LOG_TYPE_I,
-                             'Actual instances belongs to cluster %s'%(cluster.get_id()))
+                             'Actual instances belongs to cluster %s'%(cluster.id))
                 else:
                     if p_scope == ClusterAnalyzer.C_MS_SCOPE_ALL:
-                        memberships_rel.append((cluster.get_id(), 0, cluster))
+                        memberships_rel.append((cluster.id, 0, cluster))
 
         return memberships_rel
