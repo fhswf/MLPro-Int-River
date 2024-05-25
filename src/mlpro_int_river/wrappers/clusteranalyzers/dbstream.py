@@ -28,10 +28,11 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separated to own module
+## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.0 (2024-05-07)
+Ver. 1.4.1 (2024-05-25)
 
 This module provides a wrapper class for the DBStream algorithm provided by River.
 
@@ -105,8 +106,6 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
     C_TYPE                  = 'River Cluster Analyzer DBSTREAM'
 
-    C_CLUSTER_PROPERTIES    = [ cprop_centroid ]
-
 ## -------------------------------------------------------------------------------------------------
     def __init__(self,
                  p_name:str = None,
@@ -138,14 +137,23 @@ class WrRiverDBStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def _update_clusters(self):
+    def _update_clusters(self, input_data):
         """
         This method is to update the centroids of each introduced cluster.
         """
         
-        for _, (key, val) in enumerate(self._river_algo.micro_clusters.items()):
+        updated_cls = self._river_algo.predict_one(input_data)
+        
+        for x, (key, val) in enumerate(self._river_algo.micro_clusters.items()):
             related_cluster = self._clusters[id(val)]
             related_cluster.centroid.value = list(self._river_algo.centers[key].values())
+            
+            if x == updated_cls:
+                act_size = related_cluster.size._get()
+                if act_size is not None:
+                    related_cluster.size.set(act_size+1)
+                else:
+                    related_cluster.size.set(1)
 
 
 ## -------------------------------------------------------------------------------------------------
