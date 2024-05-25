@@ -28,10 +28,11 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separated to own module
+## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.0 (2024-05-07)
+Ver. 1.4.1 (2024-05-25)
 
 This module provides a wrapper class for the DenStream algorithm provided by River.
 
@@ -142,21 +143,29 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def _update_clusters(self):
+    def _update_clusters(self, input_data):
         """
         This method is to update the centroids of each introduced cluster.
         """
         
         if self._river_algo.n_clusters != 0: 
+            updated_cls = self._river_algo.predict_one(input_data)
+            
             for val in self._river_algo.p_micro_clusters.values():
                 related_cluster = self._clusters[id(val)]
                 
                 list_center = []
-                for _, (_, val_center) in enumerate(val.x.items()):
+                for x, (_, val_center) in enumerate(val.x.items()):
                     list_center.append(val_center) 
                     
                 try:
-                    related_cluster.centroid.value = list_center
+                    related_cluster.centroid.value = list_center        
+                    if x == updated_cls:
+                        act_size = related_cluster.size._get()
+                        if act_size is not None:
+                            related_cluster.size.set(act_size+1)
+                        else:
+                            related_cluster.size.set(1)
                 except:
                     pass
 
