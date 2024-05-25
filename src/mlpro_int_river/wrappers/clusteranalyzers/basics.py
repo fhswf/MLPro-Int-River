@@ -29,10 +29,11 @@
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separation of particular algorithms into separate modules
 ## -- 2024-05-24  1.5.0     DA       Alignment with MLPro 2
+## -- 2024-05-25  1.5.1     SY       Introduction of size as a property, Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.5.0 (2024-05-24)
+Ver. 1.5.1 (2024-05-25)
 
 This module provides wrapper root classes from River to MLPro, specifically for cluster analyzers. 
 
@@ -88,7 +89,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 
     C_TYPE                  = 'River Cluster Analyzer'
 
-    C_CLUSTER_PROPERTIES    = [ cprop_centroid ]
+    C_CLUSTER_PROPERTIES    = [ cprop_centroid, cprop_size ]
 
 ## -------------------------------------------------------------------------------------------------
     def __init__( self,
@@ -145,13 +146,13 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
         
         # update MLPro clusters from river
         self.get_clusters()
-        self._update_clusters()
+        self._update_clusters(input_data)
 
         return True
     
 
 ## -------------------------------------------------------------------------------------------------
-    def _update_clusters(self):
+    def _update_clusters(self, input_data):
         """
         This method is to update the centroids of each introduced cluster.
         """
