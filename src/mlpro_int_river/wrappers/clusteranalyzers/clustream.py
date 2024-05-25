@@ -28,10 +28,12 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separated to own module
+## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.0 (2024-05-07)
+Ver. 1.4.1 (2024-05-25)
+
 
 This module provides a wrapper class for the CluStream algorithm provided by River.
 
@@ -154,14 +156,23 @@ class WrRiverCluStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def _update_clusters(self):
+    def _update_clusters(self, input_data):
         """
         This method is to update the centroids of each introduced cluster.
         """
         
+        updated_cls = self._river_algo.predict_one(input_data)
+        
         for x in self._river_algo.centers.keys():
             related_cluster = self._clusters[x]
             related_cluster.centroid.value = list(self._river_algo.centers[x].values())
+            
+            if x == updated_cls:
+                act_size = related_cluster.size._get()
+                if act_size is not None:
+                    related_cluster.size.set(act_size+1)
+                else:
+                    related_cluster.size.set(1)
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -180,7 +191,7 @@ class WrRiverCluStream2MLPro (WrClusterAnalyzerRiver2MLPro):
             try:
                 related_cluster = self._clusters[x]
             except:
-                related_cluster = self._cls_cluster(p_id=x, p_visualize=self.get_visualization())   
+                related_cluster = self._cls_cluster(p_id=x, p_properties=self.C_CLUSTER_PROPERTIES, p_visualize=self.get_visualization())   
 
                 if self.get_visualization():
                     related_cluster.init_plot(p_figure = self._figure, p_plot_settings=self._plot_settings)             
