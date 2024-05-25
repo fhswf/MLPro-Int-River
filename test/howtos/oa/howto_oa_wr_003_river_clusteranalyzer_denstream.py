@@ -12,10 +12,11 @@
 ## -- 2023-12-22  1.0.3     SY       Refactoring
 ## -- 2024-02-04  1.0.4     SY       Refactoring
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
+## -- 2024-05-25  1.1.1     SY       Printing clusters' sizes
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.0 (2024-04-30)
+Ver. 1.1.1 (2024-05-25)
 
 This module demonstrates the principles of stream processing with MLPro. To this regard, a stream of
 a stream provider is combined with a stream workflow to a stream scenario. The workflow consists of 
@@ -193,6 +194,11 @@ river_centers       = myscenario.get_workflow()._tasks[0].get_algorithm().p_micr
 for val in river_centers:
     if list(val.x.values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].centroid.value):
         print("The center of cluster %s from river and mlpro matches!"%(id(val)))
+        cls_size = myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].size._get()
+        if cls_size is not None:
+            print("The size of cluster %s is %i"%(id(val),cls_size))
+        else:
+            print("The size of cluster %s is 0"%(id(val)))
     else:
         print("The center of cluster %s from river and mlpro does not match!"%(id(val)
                                                                                ))
