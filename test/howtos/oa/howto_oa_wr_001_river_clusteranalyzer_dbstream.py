@@ -186,7 +186,7 @@ list_keys           = list(myscenario.get_workflow()._tasks[0].get_clusters().ke
 for x in range(wr_n_clusters):
     if list(river_centers[x].values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[list_keys[x]].centroid.value):
         print("The center of cluster %s from river and mlpro matches!"%(x+1))
-        cls_size = myscenario.get_workflow()._tasks[0].get_clusters()[list_keys[x]].size._get()
+        cls_size = myscenario.get_workflow()._tasks[0].get_clusters()[list_keys[x]].size.value
         if cls_size is not None:
             print("The size of cluster %s is %i"%(x+1,cls_size))
         else:

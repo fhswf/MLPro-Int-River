@@ -194,14 +194,13 @@ river_centers       = myscenario.get_workflow()._tasks[0].get_algorithm().p_micr
 for val in river_centers:
     if list(val.x.values()) == list(myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].centroid.value):
         print("The center of cluster %s from river and mlpro matches!"%(id(val)))
-        cls_size = myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].size._get()
+        cls_size = myscenario.get_workflow()._tasks[0].get_clusters()[id(val)].size.value
         if cls_size is not None:
             print("The size of cluster %s is %i"%(id(val),cls_size))
         else:
             print("The size of cluster %s is 0"%(id(val)))
     else:
-        print("The center of cluster %s from river and mlpro does not match!"%(id(val)
-                                                                               ))
+        print("The center of cluster %s from river and mlpro does not match!"%(id(val)))
 
 
 
