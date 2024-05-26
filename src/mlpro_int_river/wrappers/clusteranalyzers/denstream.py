@@ -161,11 +161,11 @@ class WrRiverDenStream2MLPro (WrClusterAnalyzerRiver2MLPro):
                 try:
                     related_cluster.centroid.value = list_center        
                     if x == updated_cls:
-                        act_size = related_cluster.size._get()
+                        act_size = related_cluster.size.value
                         if act_size is not None:
-                            related_cluster.size.set(act_size+1)
+                            related_cluster.size.value = act_size+1
                         else:
-                            related_cluster.size.set(1)
+                            related_cluster.size.value = 1
                 except:
                     pass
 
