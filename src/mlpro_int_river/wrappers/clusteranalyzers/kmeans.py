@@ -28,10 +28,11 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separated to own module
+## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.0 (2024-05-07)
+Ver. 1.4.1 (2024-05-25)
 
 This module provides a wrapper class for the KMeans algorithm provided by River.
 
@@ -133,16 +134,26 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def _update_clusters(self):
+    def _update_clusters(self, input_data):
         """
         This method is to update the centroids of each introduced cluster.
         """
+        
+        updated_cls = self._river_algo.predict_one(input_data)        
+        
         for x in self._river_algo.centers.keys():
             related_cluster = self._clusters[x]
             list_center = []
             for y in range(len(self._river_algo.centers[x])):
                 list_center.append(self._river_algo.centers[x][y+1])
             related_cluster.centroid.value = list_center
+            
+            if x == updated_cls:
+                act_size = related_cluster.size.value
+                if act_size is not None:
+                    related_cluster.size.value = act_size+1
+                else:
+                    related_cluster.size.value = 1
 
 
 ## -------------------------------------------------------------------------------------------------
