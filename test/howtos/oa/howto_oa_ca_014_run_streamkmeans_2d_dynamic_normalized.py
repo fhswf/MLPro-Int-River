@@ -12,10 +12,11 @@
 ## --                                - Add window to the workflow
 ## -- 2024-02-23  1.0.3     SY       Parameters Optimization
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
+## -- 2024-05-27  1.1.1     SY       Printing clusters' sizes
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.0 (2024-04-30)
+Ver. 1.1.1 (2024-05-27)
 
 This module demonstrates online cluster analysis of normalized dynamic 2D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -166,6 +167,7 @@ myscenario.log(Log.C_LOG_TYPE_I, 'Here is the recap of the cluster analyzer')
 myscenario.log(Log.C_LOG_TYPE_I, 'Number of clusters: ', number_of_clusters)
 for x in range(number_of_clusters):
     myscenario.log(Log.C_LOG_TYPE_I, 'Center of Cluster ', str(x+1), ': ', list(clusters[x].centroid.value))
+    myscenario.log(Log.C_LOG_TYPE_I, 'Size of Cluster ', str(x+1), ': ', clusters[x].size.value)
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
 
