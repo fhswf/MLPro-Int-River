@@ -30,10 +30,11 @@
 ## -- 2024-05-07  1.4.0     DA       Separation of particular algorithms into separate modules
 ## -- 2024-05-24  1.5.0     DA       Alignment with MLPro 2
 ## -- 2024-05-25  1.5.1     SY       Introduction of size as a property, Refactoring
+## -- 2024-07-04  1.6.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.5.1 (2024-05-25)
+Ver. 1.6.0 (2024-07-04)
 
 This module provides wrapper root classes from River to MLPro, specifically for cluster analyzers. 
 
@@ -194,7 +195,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 ## -------------------------------------------------------------------------------------------------
     def get_cluster_memberships( self, 
                                  p_inst: Instance, 
-                                 p_scope: int = ClusterAnalyzer.C_MS_SCOPE_MAX ) -> List[Tuple[str, float, Cluster]]:
+                                 p_scope: int = ClusterAnalyzer.C_RESULT_SCOPE_MAX ) -> List[Tuple[str, float, Cluster]]:
         """
         Public custom method to determine the membership of the given instance to each cluster as
         a value in percent.
