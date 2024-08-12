@@ -13,10 +13,11 @@
 ## -- 2024-02-23  1.0.3     SY       Parameters Optimization
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.1.1     SY       Printing clusters' sizes
+## -- 2024-08-12  1.2.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-05-27)
+Ver. 1.2.1 (2024-08-12)
 
 This module demonstrates online cluster analysis of normalized dynamic 2D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -40,7 +41,7 @@ In particular you will learn:
 
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
-from mlpro.bf.streams.tasks.windows import Window
+from mlpro.bf.streams.tasks.windows import RingBuffer
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
@@ -65,30 +66,32 @@ class Dynamic2DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='Cluster Analysis using StreamKMeans@River',
-                              p_range_max=OAWorkflow.C_RANGE_NONE,
-                              p_ada=p_ada,
-                              p_visualize=p_visualize,
-                              p_logging=p_logging)
+        workflow = OAWorkflow( p_name='Cluster Analysis using StreamKMeans@River',
+                               p_range_max=OAWorkflow.C_RANGE_NONE,
+                               p_ada=p_ada,
+                               p_visualize=p_visualize,
+                               p_logging=p_logging )
 
 
         # 1.2.2 Creation of tasks and add them to the workflow
       
         # Window
-        task_window = Window(p_buffer_size=100, 
-                             p_delay=False,
-                             p_enable_statistics=True,
-                             p_name='#1: Sliding Window',
-                             p_duplicate_data=True,
-                             p_visualize=p_visualize,
-                             p_logging=p_logging)
+        task_window = RingBuffer( p_buffer_size=100, 
+                                  p_delay=False,
+                                  p_enable_statistics=True,
+                                  p_name='#1: Sliding Window',
+                                  p_duplicate_data=True,
+                                  p_visualize=p_visualize,
+                                  p_logging=p_logging )
+        
         workflow.add_task(p_task=task_window)
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='#2: Boundary Detector', 
-                                   p_ada=True, 
-                                   p_visualize=p_visualize,   
-                                   p_logging=p_logging)
+        task_bd = BoundaryDetector( p_name='#2: Boundary Detector', 
+                                    p_ada=True, 
+                                    p_visualize=p_visualize,   
+                                    p_logging=p_logging )
+        
         workflow.add_task(p_task=task_bd, p_pred_tasks=[task_window])
 
         # MinMax-Normalizer
@@ -104,14 +107,14 @@ class Dynamic2DScenario(OAScenario):
         workflow.add_task(p_task = task_norm_minmax, p_pred_tasks=[task_bd])
 
         # Cluster Analyzer
-        task_clusterer = WrRiverStreamKMeans2MLPro(p_name='#4: StreamKMeans@River',
-                                                   p_chunk_size=500,
-                                                   p_n_clusters=5,
-                                                   p_halflife=1.00, 
-                                                   p_sigma=0.5,
-                                                   p_seed=54,
-                                                   p_visualize=p_visualize,
-                                                   p_logging=p_logging )
+        task_clusterer = WrRiverStreamKMeans2MLPro( p_name='#4: StreamKMeans@River',
+                                                    p_chunk_size=500,
+                                                    p_n_clusters=5,
+                                                    p_halflife=1.00, 
+                                                    p_sigma=0.5,
+                                                    p_seed=54,
+                                                    p_visualize=p_visualize,
+                                                    p_logging=p_logging )
        
         workflow.add_task(p_task = task_clusterer, p_pred_tasks=[task_norm_minmax])
 

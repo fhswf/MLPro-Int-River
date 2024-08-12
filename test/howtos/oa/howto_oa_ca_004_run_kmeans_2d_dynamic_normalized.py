@@ -13,10 +13,11 @@
 ## -- 2024-02-02  1.1.0     SY       Parameters Optimization
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.2.1     SY       Printing clusters' sizes
+## -- 2024-08-12  1.3.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.2.1 (2024-05-27)
+Ver. 1.3.0 (2024-08-12)
 
 This module demonstrates online cluster analysis of normalized dynamic 2D random point clouds using the wrapped
 River implementation of stream algorithm KMeans. To this regard, the systematics of sub-framework 
@@ -40,7 +41,7 @@ In particular you will learn:
 
 from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
-from mlpro.bf.streams.tasks.windows import Window
+from mlpro.bf.streams.tasks.windows import RingBuffer
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverKMeans2MLPro
 
@@ -75,20 +76,21 @@ class Dynamic2DScenario(OAScenario):
         # 1.2.2 Creation of tasks and add them to the workflow
       
         # Window
-        task_window = Window(p_buffer_size=100, 
-                             p_delay=False,
-                             p_enable_statistics=True,
-                             p_name='#1: Sliding Window',
-                             p_duplicate_data=True,
-                             p_visualize=p_visualize,
-                             p_logging=p_logging)
+        task_window = RingBuffer( p_buffer_size=100, 
+                                  p_delay=False,
+                                  p_enable_statistics=True,
+                                  p_name='#1: Sliding Window',
+                                  p_duplicate_data=True,
+                                  p_visualize=p_visualize,
+                                  p_logging=p_logging )
+        
         workflow.add_task(p_task=task_window)
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='#2: Boundary Detector', 
-                                   p_ada=True, 
-                                   p_visualize=p_visualize,   
-                                   p_logging=p_logging)
+        task_bd = BoundaryDetector( p_name='#2: Boundary Detector', 
+                                    p_ada=True, 
+                                    p_visualize=p_visualize,   
+                                    p_logging=p_logging )
         workflow.add_task(p_task=task_bd, p_pred_tasks=[task_window])
 
         # MinMax-Normalizer
