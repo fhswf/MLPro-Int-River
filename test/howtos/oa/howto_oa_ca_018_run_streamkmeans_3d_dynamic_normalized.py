@@ -15,10 +15,11 @@
 ## -- 2024-02-23  1.1.2     SY       Parameters Optimization
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.2.1     SY       Printing clusters' sizes
+## -- 2024-11-27  1.3.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.2.1 (2024-05-27)
+Ver. 1.3.0 (2024-11-27)
 
 This module demonstrates online cluster analysis of normalized dynamic 3D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -36,9 +37,11 @@ In particular you will learn:
 """
 
 
-from mlpro.bf.streams.streams import *
 from mlpro.bf.various import Log
+from mlpro.bf.streams.streams import *
 from mlpro.oa.streams import *
+from mlpro.oa.streams.tasks import BoundaryDetector, NormalizerMinMax
+
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
