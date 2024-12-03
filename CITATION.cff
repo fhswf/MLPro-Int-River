@@ -11,7 +11,7 @@ authors:
   orcid: "https://orcid.org/0000-0001-7570-2726"
   affiliation: "South Westphalia University of Applied Sciences, Germany"
 license: "Apache-2.0"
-version: "0.2.0"
+version: "0.3.0"
 date-released: 2024-12-03
 doi: 10.5281/zenodo.11130004
 url: "https://github.com/fhswf/MLPro-Int-River"
