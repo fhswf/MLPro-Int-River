@@ -12,10 +12,11 @@
 ## -- 2023-12-22  1.0.3     SY       Refactoring
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -- 2024-05-25  1.1.1     SY       Printing clusters' sizes
+## -- 2024-12-03  1.2.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-05-25)
+Ver. 1.2.0 (2024-12-03)
 
 This module demonstrates the principles of stream processing with MLPro. To this regard, a stream of
 a stream provider is combined with a stream workflow to a stream scenario. The workflow consists of 
@@ -95,7 +96,7 @@ class Stream4KMeans (StreamMLProBase):
 
 ## -------------------------------------------------------------------------------------------------
 ## -------------------------------------------------------------------------------------------------
-class AdScenario4KMeans (OAScenario):
+class AdScenario4KMeans (OAStreamScenario):
 
     C_NAME = 'AdScenario4KMeans'
 
@@ -108,21 +109,21 @@ class AdScenario4KMeans (OAScenario):
         # 2 Set up a stream workflow based on a custom stream task
 
         # 2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='wf1',
-                               p_range_max=OAWorkflow.C_RANGE_NONE,
-                               p_ada=p_ada,
-                               p_visualize=p_visualize, 
-                               p_logging=p_logging )
+        workflow = OAStreamWorkflow( p_name='wf1',
+                                     p_range_max=OAStreamWorkflow.C_RANGE_NONE,
+                                     p_ada=p_ada,
+                                     p_visualize=p_visualize, 
+                                     p_logging=p_logging )
 
 
         # 2.2 Creation of a cluster analzer task
         clusterer = WrRiverKMeans2MLPro( p_name='t1',
-                                        p_n_clusters=2,
-                                        p_halflife=0.1, 
-                                        p_sigma=3, 
-                                        p_seed=42,
-                                        p_visualize=p_visualize, 
-                                        p_logging=p_logging )
+                                         p_n_clusters=2,
+                                         p_halflife=0.1, 
+                                         p_sigma=3, 
+                                         p_seed=42,
+                                         p_visualize=p_visualize, 
+                                         p_logging=p_logging )
 
         workflow.add_task( p_task=clusterer )
 
@@ -151,9 +152,9 @@ else:
 
 # 2 Instantiate the stream scenario
 myscenario = AdScenario4KMeans( p_mode=Mode.C_MODE_REAL,
-                               p_cycle_limit=cycle_limit,
-                               p_visualize=visualize,
-                               p_logging=logging )
+                                p_cycle_limit=cycle_limit,
+                                p_visualize=visualize,
+                                p_logging=logging )
 
 
 

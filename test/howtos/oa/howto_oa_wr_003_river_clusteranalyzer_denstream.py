@@ -13,10 +13,11 @@
 ## -- 2024-02-04  1.0.4     SY       Refactoring
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -- 2024-05-25  1.1.1     SY       Printing clusters' sizes
+## -- 2024-12-03  1.2.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-05-25)
+Ver. 1.2.0 (2024-12-03)
 
 This module demonstrates the principles of stream processing with MLPro. To this regard, a stream of
 a stream provider is combined with a stream workflow to a stream scenario. The workflow consists of 
@@ -96,7 +97,7 @@ class Stream4DenStream (StreamMLProBase):
 
 ## -------------------------------------------------------------------------------------------------
 ## -------------------------------------------------------------------------------------------------
-class AdScenario4DenStream (OAScenario):
+class AdScenario4DenStream (OAStreamScenario):
 
     C_NAME = 'AdScenario4DenStream'
 
@@ -109,22 +110,22 @@ class AdScenario4DenStream (OAScenario):
         # 2 Set up a stream workflow based on a custom stream task
 
         # 2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='wf1',
-                               p_range_max=OAWorkflow.C_RANGE_NONE,
-                               p_ada=p_ada,
-                               p_visualize=p_visualize, 
-                               p_logging=p_logging )
+        workflow = OAStreamWorkflow( p_name='wf1',
+                                     p_range_max=OAStreamWorkflow.C_RANGE_NONE,
+                                     p_ada=p_ada,
+                                     p_visualize=p_visualize, 
+                                     p_logging=p_logging )
 
 
         # 2.2 Creation of a cluster analzer task
         clusterer = WrRiverDenStream2MLPro( p_name='t1',
-                                           p_decaying_factor=0.01,
-                                           p_beta=0.5,
-                                           p_mu=2.5,
-                                           p_epsilon=0.5,
-                                           p_n_samples_init=10,
-                                           p_visualize=p_visualize, 
-                                           p_logging=p_logging )
+                                            p_decaying_factor=0.01,
+                                            p_beta=0.5,
+                                            p_mu=2.5,
+                                            p_epsilon=0.5,
+                                            p_n_samples_init=10,
+                                            p_visualize=p_visualize, 
+                                            p_logging=p_logging )
 
         workflow.add_task( p_task=clusterer )
 
@@ -157,9 +158,9 @@ else:
 
 # 2 Instantiate the stream scenario
 myscenario = AdScenario4DenStream( p_mode=Mode.C_MODE_REAL,
-                                  p_cycle_limit=cycle_limit,
-                                  p_visualize=visualize,
-                                  p_logging=logging )
+                                   p_cycle_limit=cycle_limit,
+                                   p_visualize=visualize,
+                                   p_logging=logging )
 
 
 

@@ -16,10 +16,11 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.2.1     SY       Printing clusters' sizes
 ## -- 2024-11-27  1.3.0     DA       Alignment with MLPro 2
+## -- 2024-12-03  1.4.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.3.0 (2024-11-27)
+Ver. 1.4.0 (2024-12-03)
 
 This module demonstrates online cluster analysis of normalized static 2D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -49,7 +50,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
 # 1 Prepare a scenario for Static 3D Point Clouds
-class Static2DScenario(OAScenario):
+class Static2DScenario(OAStreamScenario):
 
     C_NAME = 'Static2DScenario'
 
@@ -66,28 +67,28 @@ class Static2DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow(p_name='Cluster Analysis using StreamKMeans@River',
-                              p_range_max=OAWorkflow.C_RANGE_NONE,
-                              p_ada=p_ada,
-                              p_visualize=p_visualize,
-                              p_logging=p_logging)
+        workflow = OAStreamWorkflow( p_name='Cluster Analysis using StreamKMeans@River',
+                                     p_range_max=OAStreamWorkflow.C_RANGE_NONE,
+                                     p_ada=p_ada,
+                                     p_visualize=p_visualize,
+                                     p_logging=p_logging)
 
 
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Boundary detector 
-        task_bd = BoundaryDetector(p_name='#1: Boundary Detector', 
-                                   p_ada=True, 
-                                   p_visualize=p_visualize,   
-                                   p_logging=p_logging)
+        task_bd = BoundaryDetector( p_name='#1: Boundary Detector', 
+                                    p_ada=True, 
+                                    p_visualize=p_visualize,   
+                                    p_logging=p_logging)
         
         workflow.add_task(p_task = task_bd)
 
         # MinMax-Normalizer
-        task_norm_minmax = NormalizerMinMax(p_name='#2: Normalizer MinMax', 
-                                            p_ada=True,
-                                            p_visualize=p_visualize, 
-                                            p_logging=p_logging )
+        task_norm_minmax = NormalizerMinMax( p_name='#2: Normalizer MinMax', 
+                                             p_ada=p_ada,
+                                             p_visualize=p_visualize, 
+                                             p_logging=p_logging )
 
         task_bd.register_event_handler(
             p_event_id=BoundaryDetector.C_EVENT_ADAPTED,
@@ -98,13 +99,13 @@ class Static2DScenario(OAScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='#3: StreamKMeans@River',
-                                                   p_chunk_size=50,
-                                                   p_n_clusters=5,
-                                                   p_halflife=1, 
-                                                   p_sigma=0.5,
-                                                   p_seed=44,
-                                                   p_visualize=p_visualize,
-                                                   p_logging=p_logging )
+                                                    p_chunk_size=50,
+                                                    p_n_clusters=5,
+                                                    p_halflife=1, 
+                                                    p_sigma=0.5,
+                                                    p_seed=44,
+                                                    p_visualize=p_visualize,
+                                                    p_logging=p_logging )
         
         task_norm_minmax.register_event_handler( p_event_id=NormalizerMinMax.C_EVENT_ADAPTED,
                                                  p_event_handler=task_clusterer.renormalize_on_event )

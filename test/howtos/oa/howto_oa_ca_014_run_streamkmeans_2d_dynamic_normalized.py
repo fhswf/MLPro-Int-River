@@ -15,10 +15,11 @@
 ## -- 2024-05-27  1.1.1     SY       Printing clusters' sizes
 ## -- 2024-08-12  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-11-27  1.3.0     DA       Alignment with MLPro 2
+## -- 2024-12-03  1.4.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.3.0 (2024-11-27)
+Ver. 1.4.0 (2024-12-03)
 
 This module demonstrates online cluster analysis of normalized dynamic 2D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
@@ -51,7 +52,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
 # 1 Prepare a scenario for Dynamic 2D Point Clouds
-class Dynamic2DScenario(OAScenario):
+class Dynamic2DScenario(OAStreamScenario):
 
     C_NAME = 'Dynamic2DScenario'
 
@@ -69,11 +70,11 @@ class Dynamic2DScenario(OAScenario):
         # 1.2 Set up a stream workflow based on a custom stream task
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='Cluster Analysis using StreamKMeans@River',
-                               p_range_max=OAWorkflow.C_RANGE_NONE,
-                               p_ada=p_ada,
-                               p_visualize=p_visualize,
-                               p_logging=p_logging )
+        workflow = OAStreamWorkflow( p_name='Cluster Analysis using StreamKMeans@River',
+                                     p_range_max=OAStreamWorkflow.C_RANGE_NONE,
+                                     p_ada=p_ada,
+                                     p_visualize=p_visualize,
+                                     p_logging=p_logging )
 
 
         # 1.2.2 Creation of tasks and add them to the workflow
@@ -91,7 +92,7 @@ class Dynamic2DScenario(OAScenario):
 
         # Boundary detector 
         task_bd = BoundaryDetector( p_name='#2: Boundary Detector', 
-                                    p_ada=True, 
+                                    p_ada=p_ada, 
                                     p_visualize=p_visualize,   
                                     p_logging=p_logging )
         
@@ -99,7 +100,7 @@ class Dynamic2DScenario(OAScenario):
 
         # MinMax-Normalizer
         task_norm_minmax = NormalizerMinMax(p_name='#3: Normalizer MinMax', 
-                                            p_ada=True,
+                                            p_ada=p_ada,
                                             p_visualize=p_visualize, 
                                             p_logging=p_logging )
 

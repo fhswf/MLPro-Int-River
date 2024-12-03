@@ -9,10 +9,11 @@
 ## -- 2024-02-09  1.0.0     SY       First version release
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.1.1     SY       Printing clusters' sizes
+## -- 2024-12-03  1.2.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.1.1 (2024-05-27)
+Ver. 1.2.0 (2024-12-03)
 
 This module demonstrates online cluster analysis of static 2D random point clouds using the wrapped
 River implementation of stream algorithm CluStream. To this regard, the systematics of sub-framework 
@@ -39,7 +40,7 @@ from mlpro_int_river.wrappers.clusteranalyzers import WrRiverCluStream2MLPro
 
 
 # 1 Prepare a scenario for Static 2D Point Clouds
-class Static2DScenario(OAScenario):
+class Static2DScenario(OAStreamScenario):
 
     C_NAME = 'Static2DScenario'
 
@@ -56,29 +57,29 @@ class Static2DScenario(OAScenario):
         # 1.2 Set up a stream workflow
 
         # 1.2.1 Creation of a workflow
-        workflow = OAWorkflow( p_name='Cluster Analysis using CluStream@River',
-                               p_range_max=OAWorkflow.C_RANGE_NONE,
-                               p_ada=p_ada,
-                               p_visualize=p_visualize,
-                               p_logging=p_logging )
+        workflow = OAStreamWorkflow( p_name='Cluster Analysis using CluStream@River',
+                                     p_range_max=OAStreamWorkflow.C_RANGE_NONE,
+                                     p_ada=p_ada,
+                                     p_visualize=p_visualize,
+                                     p_logging=p_logging )
 
 
         # 1.2.2 Creation of tasks and add them to the workflow
 
         # Cluster Analyzer
-        task_clusterer = WrRiverCluStream2MLPro(p_name='#1: CluStream@River',
-                                                p_n_macro_clusters = 5,
-                                                p_max_micro_clusters = 20,
-                                                p_micro_cluster_r_factor = 2,
-                                                p_time_window = 100,
-                                                p_time_gap = 10,
-                                                p_seed = 41,
-                                                p_halflife = 1.0,
-                                                p_mu = 1,
-                                                p_sigma = 1,
-                                                p_p = 2,
-                                                p_visualize=p_visualize,
-                                                p_logging=p_logging )
+        task_clusterer = WrRiverCluStream2MLPro( p_name='#1: CluStream@River',
+                                                 p_n_macro_clusters = 5,
+                                                 p_max_micro_clusters = 20,
+                                                 p_micro_cluster_r_factor = 2,
+                                                 p_time_window = 100,
+                                                 p_time_gap = 10,
+                                                 p_seed = 41,
+                                                 p_halflife = 1.0,
+                                                 p_mu = 1,
+                                                 p_sigma = 1,
+                                                 p_p = 2,
+                                                 p_visualize=p_visualize,
+                                                 p_logging=p_logging )
         
         workflow.add_task(p_task = task_clusterer)
 
