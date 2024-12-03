@@ -1,12 +1,9 @@
 [![CI](https://github.com/fhswf/MLPro-Int-River/actions/workflows/ci.yml/badge.svg)](https://github.com/fhswf/MLPro-Int-River/actions/workflows/ci.yml)
 [![Documentation Status](https://readthedocs.org/projects/mlpro-int-river/badge/?version=latest)](https://mlpro-int-river.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/mlpro-int-river.svg)](https://badge.fury.io/py/mlpro-int-river)
-<!---
-[![Anaconda-Version Badge](https://anaconda.org/mlpro-int-river/mlpro-int-river/badges/version.svg)](https://anaconda.org/mlpro-int-river/mlpro)
-[![Anaconda-Downloads Badge](https://img.shields.io/conda/dn/mlpro-int-river/mlpro-int-river?color=green&label=Anaconda.org%20Total%20downloads&style=flat-square)](https://anaconda.org/mlpro-int-river/mlpro-int-river)
---->
 [![PyPI Total Downloads](https://static.pepy.tech/personalized-badge/mlpro-int-river?period=total&units=international_system&left_color=blue&right_color=orange&left_text=PyPI%20Total%20Downloads)](https://pepy.tech/project/mlpro-int-river)
 [![PyPI Last Month Downloads](https://static.pepy.tech/personalized-badge/mlpro-int-river?period=month&units=international_system&left_color=blue&right_color=orange&left_text=PyPI%20Last%20Month%20Downloads)](https://pepy.tech/project/mlpro-int-river)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11130004.svg)](https://doi.org/10.5281/zenodo.11130004)
 
 
 <img src="https://github.com/fhswf/MLPro-Int-River/blob/main/doc/logo/original/logo.png?raw=True" align="right" width="40%"/>
