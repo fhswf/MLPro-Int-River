@@ -1,6 +1,5 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project   : MLPro - The integrative middleware framework for standardized machine learning
-## -- Extension : MLPro-Int-scikit-learn - Integration of scikit-learn into MLPro
 ## -- Workflow  : ci.yml
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
@@ -91,7 +90,7 @@ jobs:
     if: needs.deps_gen.outputs.trigger_build == 'true'
     strategy:
       matrix:
-        python-version: ['3.11']
+        python-version: ['3.12']
 
     steps:
     - name: Checkout Codes
