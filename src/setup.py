@@ -12,8 +12,8 @@ packages=['mlpro_int_river'],
 # Package dependencies for full installation
 extras_require={
     "full": [
-        "mlpro[full]>=1.9.4",
-        "river>=0.21.0"
+        "mlpro[full]>=2.0.0",
+        "river>=0.22.0"
     ],
 },
 

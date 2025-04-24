@@ -29,10 +29,11 @@
 ## -- 2024-05-05  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-07  1.4.0     DA       Separated to own module
 ## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
+## -- 2025-04-24  1.5.0     DA       Alignment with MLPro 2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.1 (2024-05-25)
+Ver. 1.5.0 (2025-04-24)
 
 This module provides a wrapper class for the STREAMKMeans algorithm provided by River.
 
@@ -169,7 +170,7 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def get_clusters(self) -> dict[Cluster]:
+    def _get_clusters(self):
         """
         This method returns the current list of clusters.
 
@@ -225,3 +226,7 @@ class WrRiverStreamKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
                     related_cluster[river_idx] = cluster.centroid.value[mlpro_idx]
             except:
                 pass
+
+
+## -------------------------------------------------------------------------------------------------
+    clusters = property( fget=_get_clusters )
