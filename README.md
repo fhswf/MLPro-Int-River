@@ -14,6 +14,6 @@ Welcome to MLPro-Int-River, an extension to MLPro to integrate the River package
 MLPro-Int-River provides wrapper classes that enable the use of selected River functionalities in your MLPro applications. The use of these wrappers is illustrated in numerous example programs.
 
 ### Learn more
-[MLPro - Machine Learning Professional](https://mlpro.readthedocs.io)   
+[MLPro - The integrative middleware framework for standardized machine learning in Python](https://mlpro.readthedocs.io)   
 [MLPro-Int-River - Integration of River into MLPro](https://mlpro-int-river.readthedocs.io)   
 [River - Online machine learning in Python](https://riverml.xyz)   

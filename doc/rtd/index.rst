@@ -30,11 +30,12 @@ Before running the examples, please install the latest versions of MLPro, River,
 
 
 **See also**
-   - `MLPro - Machine Learning Professional <https://mlpro.readthedocs.io>`_ 
+   - `MLPro - The integrative middleware framework for standardized machine learning in Python <https://mlpro.readthedocs.io>`_ 
    - `MLPro-OA - Sub-framework for online machine learning <https://mlpro.readthedocs.io/en/latest/content/03_machine_learning/mlpro_oa/main.html>`_
    - `River - Online machine learning in Python <https://riverml.xyz>`_ 
-   - `Further MLPro extensions <https://mlpro.readthedocs.io/en/latest/content/04_extensions/main.html>`_
    - `MLPro-Int-River on GitHub <https://github.com/fhswf/MLPro-Int-River>`_
+   - `MLPro-Int-River on PyPI <https://pypi.org/project/mlpro-int-river>`_
+   - `Further MLPro extensions <https://mlpro.readthedocs.io/en/latest/content/04_extensions/main.html>`_
 
 
 .. toctree::
