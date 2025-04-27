@@ -1,5 +1,11 @@
-mlpro[full]>=2.0.0
-river>=0.22.0
+# MLPro
+# mlpro[full]>=2.0.1
+git+https://github.com/mlpro-community/mlpro.git@main#egg=mlpro
+
+# River
+# river>=0.22.0
+git+https://github.com/online-ml/river.git@main#egg=river
+
 
 sphinxcontrib-napoleon
 sphinx-copybutton
