@@ -6,10 +6,11 @@
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
 ## -- 2025-03-11  0.0.0     DS/DA    Creation
+## -- 2025-04-27  0.1.0     DA       Alignment with MLPro 2.0.1
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 0.0.0 (2025-03-11)
+Ver. 0.1.0 (2025-04-27)
 
 This module demonstrates online cluster analysis of static 2D random point clouds using the wrapped
 River implementation of stream algorithm KMeans. To this regard, the systematics of sub-framework 
@@ -74,9 +75,9 @@ class Static2DScenario(OAStreamScenario):
         workflow.add_task(p_task = task_clusterer)
 
         # 1.3 Add the generic cluster-based detector for point and group anomalies
-        task_anomalydetector = ...
+        # task_anomalydetector = ...
 
-        workflow.add_task( p_task = task_anomalydetector, p_pred_tasks=[task_clusterer] )
+        # workflow.add_task( p_task = task_anomalydetector, p_pred_tasks=[task_clusterer] )
 
 
         # 1.4 Return stream and workflow
@@ -122,7 +123,7 @@ tp_delta            = tp_after - tp_before
 duraction_sec       = ( tp_delta.seconds * 1000000 + tp_delta.microseconds + 1 ) / 1000000
 myscenario.log(Log.C_LOG_TYPE_S, 'Duration [sec]:', round(duraction_sec,2), ', Cycles/sec:', round(cycle_limit/duraction_sec,2))
 
-clusters            = myscenario.get_workflow()._tasks[0].get_clusters()
+clusters            = myscenario.get_workflow()._tasks[0].clusters
 number_of_clusters  = len(clusters)
 
 myscenario.log(Log.C_LOG_TYPE_I, '-------------------------------------------------------')
