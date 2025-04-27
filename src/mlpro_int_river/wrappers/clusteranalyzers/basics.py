@@ -146,7 +146,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
         self._river_algo.learn_one(input_data)
         
         # update MLPro clusters from river
-        self.get_clusters()
+        self._get_clusters()
         self._update_clusters(input_data)
 
         return True
@@ -156,22 +156,6 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
     def _update_clusters(self, input_data):
         """
         This method is to update the centroids of each introduced cluster.
-        """
-
-        raise NotImplementedError
-
-
-## -------------------------------------------------------------------------------------------------
-    def get_clusters(self) -> dict[Cluster]:
-        """
-        This method returns the current list of clusters. To be defined according to each clusterer
-        mechanism.
-
-        Returns
-        -------
-        list_of_clusters : List[Cluster]
-            Current list of clusters.
-            
         """
 
         raise NotImplementedError
