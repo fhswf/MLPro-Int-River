@@ -40,7 +40,9 @@ In particular you will learn:
 """
 
 
-from mlpro.bf.various import Log
+from datetime import datetime
+
+from mlpro.bf import *
 from mlpro.bf.streams.streams import StreamMLProClouds
 from mlpro.oa.streams import *
 from mlpro.oa.streams.tasks import BoundaryDetector, NormalizerMinMax

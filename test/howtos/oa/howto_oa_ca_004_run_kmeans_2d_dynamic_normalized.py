@@ -41,8 +41,10 @@ In particular you will learn:
 """
 
 
+from datetime import datetime
+
+from mlpro.bf import *
 from mlpro.bf.streams.streams import StreamMLProClouds
-from mlpro.bf.various import Log
 from mlpro.bf.streams.tasks.windows import RingBuffer
 from mlpro.oa.streams import *
 from mlpro.oa.streams.tasks import BoundaryDetector, NormalizerMinMax
