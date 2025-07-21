@@ -31,10 +31,11 @@
 ## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
 ## -- 2025-04-24  1.5.0     DA       Alignment with MLPro 2
 ## -- 2025-07-20  1.5.1     DS       Added attribute C_CLUSTER_PROPERTIES 
+## -- 2025-07-21  1.5.2     DS       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.5.1 (2025-04-20)
+Ver. 1.5.2 (2025-07-21)
 
 This module provides a wrapper class for the KMeans algorithm provided by River.
 
@@ -55,6 +56,8 @@ from mlpro.bf.various import Log
 from mlpro.bf.streams import *
 from river import cluster
 
+# Export list for public API
+__all__ = [ 'WrRiverKMeanss2MLPro' ]
 
 
 
