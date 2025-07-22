@@ -1,1 +1,1 @@
-from mlpro_int_river.wrappers import *
+from .wrappers import *
