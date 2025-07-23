@@ -4,7 +4,7 @@ Howto OA-CA-015: Run STREAMKMeans on static 3D point clouds
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_015_run_streamkmeans_3d_static.py
+.. literalinclude:: ../../../../../test/howtos/oa/clusteranalyzers/howto_oa_ca_015_run_streamkmeans_3d_static.py
 	:language: python
 
 

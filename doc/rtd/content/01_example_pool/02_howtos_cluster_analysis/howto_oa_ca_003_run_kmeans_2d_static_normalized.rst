@@ -4,7 +4,7 @@ Howto OA-CA-003: Run KMeans on normalized static 2D point clouds
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_003_run_kmeans_2d_static_normalized.py
+.. literalinclude:: ../../../../../test/howtos/oa/clusteranalyzers/howto_oa_ca_003_run_kmeans_2d_static_normalized.py
 	:language: python
 
 

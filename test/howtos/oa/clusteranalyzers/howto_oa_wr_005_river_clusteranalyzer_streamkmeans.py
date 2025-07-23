@@ -13,10 +13,11 @@
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -- 2024-05-25  1.1.1     SY       Printing clusters' sizes
 ## -- 2024-12-03  1.2.0     DA       Alignment with MLPro 2
+## -- 2025-07-23  1.3.0     DA       Alignment with MLPro 2.1
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.2.0 (2024-12-03)
+Ver. 1.3.0 (2025-07-23)
 
 This module demonstrates the principles of stream processing with MLPro. To this regard, a stream of
 a stream provider is combined with a stream workflow to a stream scenario. The workflow consists of 
@@ -37,9 +38,18 @@ STREAMKMeans
 
 """
 
-from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.streams.provider_mlpro import StreamMLProBase
+
+from datetime import datetime
+
+import numpy as np
+
+from mlpro.bf import Log, Mode, PlotSettings
+from mlpro.bf.math import MSpace
+from mlpro.bf.streams import Feature
+from mlpro.bf.streams.streams import StreamMLProBase
+from mlpro.bf.streams.streams.clouds import *
 from mlpro.oa.streams import *
+
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 

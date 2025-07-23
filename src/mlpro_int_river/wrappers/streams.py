@@ -24,10 +24,12 @@
 ## --                                - Class WrStreamProviderRiver: detects now all River data sets 
 ## -- 2024-02-17  2.0.1     DA       Class WrStreamProviderRiver: correction C_TYPE
 ## -- 2025-07-16  2.0.2     DA       Refactoring
+## -- 2025-07-20  2.0.3     DS       Alignments with MLPro 2.0.2
+## -- 2025-07-21  2.0.4     DS       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 2.0.2 (2025-07-16)
+Ver. 2.0.4 (2025-07-21)
 
 This module provides wrapper classes to embed River stream functionalities into MLPro. 
 
@@ -37,14 +39,22 @@ https://www.riverml.xyz/
 """
 
 import numpy
+
 import river.datasets as river_ds
 
-from mlpro.bf.various import Log, ScientificObject
-from mlpro.bf.ops import Mode
+from mlpro.bf import Log, Mode
+from mlpro.bf.various import ScientificObject
 from mlpro.bf.math import MSpace, Element
 from mlpro.bf.streams import *
 
 from mlpro_int_river.wrappers.basics import WrapperRiver
+
+
+
+# Export list for public API
+__all__ = [ 'WrStreamProviderRiver',
+            'WrStreamRiver' ]
+
 
 
 

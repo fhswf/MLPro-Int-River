@@ -1,2 +1,2 @@
-from mlpro_int_river.wrappers.basics import WrapperRiver
-from mlpro_int_river.wrappers.streams import WrStreamProviderRiver, WrStreamRiver
+from .basics import *
+from .streams import *

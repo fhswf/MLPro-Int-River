@@ -4,7 +4,7 @@ Howto OA-CA-013: Run STREAMKMeans on normalized static 2D point clouds
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_013_run_streamkmeans_2d_static_normalized.py
+.. literalinclude:: ../../../../../test/howtos/oa/clusteranalyzers/howto_oa_ca_013_run_streamkmeans_2d_static_normalized.py
 	:language: python
 
 

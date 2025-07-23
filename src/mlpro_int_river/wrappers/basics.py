@@ -28,10 +28,11 @@
 ## --                                    - selected algorithms for anomaly detection 
 ## -- 2024-02-15  2.1.0     DA       Updated minimum version of river to 0.21.0
 ## -- 2024-04-10  2.1.1     DA       Refactoring
+## -- 2025-07-21  2.1.2     DS       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 2.1.1 (2024-04-10)
+Ver. 2.1.2 (2025-07-21)
 
 This module contains the abstract root class for all river wrapper classes.
 
@@ -43,6 +44,8 @@ https://www.riverml.xyz/
 from mlpro.bf.various import ScientificObject
 from mlpro.wrappers import Wrapper
 
+# Export list for public API
+__all__ = [ 'WrapperRiver' ]
 
 
 

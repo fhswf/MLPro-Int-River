@@ -32,10 +32,11 @@
 ## -- 2024-05-25  1.5.1     SY       Introduction of size as a property, Refactoring
 ## -- 2024-07-04  1.6.0     DA       Alignment with MLPro 2
 ## -- 2025-06-15  1.7.0     DA       Alignment with MLpro 2.0.2
+## -- 2025-07-21  1.7.1     DS       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.7.0 (2025-06-15)
+Ver. 1.7.1 (2025-07-21)
 
 This module provides wrapper root classes from River to MLPro, specifically for cluster analyzers. 
 
@@ -58,6 +59,11 @@ from mlpro.bf.various import Log
 from mlpro.bf.streams import *
 
 from river import base
+
+
+
+# Export list for public API
+__all__ = [ 'WrClusterAnalyzerRiver2MLPro' ]
 
 
 

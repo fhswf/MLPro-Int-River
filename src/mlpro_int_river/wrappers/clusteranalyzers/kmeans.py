@@ -30,10 +30,12 @@
 ## -- 2024-05-07  1.4.0     DA       Separated to own module
 ## -- 2024-05-25  1.4.1     SY       Introduction of size as a property
 ## -- 2025-04-24  1.5.0     DA       Alignment with MLPro 2
+## -- 2025-07-20  1.5.1     DS       Added attribute C_CLUSTER_PROPERTIES 
+## -- 2025-07-21  1.5.2     DS       Refactoring
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.5.0 (2025-04-24)
+Ver. 1.5.2 (2025-07-21)
 
 This module provides a wrapper class for the KMeans algorithm provided by River.
 
@@ -48,10 +50,16 @@ from mlpro_int_river.wrappers.clusteranalyzers.basics import WrClusterAnalyzerRi
 from mlpro.bf.math.normalizers import Normalizer
 from mlpro.oa.streams.tasks.clusteranalyzers.clusters import Cluster, ClusterCentroid
 from mlpro.oa.streams.tasks.clusteranalyzers.clusters.properties import *
+from mlpro.bf.math.geometry import *
 from mlpro.bf.mt import Task as MLTask
 from mlpro.bf.various import Log
 from mlpro.bf.streams import *
 from river import cluster
+
+
+
+# Export list for public API
+__all__ = [ 'WrRiverKMeans2MLPro' ]
 
 
 
@@ -100,6 +108,10 @@ class WrRiverKMeans2MLPro (WrClusterAnalyzerRiver2MLPro):
     """
 
     C_TYPE          = 'River Cluster Analyzer KMeans'
+    C_CLUSTER_PROPERTIES = [cprop_centroid1,
+                            cprop_size1,
+                            cprop_size_geo1]
+                            
 
 
 ## -------------------------------------------------------------------------------------------------
