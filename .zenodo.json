@@ -1,0 +1,33 @@
+{
+  "title": "MLPro-Int-River - Integration of River into MLPro",
+  "description": "This repository provides wrapper classes that enable the use of selected River functionalities in your MLPro applications.",
+  "creators": [
+    {
+      "name": "Arend, Detlef",
+      "affiliation": "South Westphalia University of Applied Sciences, Germany",
+      "orcid": "0000-0002-8315-2346"
+    },
+    {
+      "name": "Yuwono, Steve",
+      "affiliation": "South Westphalia University of Applied Sciences, Germany",
+      "orcid": "0000-0001-7570-2726"
+    }
+  ],
+  "license": "Apache-2.0",
+  "upload_type": "software",
+  "keywords": [
+    "online machine learning",
+    "Python",
+    "MLPro",
+    "River",
+    "framework",
+    "open source"
+  ],
+  "communities": [
+    {
+      "identifier": "mlpro"
+    }
+  ],
+  "language": "eng",
+  "access_right": "open"
+}
