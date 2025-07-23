@@ -33,9 +33,11 @@ In particular you will learn:
 """
 
 
+from datetime import datetime
+
+from mlpro.bf import *
 from mlpro.bf.streams.streams import *
 from mlpro.bf.streams.streams.clouds import *
-from mlpro.bf.various import Log
 from mlpro.oa.streams import *
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverKMeans2MLPro
 

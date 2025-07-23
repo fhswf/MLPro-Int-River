@@ -31,10 +31,11 @@
 ## -- 2024-05-24  1.5.0     DA       Alignment with MLPro 2
 ## -- 2024-05-25  1.5.1     SY       Introduction of size as a property, Refactoring
 ## -- 2024-07-04  1.6.0     DA       Alignment with MLPro 2
+## -- 2025-06-15  1.7.0     DA       Alignment with MLpro 2.0.2
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.6.0 (2024-07-04)
+Ver. 1.7.0 (2025-06-15)
 
 This module provides wrapper root classes from River to MLPro, specifically for cluster analyzers. 
 
@@ -120,13 +121,13 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 
 
 ## -------------------------------------------------------------------------------------------------
-    def _adapt(self, p_inst_new : Instance) -> bool:
+    def _adapt(self, p_instance_new : Instance) -> bool:
         """
         This method is to adapt the current clusters according to the incoming instances.
 
         Parameters
         ----------
-        p_inst_new : Instance
+        p_instance_new : Instance
             New stream instances to be processed.
 
         Returns
@@ -136,7 +137,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
         """
         
         # extract features data from instances
-        feature_data    = np.array(p_inst_new.get_feature_data().get_values())
+        feature_data    = np.array(p_instance_new.get_feature_data().get_values())
 
         # transform np array to dict with enumeration
         input_data = dict(enumerate(feature_data.flatten(), 1))
@@ -178,7 +179,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 
 ## -------------------------------------------------------------------------------------------------
     def get_cluster_memberships( self, 
-                                 p_inst: Instance, 
+                                 p_instance: Instance, 
                                  p_scope: int = ClusterAnalyzer.C_RESULT_SCOPE_MAX ) -> List[Tuple[str, float, Cluster]]:
         """
         Public custom method to determine the membership of the given instance to each cluster as
@@ -186,7 +187,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
 
         Parameters
         ----------
-        p_inst : Instance
+        p_instance : Instance
             Instance to be evaluated.
         p_scope : int
             Scope of the result list. See class attributes C_MS_SCOPE_* for possible values. Default
@@ -201,7 +202,7 @@ class WrClusterAnalyzerRiver2MLPro (WrapperRiver, ClusterAnalyzer):
         """
         
         # extract features data from instances
-        feature_data    = p_inst.get_feature_data().get_values()
+        feature_data    = p_instance.get_feature_data().get_values()
 
         # transform np array to dict with enumeration
         input_data = dict(enumerate(feature_data.flatten(), 1))
