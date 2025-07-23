@@ -1,25 +1,23 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro.oa.examples
-## -- Module  : howto_oa_wr_001_river_clusteranalyzer_dbstream.py
+## -- Module  : howto_oa_wr_004_river_clusteranalyzer_kmeans.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
-## -- 2023-05-23  0.0.0     SY       Creation
-## -- 2023-05-23  1.0.0     SY       First version release
-## -- 2023-05-25  1.0.1     SY       Refactoring related to ClusterCentroid
-## -- 2023-06-05  1.0.2     SY       Renaming module
-## -- 2023-08-23  1.0.3     SY       Refactoring
-## -- 2023-12-08  1.0.4     SY       Refactoring
-## -- 2023-12-17  1.0.5     SY       Refactoring unit test mode
-## -- 2023-12-22  1.0.6     SY       Refactoring
+## -- 2023-06-05  0.0.0     SY       Creation
+## -- 2023-06-05  1.0.0     SY       First version release
+## -- 2023-08-23  1.0.1     SY       Refactoring
+## -- 2023-12-17  1.0.2     SY       Refactoring unit test mode
+## -- 2023-12-22  1.0.3     SY       Refactoring
 ## -- 2024-04-30  1.1.0     DA       Alignment with MLPro 2
 ## -- 2024-05-25  1.1.1     SY       Printing clusters' sizes
 ## -- 2024-12-03  1.2.0     DA       Alignment with MLPro 2
+## -- 2025-07-23  1.3.0     DA       Alignment with MLPro 2.1
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.2.0 (2024-12-03)
+Ver. 1.3.0 (2025-07-23)
 
 This module demonstrates the principles of stream processing with MLPro. To this regard, a stream of
 a stream provider is combined with a stream workflow to a stream scenario. The workflow consists of 
@@ -36,27 +34,36 @@ You will learn:
 3) How to add a task ClusterAnalyzer.
 
 4) How to reuse a cluster analyzer algorithm from river (https://www.riverml.xyz/), specifically
-DBSTREAM
+KMeans
 
 """
 
-from mlpro.bf.streams.streams import *
-from mlpro.bf.streams.streams.provider_mlpro import StreamMLProBase
+
+from datetime import datetime
+
+import numpy as np
+
+from mlpro.bf import Log, Mode, PlotSettings
+from mlpro.bf.math import MSpace
+from mlpro.bf.streams import Feature
+from mlpro.bf.streams.streams import StreamMLProBase
+from mlpro.bf.streams.streams.clouds import *
 from mlpro.oa.streams import *
-from mlpro_int_river.wrappers.clusteranalyzers import WrRiverDBStream2MLPro
+
+from mlpro_int_river.wrappers.clusteranalyzers import WrRiverKMeans2MLPro
 
 
 
 ## -------------------------------------------------------------------------------------------------
 ## -------------------------------------------------------------------------------------------------
-class Stream4DBStream (StreamMLProBase):
+class Stream4KMeans (StreamMLProBase):
 
-    C_ID                = 'St4DBStream'
-    C_NAME              = 'Stream4DBStream'
+    C_ID                = 'St4KMeans'
+    C_NAME              = 'Stream4KMeans'
     C_VERSION           = '1.0.0'
-    C_NUM_INSTANCES     = 12
+    C_NUM_INSTANCES     = 6
 
-    C_SCIREF_URL        = 'https://riverml.xyz/latest/api/cluster/DBSTREAM/'
+    C_SCIREF_URL        = 'https://riverml.xyz/latest/api/cluster/KMeans/'
 
 
 ## -------------------------------------------------------------------------------------------------
@@ -79,10 +86,16 @@ class Stream4DBStream (StreamMLProBase):
 ## -------------------------------------------------------------------------------------------------
     def _init_dataset(self):
 
-        # Prepare a test dataset from https://riverml.xyz/latest/api/cluster/DBSTREAM/
+        # Prepare a test dataset from https://riverml.xyz/latest/api/cluster/KMeans/
         
-        X = [ [1, 0.5], [1, 0.625], [1, 0.75], [1, 1.125], [1, 1.5], [1, 1.75], [4, 1.5], [4, 2.25],
-             [4, 2.5], [4, 3], [4, 3.25], [4, 3.5] ]
+        X = [
+            [1, 2],
+            [1, 4],
+            [1, 0],
+            [-4, 2],
+            [-4, 4],
+            [-4, 0]
+            ]
 
         self._dataset   = np.array(X)
 
@@ -92,15 +105,15 @@ class Stream4DBStream (StreamMLProBase):
 
 ## -------------------------------------------------------------------------------------------------
 ## -------------------------------------------------------------------------------------------------
-class AdScenario4DBStream (OAStreamScenario):
+class AdScenario4KMeans (OAStreamScenario):
 
-    C_NAME = 'AdScenario4DBStream'
+    C_NAME = 'AdScenario4KMeans'
 
 ## -------------------------------------------------------------------------------------------------
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1 Get stream from Stream4DBStream
-        stream = Stream4DBStream( p_logging=0 )
+        # 1 Get stream from StreamKMeans
+        stream = Stream4KMeans( p_logging=0 )
 
         # 2 Set up a stream workflow based on a custom stream task
 
@@ -113,14 +126,13 @@ class AdScenario4DBStream (OAStreamScenario):
 
 
         # 2.2 Creation of a cluster analzer task
-        clusterer = WrRiverDBStream2MLPro( p_name='t1',
-                                           p_clustering_threshold = 1.5,
-                                           p_fading_factor = 0.05,
-                                           p_cleanup_interval = 4,
-                                           p_intersection_factor = 0.5,
-                                           p_minimum_weight = 1.0,
-                                           p_visualize=p_visualize, 
-                                           p_logging=p_logging )
+        clusterer = WrRiverKMeans2MLPro( p_name='t1',
+                                         p_n_clusters=2,
+                                         p_halflife=0.1, 
+                                         p_sigma=3, 
+                                         p_seed=42,
+                                         p_visualize=p_visualize, 
+                                         p_logging=p_logging )
 
         workflow.add_task( p_task=clusterer )
 
@@ -129,17 +141,18 @@ class AdScenario4DBStream (OAStreamScenario):
 
 
 
+
 # 1 Preparation of demo/unit test mode
 if __name__ == "__main__":
     # 1.1 Parameters for demo mode
     logging     = Log.C_LOG_ALL
     visualize   = True
-    cycle_limit = 12
+    cycle_limit = 6
     step_rate   = 1
 
 else:
     # 1.2 Parameters for internal unit test
-    cycle_limit = 12
+    cycle_limit = 6
     logging     = Log.C_LOG_NOTHING
     visualize   = False
     step_rate   = 1
@@ -147,10 +160,10 @@ else:
 
 
 # 2 Instantiate the stream scenario
-myscenario = AdScenario4DBStream( p_mode=Mode.C_MODE_REAL,
-                                  p_cycle_limit=cycle_limit,
-                                  p_visualize=visualize,
-                                  p_logging=logging )
+myscenario = AdScenario4KMeans( p_mode=Mode.C_MODE_REAL,
+                                p_cycle_limit=cycle_limit,
+                                p_visualize=visualize,
+                                p_logging=logging )
 
 
 
@@ -172,22 +185,20 @@ myscenario.log(Log.C_LOG_TYPE_S, 'Duration [sec]:', round(duraction_sec,2), ', C
 
 
 # 4 Validating the number of clusters and centers of each cluster between original algorithm and wrapper
-river_n_clusters    = myscenario.get_workflow()._tasks[0].get_algorithm().n_clusters
 wr_n_clusters       = len(myscenario.get_workflow()._tasks[0].clusters)
 
-if river_n_clusters == wr_n_clusters:
+if wr_n_clusters == 2:
     print("The number of clusters from river and mlpro matches!")
 else:
     print("The number of clusters from river and mlpro does not match!")
     
     
 river_centers       = myscenario.get_workflow()._tasks[0].get_algorithm().centers
-list_keys           = list(myscenario.get_workflow()._tasks[0].clusters.keys())
 
 for x in range(wr_n_clusters):
-    if list(river_centers[x].values()) == list(myscenario.get_workflow()._tasks[0].clusters[list_keys[x]].centroid.value):
+    if list(river_centers[x].values()) == list(myscenario.get_workflow()._tasks[0].clusters[x].centroid.value):
         print("The center of cluster %s from river and mlpro matches!"%(x+1))
-        cls_size = myscenario.get_workflow()._tasks[0].clusters[list_keys[x]].size.value
+        cls_size = myscenario.get_workflow()._tasks[0].clusters[x].size.value
         if cls_size is not None:
             print("The size of cluster %s is %i"%(x+1,cls_size))
         else:

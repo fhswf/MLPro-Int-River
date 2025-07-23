@@ -4,7 +4,7 @@ Howto OA-CA-005: Run KMeans on static 3D point clouds
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_005_run_kmeans_3d_static.py
+.. literalinclude:: ../../../../../test/howtos/oa/clusteranalyzers/howto_oa_ca_005_run_kmeans_3d_static.py
 	:language: python
 
 

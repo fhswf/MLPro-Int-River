@@ -56,8 +56,11 @@ from mlpro.bf.various import Log
 from mlpro.bf.streams import *
 from river import cluster
 
+
+
 # Export list for public API
-__all__ = [ 'WrRiverKMeanss2MLPro' ]
+__all__ = [ 'WrRiverKMeans2MLPro' ]
+
 
 
 

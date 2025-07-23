@@ -1,7 +1,7 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river
-## -- Module  : howto_oa_ca_012_run_streamkmeans_2d_dynamic.py
+## -- Module  : howto_oa_ca_016_run_streamkmeans_3d_dynamic.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
@@ -13,12 +13,13 @@
 ## -- 2024-04-30  1.2.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.2.1     SY       Printing clusters' sizes
 ## -- 2024-12-03  1.3.0     DA       Alignment with MLPro 2
+## -- 2025-07-23  1.4.0     DA       Alignment with MLPro 2.1
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.3.0 (2024-12-03)
+Ver. 1.5.0 (2025-07-23)
 
-This module demonstrates online cluster analysis of dynamic 2D random point clouds using the wrapped
+This module demonstrates online cluster analysis of dynamic 3D random point clouds using the wrapped
 River implementation of stream algorithm STREAMKMeans. To this regard, the systematics of sub-framework 
 MLPro-OA-Streams for online adaptive stream processing is used to implement a scenario consisting of  
 a custom workflow and a native benchmark stream.
@@ -34,29 +35,33 @@ In particular you will learn:
 """
 
 
-from mlpro.bf.streams.streams import *
+from datetime import datetime
+
+from mlpro.bf import Log, Mode, PlotSettings
 from mlpro.bf.streams.streams.clouds import *
-from mlpro.bf.various import Log
 from mlpro.oa.streams import *
+
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverStreamKMeans2MLPro
 
 
 
-# 1 Prepare a scenario for Static 3D Point Clouds
-class Dynamic2DScenario(OAStreamScenario):
+# 1 Prepare a scenario for Dynamic 3D Point Clouds
+class Dynamic3DScenario(OAStreamScenario):
 
-    C_NAME = 'Dynamic2DScenario'
+    C_NAME = 'Dynamic3DScenario'
 
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
-        # 1.1 Get stream from StreamMLProClouds
-        stream = StreamMLProClouds( p_num_dim = 2,
+        # 1.1 Get MLPro benchmark stream
+        stream = StreamMLProClouds( p_num_dim = 3,
                                     p_num_instances = 2000,
                                     p_num_clouds = 5,
                                     p_seed = 1,
-                                    p_radii=[100],
-                                    p_velocity=1,
+                                    p_radii = [100, 150, 200, 250, 300],
+                                    p_weights = [2,3,4,5,6],
+                                    p_velocity = 1, 
                                     p_logging=Log.C_LOG_NOTHING )
+        
 
         # 1.2 Set up a stream workflow
 
@@ -72,13 +77,13 @@ class Dynamic2DScenario(OAStreamScenario):
 
         # Cluster Analyzer
         task_clusterer = WrRiverStreamKMeans2MLPro( p_name='#1: StreamKMeans@River',
-                                                    p_chunk_size=25,
-                                                    p_n_clusters=5,
-                                                    p_halflife=1, 
-                                                    p_sigma=5,
-                                                    p_seed=44,
-                                                    p_visualize=p_visualize,
-                                                    p_logging=p_logging )
+                                                   p_chunk_size=25,
+                                                   p_n_clusters=5,
+                                                   p_halflife=1.0, 
+                                                   p_sigma=500,
+                                                   p_seed=50,
+                                                   p_visualize=p_visualize,
+                                                   p_logging=p_logging )
         
         workflow.add_task(p_task = task_clusterer)
 
@@ -89,10 +94,10 @@ class Dynamic2DScenario(OAStreamScenario):
 
 # 2 Prepare Demo/Unit test mode
 if __name__ == '__main__':
-    cycle_limit = 1000
+    cycle_limit = 2000
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 1
+    step_rate   = 10
 else:
     cycle_limit = 2
     logging     = Log.C_LOG_NOTHING
@@ -102,7 +107,7 @@ else:
 
 
 # 3 Instantiate the stream scenario
-myscenario = Dynamic2DScenario(
+myscenario = Dynamic3DScenario(
     p_mode=Mode.C_MODE_REAL,
     p_cycle_limit=cycle_limit,
     p_visualize=visualize,

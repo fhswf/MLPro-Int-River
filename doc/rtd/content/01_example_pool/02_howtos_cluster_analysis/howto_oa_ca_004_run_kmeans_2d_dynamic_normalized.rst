@@ -4,7 +4,7 @@ Howto OA-CA-004: Run KMeans on normalized dynamic 2D point clouds
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_004_run_kmeans_2d_dynamic_normalized.py
+.. literalinclude:: ../../../../../test/howtos/oa/clusteranalyzers/howto_oa_ca_004_run_kmeans_2d_dynamic_normalized.py
 	:language: python
 
 

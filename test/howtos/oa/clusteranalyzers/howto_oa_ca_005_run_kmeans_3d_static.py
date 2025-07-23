@@ -12,10 +12,11 @@
 ## -- 2024-04-30  1.3.0     DA       Alignment with MLPro 2
 ## -- 2024-05-27  1.3.1     SY       Printing clusters' sizes
 ## -- 2024-12-03  1.4.0     DA       Alignment with MLPro 2
+## -- 2025-07-23  1.5.0     DA       Alignment with MLPro 2.1
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 1.4.0 (2024-12-03)
+Ver. 1.5.0 (2025-07-23)
 
 This module demonstrates online cluster analysis of static 3D random point clouds using the wrapped
 River implementation of stream algorithm KMeans. To this regard, the systematics of sub-framework 
@@ -33,10 +34,12 @@ In particular you will learn:
 """
 
 
-from mlpro.bf.streams.streams import *
+from datetime import datetime
+
+from mlpro.bf import Log, Mode, PlotSettings
 from mlpro.bf.streams.streams.clouds import *
-from mlpro.bf.various import Log
 from mlpro.oa.streams import *
+
 from mlpro_int_river.wrappers.clusteranalyzers import WrRiverKMeans2MLPro
 
 

@@ -4,7 +4,7 @@ Howto OA-CA-016: Run STREAMKMeans on dynamic 3D point clouds
 
 **Executable code**
 
-.. literalinclude:: ../../../../../test/howtos/oa/howto_oa_ca_016_run_streamkmeans_3d_dynamic.py
+.. literalinclude:: ../../../../../test/howtos/oa/clusteranalyzers/howto_oa_ca_016_run_streamkmeans_3d_dynamic.py
 	:language: python
 
 
