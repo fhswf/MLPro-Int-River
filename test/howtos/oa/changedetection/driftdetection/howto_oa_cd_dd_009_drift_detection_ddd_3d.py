@@ -1,32 +1,34 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river 
-## -- Module  : howto_oa_cd_ad_014_point_anomaly_detection_pad_2d.py
+## -- Module  : howto_oa_cd_ad_009_drift_detection_ddd_3d.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
-## -- 2025-08-12  0.0.0     DS       Creation
+## -- 2025-08-14  0.0.0     DS       Creation
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 0.0.0 (2025-08-12)
+Ver. 0.0.0 (2025-08-14)
 
 """
-from river.anomaly import PredictiveAnomalyDetection
-from river import optim,base
-from mlpro_int_river.wrappers.changedetectors.basics import WrAnomalyDetectorRiver2MLPro
+
+from sparccstream import *
+from river.drift import DummyDriftDetector
+from mlpro_int_river.wrappers.changedetectors.basics import WrDriftDetectorRiver2MLPro
 
 from mlpro.bf import *
-from mlpro.bf.streams.streams import StreamMLProPOutliers
+from mlpro.bf.events import Event
+from mlpro.bf.streams.streams.clouds import StreamMLProClouds
 from mlpro.oa.streams import OAStreamScenario, OAStreamWorkflow, OAStreamTask
 
 
 
 ## ------------------------------------------------------------------------------------------------
 ## ------------------------------------------------------------------------------------------------
-class ADPAScenarioPAD2D (OAStreamScenario):
+class DDScenarioDDD3D (OAStreamScenario):
     
-    C_NAME = 'Point Anomaly Detection with PredictiveAnomalyDetection 2D'
+    C_NAME = 'Drift Detection with DummyDriftDetector 3D'
 
 ## ------------------------------------------------------------------------------------------------
     def _setup(self, 
@@ -34,20 +36,22 @@ class ADPAScenarioPAD2D (OAStreamScenario):
                p_ada : bool, 
                p_visualize : bool, 
                p_logging,
-               p_predictive_model: base.Estimator|None = None,
-               p_horizon: int = 1,
-               p_n_std: float = 3.0,
-               p_warmup_period: int = 0,
-               p_anomaly_buffer_size: int = 100,
-               p_instance_buffer_size: int = 50,
-               p_detection_steprate: int = 50, 
+               p_trigger_method: str = "fixed",
+               p_t_0: int = 300,
+               p_w: int = 0,
+               p_dynamic_cloning: bool = False,
+               p_drift_buffer_size: int = 100,
+               p_instance_buffer_size: int = 20,
+               p_detection_steprate:int = 1,
                **p_kwargs):
         
         # 1 Get the native stream from MLPro stream provider
-        stream = StreamMLProPOutliers( p_functions = ['const', 'const'],#,'sin' , 'cos' , 'const'],
-                                       p_outlier_rate=0.02,
-                                       p_logging=p_logging,
-                                       p_seed= 20)
+        stream = StreamMLProClouds( p_num_dim = 3,
+                                    p_num_instances= 50,
+                                    p_num_clouds= 2,
+                                    p_radii= [50],
+                                    p_weights=[1,2],
+                                    p_seed= 20)
         
         # 2 Creation of a workflow
         workflow = OAStreamWorkflow( p_name='wf1',
@@ -55,24 +59,23 @@ class ADPAScenarioPAD2D (OAStreamScenario):
                                      p_ada=p_ada,
                                      p_visualize=p_visualize, 
                                      p_logging=p_logging )
-        
-        # 3 Instantiation of River 'PredictiveAnomalyDetection' anomaly detector
-        river_pad = PredictiveAnomalyDetection( predictive_model = p_predictive_model,
-                                                horizon  = p_horizon,
-                                                n_std = p_n_std,
-                                                warmup_period = p_warmup_period)
-        
+      
+        # 3 Instantiation of River 'DummyDriftDetector' drift detector
+        river_kswin = DummyDriftDetector( trigger_method = p_trigger_method,
+                                          t_0 = p_t_0,
+                                          w = p_w,
+                                          dynamic_cloning = p_dynamic_cloning )
+
         # 4 Creation of tasks and add them to the workflow
-        anomalydetector = WrAnomalyDetectorRiver2MLPro( p_algo_river = river_pad,
-                                                        p_anomaly_buffer_size = p_anomaly_buffer_size,
-                                                        p_instance_buffer_size = p_instance_buffer_size,
-                                                        p_detection_steprate = p_detection_steprate,
-                                                        p_group_anomaly_det = False,
-                                                        p_visualize = p_visualize,
-                                                        p_logging = p_logging )
+        driftdetector = WrDriftDetectorRiver2MLPro( p_algo_river = river_kswin,
+                                                    p_drift_buffer_size = p_drift_buffer_size,
+                                                    p_instance_buffer_size = p_instance_buffer_size,
+                                                    p_detection_steprate = p_detection_steprate,
+                                                    p_visualize = p_visualize,
+                                                    p_logging = p_logging )
         
-        workflow.add_task(p_task = anomalydetector)
-        
+        workflow.add_task(p_task = driftdetector )
+
         # 5 Return stream and workflow
         return stream, workflow
 
@@ -86,11 +89,11 @@ if __name__ == "__main__":
     cycle_limit             = 500
     logging                 = Log.C_LOG_WE
     step_rate               = 1
-    predictive_model        = None
-    horizon                 = 1
-    n_std                   = 3.0
-    warmup_period           = 0
-    anomaly_buffer_size     = 100
+    trigger_method          = "fixed"
+    t_0                     = 300
+    w                       = 0
+    dynamic_cloning         = False
+    drift_buffer_size       = 100
     instance_buffer_size    = 50
     detection_steprate      = 50
 
@@ -104,34 +107,37 @@ if __name__ == "__main__":
         if i == 'A': logging = Log.C_LOG_WE
         elif i == 'N': logging = Log.C_LOG_NOTHING
 
-    predictive_model        = (input(f'Algo PAD: Predictive model (press ENTER for {predictive_model}): ') or predictive_model)
-    horizon                 = int(input(f'Algo PAD: Horizon (press ENTER for {horizon}): ') or horizon)
-    n_std                   = float(input(f'Algo PAD: Number of Standard Deviations (press ENTER for {n_std}): ') or n_std)
-    warmup_period           = int(input(f'Algo PAD: Warmup period (press ENTER for {warmup_period}): ') or warmup_period)
-
+    
+    trigger_method          = str(input(f'Algo DDD: Thrigger method (press ENTER for {trigger_method}): ') or trigger_method)
+    t_0                     = int(input(f'Algo DDD: Reference point to define triggers (press ENTER for {t_0}): ') or t_0)
+    w                       = int(input(f'Algo DDD: Auxiliary parameter (press ENTER for {w}): ') or w)
+    dynamic_cloning         = bool(input(f'Algo DDD: Dynamic cloning (press ENTER for {dynamic_cloning}): ') or dynamic_cloning)
+    
 else:
     # 1.2 Parameters for internal unit test
     cycle_limit             = 20
     logging                 = Log.C_LOG_NOTHING
     visualize               = False
     step_rate               = 1
-    n_neighbors             = 10
-    distance_func           = None
-    anomaly_buffer_size     = 100
+    trigger_method          = "fixed"
+    t_0                     = 300
+    w                       = 0
+    dynamic_cloning         = False
+    drift_buffer_size       = 100
     instance_buffer_size    = 10
     detection_steprate      = 10
 
 
 # 2 Instantiate the stream scenario
-myscenario = ADPAScenarioPAD2D( p_mode = Mode.C_MODE_REAL,
+myscenario = DDScenarioDDD3D( p_mode = Mode.C_MODE_REAL,
                                 p_cycle_limit = cycle_limit,
                                 p_visualize = visualize,
                                 p_logging = logging,
-                                p_predictive_model = predictive_model,
-                                p_horizon = horizon,      
-                                p_n_std = n_std,
-                                p_warmup_period = warmup_period,                
-                                p_anomaly_buffer_size = anomaly_buffer_size,
+                                p_trigger_method = trigger_method,
+                                p_t_0 = t_0,
+                                p_w = w,
+                                p_dynamic_cloning = dynamic_cloning,
+                                p_drift_buffer_size = drift_buffer_size,
                                 p_instance_buffer_size = instance_buffer_size,
                                 p_detection_steprate = detection_steprate )
 
@@ -152,3 +158,4 @@ myscenario.run()
 
 if __name__ == '__main__':
     input('Press ENTER to exit...')
+

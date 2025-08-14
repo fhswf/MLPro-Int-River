@@ -56,7 +56,7 @@ class ADPAScenarioPAD3D (OAStreamScenario):
                                      p_visualize=p_visualize, 
                                      p_logging=p_logging )
         
-        # 3 Instantiation of River 'LocalOutlierFactor' anomaly detector
+        # 3 Instantiation of River 'PredictiveAnomalyDetection' anomaly detector
         river_pad = PredictiveAnomalyDetection( predictive_model = p_predictive_model,
                                                 horizon  = p_horizon,
                                                 n_std = p_n_std,

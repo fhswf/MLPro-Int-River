@@ -1,19 +1,19 @@
 ## -------------------------------------------------------------------------------------------------
 ## -- Project : MLPro - The integrative middleware framework for standardized machine learning
 ## -- Package : mlpro_int_river 
-## -- Module  : howto_oa_cd_ad_014_point_anomaly_detection_pad_2d.py
+## -- Module  : howto_oa_cd_ad_021_point_anomaly_detection_sad_3d.py
 ## -------------------------------------------------------------------------------------------------
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
-## -- 2025-08-12  0.0.0     DS       Creation
+## -- 2025-08-13  0.0.0     DS       Creation
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 0.0.0 (2025-08-12)
+Ver. 0.0.0 (2025-08-13)
 
 """
-from river.anomaly import PredictiveAnomalyDetection
-from river import optim,base
+from river.anomaly import StandardAbsoluteDeviation
+from river import stats
 from mlpro_int_river.wrappers.changedetectors.basics import WrAnomalyDetectorRiver2MLPro
 
 from mlpro.bf import *
@@ -24,9 +24,9 @@ from mlpro.oa.streams import OAStreamScenario, OAStreamWorkflow, OAStreamTask
 
 ## ------------------------------------------------------------------------------------------------
 ## ------------------------------------------------------------------------------------------------
-class ADPAScenarioPAD2D (OAStreamScenario):
+class ADPAScenarioSAD3D (OAStreamScenario):
     
-    C_NAME = 'Point Anomaly Detection with PredictiveAnomalyDetection 2D'
+    C_NAME = 'Point Anomaly Detection with StandardAbsoluteDeviation 3D'
 
 ## ------------------------------------------------------------------------------------------------
     def _setup(self, 
@@ -34,17 +34,14 @@ class ADPAScenarioPAD2D (OAStreamScenario):
                p_ada : bool, 
                p_visualize : bool, 
                p_logging,
-               p_predictive_model: base.Estimator|None = None,
-               p_horizon: int = 1,
-               p_n_std: float = 3.0,
-               p_warmup_period: int = 0,
+               p_sub_stat: stats.base.Univariate|None = None,
                p_anomaly_buffer_size: int = 100,
                p_instance_buffer_size: int = 50,
                p_detection_steprate: int = 50, 
                **p_kwargs):
         
         # 1 Get the native stream from MLPro stream provider
-        stream = StreamMLProPOutliers( p_functions = ['const', 'const'],#,'sin' , 'cos' , 'const'],
+        stream = StreamMLProPOutliers( p_functions = ['const', 'const', 'const'],#,'sin' , 'cos' , 'const'],
                                        p_outlier_rate=0.02,
                                        p_logging=p_logging,
                                        p_seed= 20)
@@ -56,11 +53,8 @@ class ADPAScenarioPAD2D (OAStreamScenario):
                                      p_visualize=p_visualize, 
                                      p_logging=p_logging )
         
-        # 3 Instantiation of River 'PredictiveAnomalyDetection' anomaly detector
-        river_pad = PredictiveAnomalyDetection( predictive_model = p_predictive_model,
-                                                horizon  = p_horizon,
-                                                n_std = p_n_std,
-                                                warmup_period = p_warmup_period)
+        # 3 Instantiation of River 'LocalOutlierFactor' anomaly detector
+        river_pad = StandardAbsoluteDeviation( sub_stat = p_sub_stat)
         
         # 4 Creation of tasks and add them to the workflow
         anomalydetector = WrAnomalyDetectorRiver2MLPro( p_algo_river = river_pad,
@@ -83,16 +77,13 @@ class ADPAScenarioPAD2D (OAStreamScenario):
 # 1 Preparation of demo/unit test mode
 if __name__ == "__main__":
     # 1.1 Parameters for demo mode
-    cycle_limit             = 500
-    logging                 = Log.C_LOG_WE
-    step_rate               = 1
-    predictive_model        = None
-    horizon                 = 1
-    n_std                   = 3.0
-    warmup_period           = 0
-    anomaly_buffer_size     = 100
-    instance_buffer_size    = 50
-    detection_steprate      = 50
+    cycle_limit              = 500
+    logging                  = Log.C_LOG_WE
+    step_rate                = 1
+    sub_stat                 = None
+    anomaly_buffer_size      = 100
+    instance_buffer_size     = 50
+    detection_steprate       = 50
 
     cycle_limit             = int(input(f'\nCycle limit (press ENTER for {cycle_limit}): ') or cycle_limit)
     visualize               = input('Visualization Y/N (press ENTER for Y): ').upper() != 'N'
@@ -104,33 +95,26 @@ if __name__ == "__main__":
         if i == 'A': logging = Log.C_LOG_WE
         elif i == 'N': logging = Log.C_LOG_NOTHING
 
-    predictive_model        = (input(f'Algo PAD: Predictive model (press ENTER for {predictive_model}): ') or predictive_model)
-    horizon                 = int(input(f'Algo PAD: Horizon (press ENTER for {horizon}): ') or horizon)
-    n_std                   = float(input(f'Algo PAD: Number of Standard Deviations (press ENTER for {n_std}): ') or n_std)
-    warmup_period           = int(input(f'Algo PAD: Warmup period (press ENTER for {warmup_period}): ') or warmup_period)
-
+    sub_stat                 = (input(f'Algo SAD: The statistic to be subtracted (press ENTER for {sub_stat}): ') or sub_stat)
+    
 else:
     # 1.2 Parameters for internal unit test
-    cycle_limit             = 20
-    logging                 = Log.C_LOG_NOTHING
-    visualize               = False
-    step_rate               = 1
-    n_neighbors             = 10
-    distance_func           = None
-    anomaly_buffer_size     = 100
-    instance_buffer_size    = 10
-    detection_steprate      = 10
+    cycle_limit              = 20
+    logging                  = Log.C_LOG_NOTHING
+    visualize                = False
+    step_rate                = 1
+    sub_stat                 = None
+    anomaly_buffer_size      = 100
+    instance_buffer_size     = 10
+    detection_steprate       = 10
 
 
 # 2 Instantiate the stream scenario
-myscenario = ADPAScenarioPAD2D( p_mode = Mode.C_MODE_REAL,
+myscenario = ADPAScenarioSAD3D( p_mode = Mode.C_MODE_REAL,
                                 p_cycle_limit = cycle_limit,
                                 p_visualize = visualize,
                                 p_logging = logging,
-                                p_predictive_model = predictive_model,
-                                p_horizon = horizon,      
-                                p_n_std = n_std,
-                                p_warmup_period = warmup_period,                
+                                p_sub_stat = sub_stat,           
                                 p_anomaly_buffer_size = anomaly_buffer_size,
                                 p_instance_buffer_size = instance_buffer_size,
                                 p_detection_steprate = detection_steprate )
