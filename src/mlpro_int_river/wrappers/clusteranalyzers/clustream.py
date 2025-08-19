@@ -121,7 +121,6 @@ class WrRiverCluStream2MLPro (WrClusterAnalyzerRiver2MLPro):
 
     C_TYPE          = 'River Cluster Analyzer CluStream'
 
-
 ## -------------------------------------------------------------------------------------------------
     def __init__(self,
                  p_name:str = None,

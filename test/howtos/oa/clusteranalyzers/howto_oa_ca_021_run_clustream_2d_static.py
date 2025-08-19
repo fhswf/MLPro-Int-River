@@ -74,7 +74,7 @@ class Static2DScenario(OAStreamScenario):
                                                  p_n_macro_clusters = 5,
                                                  p_max_micro_clusters = 20,
                                                  p_micro_cluster_r_factor = 2,
-                                                 p_time_window = 100,
+                                                 p_time_window = 50, #100,
                                                  p_time_gap = 10,
                                                  p_seed = 41,
                                                  p_halflife = 1.0,
