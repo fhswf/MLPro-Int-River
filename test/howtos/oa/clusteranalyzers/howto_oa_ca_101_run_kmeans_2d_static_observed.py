@@ -6,10 +6,12 @@
 ## -- History :
 ## -- yyyy-mm-dd  Ver.      Auth.    Description
 ## -- 2025-08-27  0.1.0     DA       Creation
+## -- 2025-09-15  0.2.0     DA       - New stream generator StreamMLProClusterGenerator
+## --                                - Updated CAObserver with extended CA metrics and improved plotting
 ## -------------------------------------------------------------------------------------------------
 
 """
-Ver. 0.1.0 (2025-08-27)
+Ver. 0.2.0 (2025-09-15)
 
 ...
 
@@ -27,7 +29,7 @@ import os
 from datetime import datetime
 
 from mlpro.bf import *
-from mlpro.bf.streams.streams import StreamMLProClouds
+from mlpro.bf.streams.streams import StreamMLProClusterGenerator
 from mlpro.oa.streams import *
 from mlpro.oa.streams.helpers import CAObserver
 
@@ -43,12 +45,11 @@ class Static2DScenario(OAStreamScenario):
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
         # 1.1 Get MLPro benchmark stream
-        stream = StreamMLProClouds( p_num_dim = 2,
-                                    p_num_instances = 2000,
-                                    p_num_clouds = 5,
-                                    p_seed = 1,
-                                    p_radii=[100],
-                                    p_logging=Log.C_LOG_NOTHING )
+        stream = StreamMLProClusterGenerator( p_num_dim = 2,
+                                              p_num_instances = 2000,
+                                              p_num_clusters = 5,
+                                              p_seed = 1,
+                                              p_radii=[100] ) 
 
         # 1.2 Set up a stream workflow
 
@@ -74,11 +75,12 @@ class Static2DScenario(OAStreamScenario):
         workflow.add_task(p_task = task_clusterer)
 
         # Observer
-        self.task_observer = CAObserver( p_clusterer=task_clusterer,
-                                         p_cluster_size_min=1,
-                                         p_name='#2: CAObserver',
-                                         p_visualize=p_visualize,
-                                         p_logging=p_logging )
+        self.task_observer = CAObserver( p_clusterer = task_clusterer,
+                                         p_cluster_statistics = stream.cluster_statistics,
+                                         p_cluster_size_min = 1,
+                                         p_name = '#2: CAObserver',
+                                         p_visualize = p_visualize,
+                                         p_logging = p_logging )
         
         workflow.add_task(p_task = self.task_observer, p_pred_tasks=[task_clusterer])  
 
