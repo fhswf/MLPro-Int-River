@@ -29,7 +29,7 @@ import os
 from datetime import datetime
 
 from mlpro.bf import *
-from mlpro.bf.streams.streams import StreamMLProClusterGenerator
+from mlpro.bf.streams.streams.generators.multiclusters import *
 from mlpro.oa.streams import *
 from mlpro.oa.streams.helpers import CAObserver
 
@@ -45,11 +45,16 @@ class Static2DScenario(OAStreamScenario):
     def _setup(self, p_mode, p_ada: bool, p_visualize: bool, p_logging):
 
         # 1.1 Get MLPro benchmark stream
-        stream = StreamMLProClusterGenerator( p_num_dim = 2,
-                                              p_num_instances = 2000,
-                                              p_num_clusters = 5,
-                                              p_seed = 1,
-                                              p_radii=[100] ) 
+        stream = MultiStreamGenCluster( p_num_dim = 2 )
+
+        centers = [ [-500, -500], [500, -500], [500, 500], [-500, 500], [0, 0] ]
+        for c in range(5):
+            stream.add_stream( p_stream = StreamGenCluster( p_num_dim = 2,
+                                                            p_seed = c,
+                                                            p_states = [ ClusterState( p_center = centers[c], p_radii = [ 200, 200 ] ) ],
+                                                            p_logging = p_logging ) )
+
+
 
         # 1.2 Set up a stream workflow
 
@@ -94,9 +99,9 @@ if __name__ == '__main__':
     cycle_limit = 1000
     logging     = Log.C_LOG_ALL
     visualize   = True
-    step_rate   = 2
+    step_rate   = 1
 else:
-    cycle_limit = 2
+    cycle_limit = 5
     logging     = Log.C_LOG_NOTHING
     visualize   = False
     step_rate   = 1
